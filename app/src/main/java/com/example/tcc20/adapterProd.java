@@ -9,7 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> {
+
+    private List<Product> productList;
+
+    public adapterProd(List<Product> productList) {
+        this.productList = productList;
+    }
 
     @NonNull
     @Override
@@ -34,7 +42,7 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return productList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
