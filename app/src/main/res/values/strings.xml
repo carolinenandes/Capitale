@@ -10,5 +10,6 @@
     <string name="txtQtdvenda">Vendidos:</string>
     <string name="txtDesc">Descrição:</string>
     <string name="txtQtd">Quantidade:</string>
+    <string name="txtId">Id:</string>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.example.tcc20;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,48 +10,48 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+//Classe do adapter
 public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> {
+    private List<Produto> listProd;
 
-    private List<Product> productList;
-
-    public adapterProd(List<Product> productList) {
-        this.productList = productList;
+    public adapterProd(List<Produto> listProd) {
+        this.listProd = listProd;
     }
 
+    //Este 4 paragrafos abaixo fazem com que o recyclerview funcione perfeitamente, apenas repliquem mudando as variavies
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_adapter, parent, false);
-
-        return new MyViewHolder(itemLista);
+        View itemListaProd = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_adapter_produtos, parent, false);
+        return new MyViewHolder(itemListaProd);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //Coloquei valores para teste, sem banco de dados!!!
-        holder.nome.setText("Bolo de morango");
-        holder.qtd.setText("Quantidade: 4");
-        holder.valor_venda.setText("5,00");
-        holder.valor_custo.setText("Custo 200,0");
-        holder.desc.setText("Descrição: Com certeza um bolo de morango");
-        holder.qtd_venda.setText("Vendas: 7");
-        holder.status.setText("Disponível");
+        Produto product = listProd.get(position);
+        holder.id.setText(String.valueOf(product.getId()));
+        holder.nome.setText(product.getNome());
+        holder.qtd.setText(String.valueOf(product.getQtd()));
+        holder.valor_venda.setText(product.getValor_venda());
+        holder.valor_custo.setText(product.getValor_custo());
+        holder.desc.setText(product.getDesc());
+        holder.qtd_venda.setText(String.valueOf(product.getVendas()));
+        holder.status.setText(product.getStatus());
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return listProd.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        TextView nome, qtd, valor_venda, valor_custo, desc, qtd_venda, status;
+        TextView id, nome, qtd, valor_venda, valor_custo, desc, qtd_venda, status;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //Recupera elementos da lista
+            // Recupera elementos da lista
+            id = itemView.findViewById(R.id.txtId);
             nome = itemView.findViewById(R.id.txtNome);
             qtd = itemView.findViewById(R.id.txtQtd);
             valor_venda = itemView.findViewById(R.id.txtValorvenda);

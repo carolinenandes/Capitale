@@ -15,18 +15,12 @@
 
         <TextView
             android:id="@+id/txtNome"
-            android:layout_width="235dp"
-            android:layout_height="wrap_content"
+            android:layout_width="277dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/txtNome"
             android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="186dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/txtStatus" />
     </LinearLayout>
 
     <TextView
@@ -58,8 +52,8 @@
 
     <TextView
         android:id="@+id/txtDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="406dp"
+        android:layout_height="57dp"
         android:layout_marginStart="4dp"
         android:text="@string/txtDesc"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +63,28 @@
         android:id="@+id/txtQtd"
         android:layout_width="86dp"
         android:layout_height="25dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/txtQtdvenda"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        android:layout_marginStart="4dp"
+        android:text="@string/txtQtd"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:text="@string/txtStatus"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtId"
+        android:layout_width="74dp"
+        android:layout_height="18dp"
+        android:text="@string/txtId"
+        tools:layout_editor_absoluteX="336dp"
+        tools:layout_editor_absoluteY="115dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
