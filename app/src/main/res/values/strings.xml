@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TCC2.0</string>
+    <string name="btnProd">Prod</string>
+    <string name="titleProd">Produtos</string>
+    <string name="btnAddProd">Adicionar Produto</string>
+    <string name="txtNome">Nome</string>
+    <string name="txtStatus">Status</string>
+    <string name="txtValorvenda">Valor:</string>
+    <string name="txtValorcusto">Custo:</string>
+    <string name="txtQtdvenda">Vendidos:</string>
+    <string name="txtDesc">Descrição:</string>
+    <string name="txtQtd">Quantidade:</string>
+    <string name="txtId">Id:</string>
+
+</resources>
