@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class ProdActivity extends AppCompatActivity {
     private RecyclerView recyclerviewProd;
     private ArrayList<Produto> productList;
     private adapterProd adapter;
-    private BancoDeDados banco;
+    public BancoDeDados banco;
     private Button btnAddProd;
 
     @Override
@@ -33,10 +35,14 @@ public class ProdActivity extends AppCompatActivity {
         btnAddProd = findViewById(R.id.btnAddProd);
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
+        banco = new BancoDeDados(this);
+
+
+
         btnAddProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertDialogFragment dialog = new InsertDialogFragment();
+                InsertDialogFragment dialog = new InsertDialogFragment(banco, adapter);
                 dialog.show(getSupportFragmentManager(), "insert_dialog");
             }
         });
@@ -48,12 +54,11 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd.setHasFixedSize(true);
         recyclerviewProd.setAdapter(adapter);
 
-        banco = new BancoDeDados(getApplicationContext());
 
         carregarDadosDoBanco();
     }
 
-    private void carregarDadosDoBanco() {
+    public void carregarDadosDoBanco() {
         try {
             banco.openDB();
 

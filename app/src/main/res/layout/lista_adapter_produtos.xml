@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -71,8 +71,8 @@
 
     <TextView
         android:id="@+id/txtStatus"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="19dp"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:text="@string/txtStatus"
@@ -83,8 +83,10 @@
         android:id="@+id/txtId"
         android:layout_width="74dp"
         android:layout_height="18dp"
+        android:layout_marginStart="246dp"
+        android:layout_marginTop="1dp"
         android:text="@string/txtId"
-        tools:layout_editor_absoluteX="336dp"
-        tools:layout_editor_absoluteY="115dp" />
+        app:layout_constraintStart_toEndOf="@+id/txtQtd"
+        app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

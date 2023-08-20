@@ -17,5 +17,6 @@
     <string name="hintValorCusto">Custo de produção</string>
     <string name="hintDesc">Descrição</string>
     <string name="hintStatus">Status</string>
+    <string name="hintQtdVenda">Quantidade de vendas</string>
 
 </resources>
