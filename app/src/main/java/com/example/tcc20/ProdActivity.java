@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -33,11 +34,20 @@ public class ProdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prod);
 
         btnAddProd = findViewById(R.id.btnAddProd);
+        Button btnRefresh = findViewById(R.id.btnRefresh);
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
 
-
+        //Atualiza a pagina
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                finish(); // Fecha a Activity atual
+                startActivity(intent);
+            }
+        });
 
         btnAddProd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +95,12 @@ public class ProdActivity extends AppCompatActivity {
 
             banco.close();
             adapter.notifyDataSetChanged();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
 

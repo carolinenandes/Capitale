@@ -19,4 +19,13 @@
     <string name="hintStatus">Status</string>
     <string name="hintQtdVenda">Quantidade de vendas</string>
 
+    <string name="label_id">ID: %s</string>
+    <string name="label_nome">Nome: %s</string>
+    <string name="label_qtd">Quantidade: %s</string>
+    <string name="label_valor_venda">Valor de Venda: %s</string>
+    <string name="label_valor_custo">Valor de Custo: %s</string>
+    <string name="label_desc">Descrição: %s</string>
+    <string name="label_qtd_venda">Quantidade de Vendas: %s</string>
+    <string name="label_status">Status: %s</string>
+
 </resources>

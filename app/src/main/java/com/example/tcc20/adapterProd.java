@@ -29,14 +29,15 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Produto product = listProd.get(position);
-        holder.id.setText(String.valueOf(product.getId()));
-        holder.nome.setText(product.getNome());
-        holder.qtd.setText(String.valueOf(product.getQtd()));
-        holder.valor_venda.setText(product.getValor_venda());
-        holder.valor_custo.setText(product.getValor_custo());
-        holder.desc.setText(product.getDesc());
-        holder.qtd_venda.setText(String.valueOf(product.getVendas()));
-        holder.status.setText(product.getStatus());
+
+        holder.id.setText("ID: " + String.valueOf(product.getId()));
+        holder.nome.setText("Nome: " + product.getNome());
+        holder.qtd.setText("Quantidade: " + String.valueOf(product.getQtd()));
+        holder.valor_venda.setText("Valor: " + product.getValor_venda());
+        holder.valor_custo.setText("Custo: " + product.getValor_custo());
+        holder.desc.setText("Descrição: " + product.getDesc());
+        holder.qtd_venda.setText("Vendidos: " + String.valueOf(product.getVendas()));
+        holder.status.setText("Status: " + product.getStatus());
     }
 
     @Override

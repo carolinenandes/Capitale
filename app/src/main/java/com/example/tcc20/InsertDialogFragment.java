@@ -57,7 +57,6 @@ public class InsertDialogFragment extends DialogFragment {
                 adicionarProdutoNoBanco(novoProduto, adapter);
 
                 dismiss(); // Feche o diálogo após a inserção
-
             }
         });
 
@@ -78,8 +77,8 @@ public class InsertDialogFragment extends DialogFragment {
         ContentValues values = new ContentValues();
         values.put("NOME_PROD", produto.getNome());
         values.put("QTD_PROD", produto.getQtd());
-        values.put("VALOR_VENDA", produto.getValor_venda());
-        values.put("VALOR_CUSTO", produto.getValor_custo());
+        values.put("VALOR_VENDA_PROD", produto.getValor_venda());
+        values.put("VALOR_CUSTO_PROD", produto.getValor_custo());
         values.put("DESC_PROD", produto.getDesc());
         values.put("STATUS_PROD", produto.getStatus());
         values.put("QTD_VENDA", produto.getVendas());
