@@ -27,5 +27,7 @@
     <string name="label_desc">Descrição: %s</string>
     <string name="label_qtd_venda">Quantidade de Vendas: %s</string>
     <string name="label_status">Status: %s</string>
+    <string name="btnEditProd">Editar</string>
+    <string name="btnEditarProd">Editar</string>
 
 </resources>

@@ -14,19 +14,19 @@ import android.widget.EditText;
 import androidx.fragment.app.DialogFragment;
 
 
-public class InsertDialogFragment extends DialogFragment {
+public class InsertDialogFragmentProd extends DialogFragment {
 
     private Context context;
     private BancoDeDados banco;
     private adapterProd adapter;
 
     // Construtor para passar o contexto
-    public InsertDialogFragment(Context context) {
+    public InsertDialogFragmentProd(Context context) {
         this.context = context;
     }
 
     // Construtor para passar a instância do BancoDeDados e do adaptador
-    public InsertDialogFragment(BancoDeDados banco, adapterProd adapter) {
+    public InsertDialogFragmentProd(BancoDeDados banco, adapterProd adapter) {
         this.banco = banco;
         this.adapter = adapter;
     }
@@ -36,7 +36,7 @@ public class InsertDialogFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.insert_dialog_prod, container, false);
 
-        Button btnInsertProd = view.findViewById(R.id.btnInsertProd);
+        Button btnInsertProd = view.findViewById(R.id.btnAddProd);
         EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd), etxQtdProd = view.findViewById(R.id.etxQtdProd),
                 etxtValorVenda = view.findViewById(R.id.etxtValorVenda), etxtValorCusto_prod = view.findViewById(R.id.etxtValorCusto_prod),
                 etxtDescProd = view.findViewById(R.id.etxtDescProd), etxtStatusProd = view.findViewById(R.id.etxtStatusProd),

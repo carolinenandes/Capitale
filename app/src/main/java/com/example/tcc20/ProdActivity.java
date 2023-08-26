@@ -2,6 +2,7 @@ package com.example.tcc20;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ public class ProdActivity extends AppCompatActivity {
     private adapterProd adapter;
     public BancoDeDados banco;
     private Button btnAddProd;
+    private Button btnEditarProd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,43 @@ public class ProdActivity extends AppCompatActivity {
         setContentView(R.layout.activity_prod);
 
         btnAddProd = findViewById(R.id.btnAddProd);
+        btnEditarProd = findViewById(R.id.btnEditarProd);
         Button btnRefresh = findViewById(R.id.btnRefresh);
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
+
+        // Crie a instância do adapterProd antes de criar o ItemTouchHelper
+        adapter = new adapterProd(new ArrayList<>());
+
+        btnEditarProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Verifique se um item foi selecionado
+                int selectedItemPosition = adapter.getSelectedPosition();
+                if (selectedItemPosition != RecyclerView.NO_POSITION) {
+                    Produto produtoSelecionado = productList.get(selectedItemPosition);
+                    EditDialogFragmentProd editDialog = new EditDialogFragmentProd(banco, adapter, produtoSelecionado);
+                    editDialog.show(getSupportFragmentManager(), "edit_dialog");
+                } else {
+                    // Informe ao usuário que nenhum item foi selecionado
+                    Toast.makeText(ProdActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        adapter.setOnItemDeletedListener(new adapterProd.OnItemDeletedListener() {
+            @Override
+            public void onItemSwipedToDelete(Produto produto) {
+                // Implemente a lógica de exclusão aqui
+                int position = productList.indexOf(produto);
+                if (position != -1) {
+                    productList.remove(position);
+                    adapter.notifyItemRemoved(position);
+                }
+            }
+        });
 
         //Atualiza a pagina
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +87,7 @@ public class ProdActivity extends AppCompatActivity {
         btnAddProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertDialogFragment dialog = new InsertDialogFragment(banco, adapter);
+                InsertDialogFragmentProd dialog = new InsertDialogFragmentProd(banco, adapter);
                 dialog.show(getSupportFragmentManager(), "insert_dialog");
             }
         });
@@ -64,6 +99,9 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd.setHasFixedSize(true);
         recyclerviewProd.setAdapter(adapter);
 
+        // Configure o ItemTouchHelper após a criação do adapter
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter, productList));
+        itemTouchHelper.attachToRecyclerView(recyclerviewProd);
 
         carregarDadosDoBanco();
     }
@@ -102,8 +140,6 @@ public class ProdActivity extends AppCompatActivity {
 
 
     }
-
-
 }
 
 
