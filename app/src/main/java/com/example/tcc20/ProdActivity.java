@@ -1,22 +1,15 @@
 package com.example.tcc20;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -41,9 +34,8 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
-
-        // Crie a instância do adapterProd antes de criar o ItemTouchHelper
-        adapter = new adapterProd(new ArrayList<>());
+        productList = new ArrayList<>(); // Inicialize a lista primeiro
+        adapter = new adapterProd(productList); // Em seguida, crie o adaptador com a lista
 
         btnEditarProd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +62,18 @@ public class ProdActivity extends AppCompatActivity {
                 if (position != -1) {
                     productList.remove(position);
                     adapter.notifyItemRemoved(position);
+
+                    // Aqui, você deve lidar com a exclusão no banco de dados
+                    if (banco != null) {
+                        try {
+                            banco.openDB();
+                            excluirProduto(produto.getId(), banco);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            banco.close();
+                        }
+                    }
                 }
             }
         });
@@ -92,18 +96,26 @@ public class ProdActivity extends AppCompatActivity {
             }
         });
 
-        productList = new ArrayList<>();
-        adapter = new adapterProd(productList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerviewProd.setLayoutManager(layoutManager);
         recyclerviewProd.setHasFixedSize(true);
         recyclerviewProd.setAdapter(adapter);
 
         // Configure o ItemTouchHelper após a criação do adapter
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter, productList));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter, productList, banco));
         itemTouchHelper.attachToRecyclerView(recyclerviewProd);
 
         carregarDadosDoBanco();
+    }
+
+    // Método para excluir um produto com base no ID
+    public void excluirProduto(int produtoId, BancoDeDados banco) {
+        try {
+            String sql = "DELETE FROM TB_PRODUTO WHERE ID = ?";
+            banco.db.execSQL(sql, new Object[]{produtoId});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void carregarDadosDoBanco() {

@@ -1,19 +1,24 @@
 package com.example.tcc20;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     private final adapterProd mAdapter;
     private final ArrayList<Produto> productList;
+    private final BancoDeDados banco;
 
-    public SwipeToDeleteCallback(adapterProd adapter, ArrayList<Produto> productList) {
+    public SwipeToDeleteCallback(adapterProd adapter, ArrayList<Produto> productList, BancoDeDados banco) {
         mAdapter = adapter;
         this.productList = productList;
+        this.banco = banco;
     }
-
 
     @Override
     public boolean isLongPressDragEnabled() {
@@ -42,13 +47,14 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
 
-        // Verifique se a posição é válida e se a lista não está vazia
-        if (position != RecyclerView.NO_POSITION && !productList.isEmpty()) {
-            mAdapter.removeItem(position);
+        // Verifique a direção do deslize
+        if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+            Produto produto = productList.get(position);
+            adapterProd.onItemSwipedToDelete(produto);
         }
     }
-}
 
+}
 
 
 

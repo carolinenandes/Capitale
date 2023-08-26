@@ -1,5 +1,6 @@
 package com.example.tcc20;
 
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,16 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Classe do adapter
 public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> {
     private List<Produto> listProd;
     private OnItemDeletedListener listener; // Interface para lidar com eventos de exclusão
+    private SparseBooleanArray selectedItems; // Para armazenar os itens selecionados
+
 
     // Método para configurar o adapteer
     public adapterProd(List<Produto> listProd) {
         this.listProd = listProd;
+        selectedItems = new SparseBooleanArray();
     }
 
     // Método para configurar o listener
@@ -45,6 +50,41 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
         return selectedItemPosition;
     }
 
+    // Método para selecionar ou desselecionar um item
+    public void toggleSelection(int position) {
+        if (selectedItems.get(position, false)) {
+            selectedItems.delete(position);
+        } else {
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+    // Método para verificar se um item está selecionado
+    public boolean isSelected(int position) {
+        return selectedItems.get(position, false);
+    }
+
+    // Método para desmarcar todos os itens selecionados
+    public void clearSelections() {
+        selectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    // Método para obter a contagem de itens selecionados
+    public int getSelectedItemCount() {
+        return selectedItems.size();
+    }
+
+    // Método para obter uma lista dos itens selecionados
+    public List<Integer> getSelectedItems() {
+        List<Integer> selectedPositions = new ArrayList<>(selectedItems.size());
+        for (int i = 0; i < selectedItems.size(); i++) {
+            selectedPositions.add(selectedItems.keyAt(i));
+        }
+        return selectedPositions;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Produto product = listProd.get(position);
@@ -57,6 +97,20 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
         holder.desc.setText("Descrição: " + product.getDesc());
         holder.qtd_venda.setText("Vendidos: " + String.valueOf(product.getVendas()));
         holder.status.setText("Status: " + product.getStatus());
+
+        // Configurar o clique em um item
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int adapterPosition = holder.getAdapterPosition();
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    // Lidar com o clique em um item
+                    toggleSelection(adapterPosition);
+                    // Notificar o adapter para atualizar a seleção visual
+                    notifyItemChanged(adapterPosition);
+                }
+            }
+        });
 
         // Configurar o deslize para excluir
         holder.itemView.setOnTouchListener(new View.OnTouchListener() {
@@ -80,7 +134,7 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
     }
 
     public interface OnItemDeletedListener {
-        void onItemSwipedToDelete(Produto produto);
+       void onItemSwipedToDelete(Produto produto);
     }
 
 
