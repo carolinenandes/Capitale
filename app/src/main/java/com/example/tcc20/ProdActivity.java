@@ -24,6 +24,7 @@ public class ProdActivity extends AppCompatActivity {
     private ArrayList<Produto> productList;
     private adapterProd adapter;
     public BancoDeDados banco;
+    private ItemTouchHelper itemTouchHelper;
 
 
     @Override
@@ -38,8 +39,12 @@ public class ProdActivity extends AppCompatActivity {
 
         banco = new BancoDeDados(this);
         productList = new ArrayList<>(); // Inicialize a lista primeiro
-        adapter = new adapterProd(this, productList);
+        adapter = new adapterProd(this, productList, banco);
         recyclerviewProd.setAdapter(adapter);
+
+        // Configurar o ItemTouchHelper
+        itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter, productList, banco));
+        itemTouchHelper.attachToRecyclerView(recyclerviewProd);
 
 
         btnEditarProd.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +63,7 @@ public class ProdActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         //Atualiza a página
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +89,8 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd.setAdapter(adapter);
 
         carregarDadosDoBanco();
+
+
 
         recyclerviewProd.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
