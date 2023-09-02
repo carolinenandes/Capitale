@@ -36,7 +36,7 @@ public class EditDialogFragmentProd extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_dialog_prod, container, false);
 
-        Button btnEditProd = view.findViewById(R.id.btnAddProd);
+        Button btnEditProd = view.findViewById(R.id.btnEditProd);
         EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd);
         EditText etxQtdProd = view.findViewById(R.id.etxQtdProd);
         EditText etxtValorVenda = view.findViewById(R.id.etxtValorVenda);
@@ -95,7 +95,7 @@ public class EditDialogFragmentProd extends DialogFragment {
         values.put("STATUS_PROD", produto.getStatus());
         values.put("QTD_VENDA", produto.getVendas());
 
-        db.update("TB_PRODUTO", values, "ID = ?", new String[]{String.valueOf(produto.getId())});
+        db.update("TB_PRODUTO", values, "ID_PROD = ?", new String[]{String.valueOf(produto.getId())});
         db.close();
 
         adapter.notifyDataSetChanged();

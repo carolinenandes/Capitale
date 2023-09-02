@@ -1,13 +1,17 @@
 package com.example.tcc20;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -20,22 +24,23 @@ public class ProdActivity extends AppCompatActivity {
     private ArrayList<Produto> productList;
     private adapterProd adapter;
     public BancoDeDados banco;
-    private Button btnAddProd;
-    private Button btnEditarProd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prod);
 
-        btnAddProd = findViewById(R.id.btnAddProd);
-        btnEditarProd = findViewById(R.id.btnEditarProd);
+        Button btnEditarProd = findViewById(R.id.btnEditarProd);
+        Button btnAddProd = findViewById(R.id.btnAddProd);
         Button btnRefresh = findViewById(R.id.btnRefresh);
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
         productList = new ArrayList<>(); // Inicialize a lista primeiro
-        adapter = new adapterProd(productList); // Em seguida, crie o adaptador com a lista
+        adapter = new adapterProd(this, productList);
+        recyclerviewProd.setAdapter(adapter);
+
 
         btnEditarProd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,37 +53,13 @@ public class ProdActivity extends AppCompatActivity {
                     editDialog.show(getSupportFragmentManager(), "edit_dialog");
                 } else {
                     // Informe ao usuário que nenhum item foi selecionado
+                    Log.d("ProdActivity", "Nenhum item selecionado para edição");
                     Toast.makeText(ProdActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
-        adapter.setOnItemDeletedListener(new adapterProd.OnItemDeletedListener() {
-            @Override
-            public void onItemSwipedToDelete(Produto produto) {
-                // Implemente a lógica de exclusão aqui
-                int position = productList.indexOf(produto);
-                if (position != -1) {
-                    productList.remove(position);
-                    adapter.notifyItemRemoved(position);
-
-                    // Aqui, você deve lidar com a exclusão no banco de dados
-                    if (banco != null) {
-                        try {
-                            banco.openDB();
-                            excluirProduto(produto.getId(), banco);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            banco.close();
-                        }
-                    }
-                }
-            }
-        });
-
-        //Atualiza a pagina
+        //Atualiza a página
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,23 +82,39 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd.setHasFixedSize(true);
         recyclerviewProd.setAdapter(adapter);
 
-        // Configure o ItemTouchHelper após a criação do adapter
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter, productList, banco));
-        itemTouchHelper.attachToRecyclerView(recyclerviewProd);
-
         carregarDadosDoBanco();
+
+        recyclerviewProd.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                // Verifique se é um evento de toque longo
+                if (e.getAction() == MotionEvent.ACTION_DOWN) {
+                    View childView = rv.findChildViewUnder(e.getX(), e.getY());
+                    int position = rv.getChildAdapterPosition(childView);
+
+                    // Verifique se o item existe e não está selecionado
+                    if (position != RecyclerView.NO_POSITION && !adapter.isSelected(position)) {
+                        // Selecione o item
+                        adapter.toggleItemSelection(position);
+                    }
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                // Não precisa implementar nada aqui, mas é necessário fornecer uma implementação.
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+                // Não precisa implementar nada aqui, mas é necessário fornecer uma implementação.
+            }
+        });
     }
 
-    // Método para excluir um produto com base no ID
-    public void excluirProduto(int produtoId, BancoDeDados banco) {
-        try {
-            String sql = "DELETE FROM TB_PRODUTO WHERE ID = ?";
-            banco.db.execSQL(sql, new Object[]{produtoId});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    // Método para carregar os dados do banco de dados e preencher a lista
     public void carregarDadosDoBanco() {
         try {
             banco.openDB();
@@ -149,10 +146,5 @@ public class ProdActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
-
-
-

@@ -83,16 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtDescProd" />
 
-    <Button
-        android:id="@+id/btnAddProd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="104dp"
-        android:text="@string/btnEditProd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtStatusProd" />
-
     <EditText
         android:id="@+id/etxtQtdVendas"
         android:layout_width="wrap_content"
@@ -105,5 +95,15 @@
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusProd" />
+
+    <Button
+        android:id="@+id/btnEditProd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/btnEditProd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
