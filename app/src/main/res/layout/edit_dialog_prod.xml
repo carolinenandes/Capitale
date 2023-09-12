@@ -16,7 +16,8 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/etxQtdProd"
@@ -98,12 +99,22 @@
 
     <Button
         android:id="@+id/btnEditProd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="24dp"
         android:text="@string/btnEditProd"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
+
+    <Button
+        android:id="@+id/btnExcluir"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/btnExcluir"
+        app:layout_constraintStart_toEndOf="@+id/btnEditProd"
         app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

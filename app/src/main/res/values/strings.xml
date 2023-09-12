@@ -29,5 +29,6 @@
     <string name="label_status">Status: %s</string>
     <string name="btnEditProd">Editar</string>
     <string name="btnEditarProd">Editar</string>
+    <string name="btnExcluir">Excluir</string>
 
 </resources>

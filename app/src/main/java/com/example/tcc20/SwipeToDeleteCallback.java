@@ -1,4 +1,4 @@
-package com.example.tcc20;
+/*package com.example.tcc20;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
-    private final adapterProd adapter;
+    private final adapterProd mAdapter;
     private final ArrayList<Produto> productList;
     private final BancoDeDados banco;
 
     public SwipeToDeleteCallback(adapterProd adapter, ArrayList<Produto> productList, BancoDeDados banco) {
-        this.adapter = adapter;
+        this.mAdapter = adapter;;
         this.productList = productList;
         this.banco = banco;
     }
@@ -47,18 +47,17 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
 
-
         // Verifique a direção do deslize
         if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
             Produto produto = productList.get(position);
-            adapterProd.onItemSwipedToDelete(produto, position);
             int productIdToDelete = produto.getId();
 
-            adapter.deletaProdutoDaDatabase(productIdToDelete);
+            mAdapter.deletaProdutoDaDatabase(productIdToDelete);
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
 
 
 
-
+*/

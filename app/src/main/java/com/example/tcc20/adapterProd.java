@@ -39,28 +39,6 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
     }
 
 
-    public void deletaProdutoDaDatabase(int productId) {
-        SQLiteDatabase db = banco.getWritableDatabase(); // Abre o banco de dados em modo de escrita
-
-        // Define o WHERE para excluir o registro com base no ID
-        String whereClause = "ID_PROD = ?";
-        String[] whereArgs = {String.valueOf(productId)};
-
-        // Exclua o registro da tabela
-        int deletedRows = db.delete("TB_PRODUTO", whereClause, whereArgs);
-
-        if (deletedRows > 0) {
-            // Registro excluído com sucesso
-            Toast.makeText(context, "Método deletaProdutoDaDatabase chamado para o produto com ID: " + productId, Toast.LENGTH_SHORT).show();
-        } else {
-            // Não foi possível excluir o registro
-            Toast.makeText(context, "Falha ao excluir o produto", Toast.LENGTH_SHORT).show();
-        }
-
-
-        db.close(); // Feche o banco de dados após a operação
-    }
-
     private int getItemPosition(int productId) {
         for (int i = 0; i < listProd.size(); i++) {
             if (listProd.get(i).getId() == productId) {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
@@ -36,7 +37,10 @@ public class EditDialogFragmentProd extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edit_dialog_prod, container, false);
 
+        context = getContext();
+
         Button btnEditProd = view.findViewById(R.id.btnEditProd);
+        Button btnExcluir = view.findViewById(R.id.btnExcluir);
         EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd);
         EditText etxQtdProd = view.findViewById(R.id.etxQtdProd);
         EditText etxtValorVenda = view.findViewById(R.id.etxtValorVenda);
@@ -80,6 +84,14 @@ public class EditDialogFragmentProd extends DialogFragment {
             }
         });
 
+        btnExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletaProdutoDaDatabase(produtoParaEditar.getId());
+                dismiss(); // Fecha o diálogo após a exclusão
+            }
+        });
+
         return view;
     }
 
@@ -99,5 +111,27 @@ public class EditDialogFragmentProd extends DialogFragment {
         db.close();
 
         adapter.notifyDataSetChanged();
+    }
+
+    public void deletaProdutoDaDatabase(int productId) {
+        SQLiteDatabase db = banco.getWritableDatabase(); // Abre o banco de dados em modo de escrita
+
+        // Define o WHERE para excluir o registro com base no ID
+        String whereClause = "ID_PROD = ?";
+        String[] whereArgs = {String.valueOf(productId)};
+
+        // Exclua o registro da tabela
+        int deletedRows = db.delete("TB_PRODUTO", whereClause, whereArgs);
+
+        if (deletedRows > 0) {
+            // Registro excluído com sucesso
+            Toast.makeText(context, "Produto deletado com sucesso.", Toast.LENGTH_SHORT).show();
+
+        } else {
+            // Não foi possível excluir o registro
+            Toast.makeText(context, "Falha ao excluir o produto", Toast.LENGTH_SHORT).show();
+        }
+        db.close(); // Feche o banco de dados após a operação
+        adapter.notifyItemRemoved(productId);
     }
 }
