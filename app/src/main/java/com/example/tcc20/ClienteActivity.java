@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProdActivity extends AppCompatActivity {
+public class Activity extends AppCompatActivity {
     private RecyclerView recyclerviewProd;
     private ArrayList<Produto> productList;
     private adapterProd adapter;

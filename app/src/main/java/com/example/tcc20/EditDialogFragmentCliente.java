@@ -13,15 +13,15 @@ import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
-public class EditDialogFragmentProd extends DialogFragment {
+public class EditDialogFragmentCliente extends DialogFragment {
 
     private Context context;
     private BancoDeDados banco;
-    private adapterProd adapter;
-    private Produto produtoParaEditar;
+    private adapterCliente adapter;
+    private Cliente clienteParaEditar;
 
     // Construtor para passar o contexto
-    public EditDialogFragmentProd(Context context) {
+    public EditDialogFragmentCliente(Context context) {
         this.context = context;
     }
 

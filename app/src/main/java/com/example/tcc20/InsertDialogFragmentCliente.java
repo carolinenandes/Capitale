@@ -36,7 +36,7 @@ public class InsertDialogFragmentProd extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.insert_dialog_prod, container, false);
 
-        Button btnInsertProd = view.findViewById(R.id.btnAddProd);
+        Button btnInsertProd = view.findViewById(R.id.btnAddCliente);
         EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd), etxQtdProd = view.findViewById(R.id.etxQtdProd),
                 etxtValorVenda = view.findViewById(R.id.etxtValorVenda), etxtValorCusto_prod = view.findViewById(R.id.etxtValorCusto_prod),
                 etxtDescProd = view.findViewById(R.id.etxtDescProd), etxtStatusProd = view.findViewById(R.id.etxtStatusProd),
