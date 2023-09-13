@@ -1,19 +1,15 @@
 package com.example.tcc20;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //Classe do adapter
@@ -93,6 +89,27 @@ public class adapterCliente extends RecyclerView.Adapter<adapterCliente.MyViewHo
         listClientes.remove(position);
         notifyItemRemoved(position);
         listener.onItemSwipedToDelete(cliente); // Notifica o listener
+    }
+
+    private int selectedItemPosition = RecyclerView.NO_POSITION;
+    //Este método pegam o posiçao do item que o usuário esta apertando.
+    public void setSelectedPosition(int position) {
+        selectedItemPosition = position;
+        notifyDataSetChanged();
+    }
+
+    public int getSelectedPosition() {
+        return selectedItemPosition;
+    }
+
+    // Método para selecionar ou desselecionar um item
+    public void toggleSelection(int position) {
+        if (selectedItems.get(position, false)) {
+            selectedItems.delete(position);
+        } else {
+            selectedItems.put(position, true);
+        }
+        notifyItemChanged(position);
     }
 
     // Método para verificar se um item está selecionado

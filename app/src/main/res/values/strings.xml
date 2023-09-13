@@ -16,7 +16,7 @@
     <string name="hintValorVenda">Valor de venda</string>
     <string name="hintValorCusto">Custo de produção</string>
     <string name="hintDesc">Descrição</string>
-    <string name="hintStatus">Status</string>
+    <string name="hintStatusCliente">Status</string>
     <string name="hintQtdVenda">Quantidade de vendas</string>
 
     <string name="label_id">ID: %s</string>
@@ -30,5 +30,11 @@
     <string name="btnEditProd">Editar</string>
     <string name="btnEditarProd">Editar</string>
     <string name="btnExcluir">Excluir</string>
+    <string name="txtFone">Telefone:</string>
+    <string name="btnAddCliente">Adicionar Cliente</string>
+    <string name="btnVerCliente">Ver</string>
+    <string name="titleCliente">Clientes</string>
+    <string name="hintFoneCliente">Telefone</string>
+    <string name="hintEmailCliente">Email</string>
 
 </resources>

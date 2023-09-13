@@ -1,4 +1,4 @@
-package com.example.tcc20;
+/*package com.example.tcc20;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,16 +26,16 @@ public class EditDialogFragmentCliente extends DialogFragment {
     }
 
     // Construtor para passar a instância do BancoDeDados, do adaptador e o produto a ser editado
-    public EditDialogFragmentProd(BancoDeDados banco, adapterProd adapter, Produto produto) {
+    public EditDialogFragmentCliente(BancoDeDados banco, adapterCliente adapter, Cliente cliente) {
         this.banco = banco;
         this.adapter = adapter;
-        this.produtoParaEditar = produto;
+        this.clienteParaEditar = cliente;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.edit_dialog_prod, container, false);
+        View view = inflater.inflate(R.layout.edit_dialog_cliente, container, false);
 
         context = getContext();
 
@@ -45,18 +45,18 @@ public class EditDialogFragmentCliente extends DialogFragment {
         EditText etxQtdProd = view.findViewById(R.id.etxQtdProd);
         EditText etxtValorVenda = view.findViewById(R.id.etxtValorVenda);
         EditText etxtValorCustoProd = view.findViewById(R.id.etxtValorCusto_prod);
-        EditText etxtDescProd = view.findViewById(R.id.etxtDescProd);
-        EditText etxtStatusProd = view.findViewById(R.id.etxtStatusProd);
-        EditText etxtQtdVendas = view.findViewById(R.id.etxtQtdVendas);
+        EditText etxtDescProd = view.findViewById(R.id.extFoneCliente);
+        EditText etxtStatusProd = view.findViewById(R.id.etxtStatusCliente);
+        EditText etxtQtdVendas = view.findViewById(R.id.etxtEmailCliente);
 
         // Preenche os campos de edição com os detalhes do produto a ser editado
-        etxtNomeProd.setText(produtoParaEditar.getNome());
-        etxQtdProd.setText(String.valueOf(produtoParaEditar.getQtd()));
-        etxtValorVenda.setText(produtoParaEditar.getValor_venda());
-        etxtValorCustoProd.setText(produtoParaEditar.getValor_custo());
-        etxtDescProd.setText(produtoParaEditar.getDesc());
-        etxtStatusProd.setText(produtoParaEditar.getStatus());
-        etxtQtdVendas.setText(String.valueOf(produtoParaEditar.getVendas()));
+        etxtNomeProd.setText(clienteParaEditar.getNome());
+        etxQtdProd.setText(String.valueOf(clienteParaEditar.getQtd()));
+        etxtValorVenda.setText(clienteParaEditar.getValor_venda());
+        etxtValorCustoProd.setText(clienteParaEditar.getValor_custo());
+        etxtDescProd.setText(clienteParaEditar.getDesc());
+        etxtStatusProd.setText(clienteParaEditar.getStatus());
+        etxtQtdVendas.setText(String.valueOf(clienteParaEditar.getVendas()));
 
         btnEditProd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,15 +70,15 @@ public class EditDialogFragmentCliente extends DialogFragment {
                 int vendas = Integer.parseInt(etxtQtdVendas.getText().toString());
 
                 // Atualiza os detalhes do produto no banco de dados
-                produtoParaEditar.setNome(nome);
-                produtoParaEditar.setQtd(qtd);
-                produtoParaEditar.setValor_venda(valorVenda);
-                produtoParaEditar.setValor_custo(valorCusto);
-                produtoParaEditar.setDesc(desc);
-                produtoParaEditar.setStatus(status);
-                produtoParaEditar.setVendas(vendas);
+                clienteParaEditar.setNome(nome);
+                clienteParaEditar.setQtd(qtd);
+                clienteParaEditar.setValor_venda(valorVenda);
+                clienteParaEditar.setValor_custo(valorCusto);
+                clienteParaEditar.setDesc(desc);
+                clienteParaEditar.setStatus(status);
+                clienteParaEditar.setVendas(vendas);
 
-                atualizarProdutoNoBanco(produtoParaEditar, adapter);
+                atualizarProdutoNoBanco(clienteParaEditar, adapter);
 
                 dismiss(); // Fecha o diálogo após a edição
             }
@@ -87,7 +87,7 @@ public class EditDialogFragmentCliente extends DialogFragment {
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deletaProdutoDaDatabase(produtoParaEditar.getId());
+                deletaProdutoDaDatabase(clienteParaEditar.getId());
                 dismiss(); // Fecha o diálogo após a exclusão
             }
         });
@@ -135,3 +135,4 @@ public class EditDialogFragmentCliente extends DialogFragment {
         adapter.notifyItemRemoved(productId);
     }
 }
+*/

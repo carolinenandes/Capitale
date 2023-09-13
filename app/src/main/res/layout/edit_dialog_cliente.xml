@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etxtValorVenda" />
 
     <EditText
-        android:id="@+id/etxtDescProd"
+        android:id="@+id/extFoneCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -72,20 +72,20 @@
         app:layout_constraintTop_toBottomOf="@+id/etxtValorCusto_prod" />
 
     <EditText
-        android:id="@+id/etxtStatusProd"
+        android:id="@+id/etxtStatusCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="@string/hintStatus"
+        android:hint="@string/hintStatusCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtDescProd" />
+        app:layout_constraintTop_toBottomOf="@+id/extFoneCliente" />
 
     <EditText
-        android:id="@+id/etxtQtdVendas"
+        android:id="@+id/etxtEmailCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -95,7 +95,7 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtStatusProd" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
     <Button
         android:id="@+id/btnEditProd"
@@ -105,7 +105,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/btnEditProd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
 
     <Button
         android:id="@+id/btnExcluir"
@@ -115,6 +115,6 @@
         android:layout_marginTop="24dp"
         android:text="@string/btnExcluir"
         app:layout_constraintStart_toEndOf="@+id/btnEditProd"
-        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
