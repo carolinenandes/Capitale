@@ -36,5 +36,9 @@
     <string name="titleCliente">Clientes</string>
     <string name="hintFoneCliente">Telefone</string>
     <string name="hintEmailCliente">Email</string>
+    <string name="hintNomeCliente">Nome do Cliente</string>
+    <string name="btnInsertCliente">Adicionar Cliente</string>
+    <string name="btnEditCliente">Editar</string>
+    <string name="btnAdicionarPedido">Pedido</string>
 
 </resources>

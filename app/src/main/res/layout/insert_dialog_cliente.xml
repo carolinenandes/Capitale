@@ -6,59 +6,60 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/etxtNomeProd"
+        android:id="@+id/etxtNomeCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="@string/hintNome"
+        android:hint="@string/hintNomeCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/extFoneCliente"
+        android:id="@+id/etxtFoneCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="@string/hintFoneCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="94dp" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtNomeCliente" />
 
     <EditText
         android:id="@+id/etxtStatusCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="@string/hintStatusCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/extFoneCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtFoneCliente" />
 
     <Button
         android:id="@+id/btnInsertCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="152dp"
-        android:text="@string/btnAddProd"
+        android:layout_marginTop="44dp"
+        android:text="@string/btnInsertCliente"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
 
     <EditText
         android:id="@+id/etxtEmailCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="@string/hintEmailCliente"
         android:inputType="textPersonName"

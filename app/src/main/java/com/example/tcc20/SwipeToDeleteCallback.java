@@ -11,10 +11,10 @@ import java.util.List;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     private final adapterProd mAdapter;
-    private final ArrayList<Produto> productList;
+    private final ArrayList<produtoSelecao> productList;
     private final BancoDeDados banco;
 
-    public SwipeToDeleteCallback(adapterProd adapter, ArrayList<Produto> productList, BancoDeDados banco) {
+    public SwipeToDeleteCallback(adapterProd adapter, ArrayList<produtoSelecao> productList, BancoDeDados banco) {
         this.mAdapter = adapter;;
         this.productList = productList;
         this.banco = banco;
@@ -49,7 +49,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
 
         // Verifique a direção do deslize
         if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-            Produto produto = productList.get(position);
+            produtoSelecao produto = productList.get(position);
             int productIdToDelete = produto.getId();
 
             mAdapter.deletaProdutoDaDatabase(productIdToDelete);

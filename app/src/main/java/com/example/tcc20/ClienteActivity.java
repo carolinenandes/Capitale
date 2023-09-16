@@ -38,7 +38,7 @@ public class ClienteActivity extends AppCompatActivity {
         clienteList = new ArrayList<>();
         adapter = new adapterCliente(this, clienteList);
 
-       /* btnVerCliente.setOnClickListener(new View.OnClickListener() {
+        btnVerCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int selectedItemPosition = adapter.getSelectedPosition();
@@ -51,7 +51,7 @@ public class ClienteActivity extends AppCompatActivity {
                     Toast.makeText(ClienteActivity.this, "Selecione um cliente para editar", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
 
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override

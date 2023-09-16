@@ -1,7 +1,9 @@
-/*package com.example.tcc20;
+package com.example.tcc20;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import java.util.ArrayList;
 
 public class EditDialogFragmentCliente extends DialogFragment {
 
@@ -19,6 +24,8 @@ public class EditDialogFragmentCliente extends DialogFragment {
     private BancoDeDados banco;
     private adapterCliente adapter;
     private Cliente clienteParaEditar;
+    private static final String SELECIONAR_PRODUTOS_REQUEST_KEY = "selecionar_produtos_request";
+
 
     // Construtor para passar o contexto
     public EditDialogFragmentCliente(Context context) {
@@ -39,46 +46,39 @@ public class EditDialogFragmentCliente extends DialogFragment {
 
         context = getContext();
 
-        Button btnEditProd = view.findViewById(R.id.btnEditProd);
+        Button btnEditCliente = view.findViewById(R.id.btnEditCliente);
         Button btnExcluir = view.findViewById(R.id.btnExcluir);
-        EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd);
-        EditText etxQtdProd = view.findViewById(R.id.etxQtdProd);
-        EditText etxtValorVenda = view.findViewById(R.id.etxtValorVenda);
-        EditText etxtValorCustoProd = view.findViewById(R.id.etxtValorCusto_prod);
-        EditText etxtDescProd = view.findViewById(R.id.extFoneCliente);
-        EditText etxtStatusProd = view.findViewById(R.id.etxtStatusCliente);
-        EditText etxtQtdVendas = view.findViewById(R.id.etxtEmailCliente);
+        Button btnAdicionarPedido = view.findViewById(R.id.btnAdicionarPedido);
+        EditText etxtNomeCliente = view.findViewById(R.id.etxtNomeCliente);
+        EditText etxEmailCliente = view.findViewById(R.id.etxtEmailCliente);
+        EditText etxtStatusCliente = view.findViewById(R.id.etxtStatusCliente);
+        EditText etxtFoneCliente = view.findViewById(R.id.etxtFoneCliente);
+
 
         // Preenche os campos de edição com os detalhes do produto a ser editado
-        etxtNomeProd.setText(clienteParaEditar.getNome());
-        etxQtdProd.setText(String.valueOf(clienteParaEditar.getQtd()));
-        etxtValorVenda.setText(clienteParaEditar.getValor_venda());
-        etxtValorCustoProd.setText(clienteParaEditar.getValor_custo());
-        etxtDescProd.setText(clienteParaEditar.getDesc());
-        etxtStatusProd.setText(clienteParaEditar.getStatus());
-        etxtQtdVendas.setText(String.valueOf(clienteParaEditar.getVendas()));
+        etxtNomeCliente.setText(clienteParaEditar.getNome());
+        etxEmailCliente.setText(String.valueOf(clienteParaEditar.getEmail()));
+        etxtStatusCliente.setText(clienteParaEditar.getStatus());
+        etxtFoneCliente.setText(clienteParaEditar.getFone());
 
-        btnEditProd.setOnClickListener(new View.OnClickListener() {
+
+        btnEditCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nome = etxtNomeProd.getText().toString();
-                int qtd = Integer.parseInt(etxQtdProd.getText().toString());
-                String valorVenda = etxtValorVenda.getText().toString();
-                String valorCusto = etxtValorCustoProd.getText().toString();
-                String desc = etxtDescProd.getText().toString();
-                String status = etxtStatusProd.getText().toString();
-                int vendas = Integer.parseInt(etxtQtdVendas.getText().toString());
+                String nome = etxtNomeCliente.getText().toString();
+                String email = etxEmailCliente.getText().toString();
+                String status = etxtStatusCliente.getText().toString();
+                String fone = etxtFoneCliente.getText().toString();
+
 
                 // Atualiza os detalhes do produto no banco de dados
                 clienteParaEditar.setNome(nome);
-                clienteParaEditar.setQtd(qtd);
-                clienteParaEditar.setValor_venda(valorVenda);
-                clienteParaEditar.setValor_custo(valorCusto);
-                clienteParaEditar.setDesc(desc);
+                clienteParaEditar.setEmail(email);
+                clienteParaEditar.setFone(fone);
                 clienteParaEditar.setStatus(status);
-                clienteParaEditar.setVendas(vendas);
 
-                atualizarProdutoNoBanco(clienteParaEditar, adapter);
+
+                atualizarClienteNoBanco(clienteParaEditar, adapter);
 
                 dismiss(); // Fecha o diálogo após a edição
             }
@@ -87,52 +87,113 @@ public class EditDialogFragmentCliente extends DialogFragment {
         btnExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deletaProdutoDaDatabase(clienteParaEditar.getId());
+                deletaClienteDaDatabase(clienteParaEditar.getId());
                 dismiss(); // Fecha o diálogo após a exclusão
+            }
+        });
+
+        btnAdicionarPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogSelecaoProdutos();
             }
         });
 
         return view;
     }
 
-    private void atualizarProdutoNoBanco(Produto produto, adapterProd adapter) {
+    // Método para mostrar o Dialog de seleção de produtos
+    private void showDialogSelecaoProdutos() {
+        getParentFragmentManager().setFragmentResultListener(SELECIONAR_PRODUTOS_REQUEST_KEY, this, (requestKey, result) -> {
+            ArrayList<produtoSelecao> produtosSelecionados = result.getParcelableArrayList("produtos_selecionados");
+            adicionarPedidosAoCliente(produtosSelecionados);
+        });
+
+        DialogSelecaoProdutos dialog = new DialogSelecaoProdutos();
+        dialog.show(getParentFragmentManager(), "selecao_produtos_dialog");
+    }
+
+
+    // Callback para lidar com o retorno do Dialog de seleção de produtos
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (String.valueOf(requestCode).equals(SELECIONAR_PRODUTOS_REQUEST_KEY) && resultCode == Activity.RESULT_OK) {
+            ArrayList<produtoSelecao> produtosSelecionados = data.getParcelableArrayListExtra("produtos_selecionados");
+            adicionarPedidosAoCliente(produtosSelecionados);
+        }
+    }
+
+
+    private void atualizarClienteNoBanco(Cliente cliente, adapterCliente adapter) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("NOME_PROD", produto.getNome());
-        values.put("QTD_PROD", produto.getQtd());
-        values.put("VALOR_VENDA_PROD", produto.getValor_venda());
-        values.put("VALOR_CUSTO_PROD", produto.getValor_custo());
-        values.put("DESC_PROD", produto.getDesc());
-        values.put("STATUS_PROD", produto.getStatus());
-        values.put("QTD_VENDA", produto.getVendas());
+        values.put("NOME_CLIENTE", cliente.getNome());
+        values.put("EMAIL_CLIENTE", cliente.getEmail());
+        values.put("STATUS_CLIENTE", cliente.getStatus());
+        values.put("FONE_CLIENTE", cliente.getFone());
 
-        db.update("TB_PRODUTO", values, "ID_PROD = ?", new String[]{String.valueOf(produto.getId())});
+
+        db.update("TB_CLIENTE", values, "ID_CLIENTE = ?", new String[]{String.valueOf(cliente.getId())});
         db.close();
 
         adapter.notifyDataSetChanged();
     }
 
-    public void deletaProdutoDaDatabase(int productId) {
+    public void deletaClienteDaDatabase(int clienteId) {
         SQLiteDatabase db = banco.getWritableDatabase(); // Abre o banco de dados em modo de escrita
 
         // Define o WHERE para excluir o registro com base no ID
-        String whereClause = "ID_PROD = ?";
-        String[] whereArgs = {String.valueOf(productId)};
+        String whereClause = "ID_CLIENTE = ?";
+        String[] whereArgs = {String.valueOf(clienteId)};
 
         // Exclua o registro da tabela
-        int deletedRows = db.delete("TB_PRODUTO", whereClause, whereArgs);
+        int deletedRows = db.delete("TB_CLIENTE", whereClause, whereArgs);
 
         if (deletedRows > 0) {
             // Registro excluído com sucesso
-            Toast.makeText(context, "Produto deletado com sucesso.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Cliente deletado com sucesso.", Toast.LENGTH_SHORT).show();
 
         } else {
             // Não foi possível excluir o registro
-            Toast.makeText(context, "Falha ao excluir o produto", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Falha ao excluir o cliente", Toast.LENGTH_SHORT).show();
         }
         db.close(); // Feche o banco de dados após a operação
-        adapter.notifyItemRemoved(productId);
+        adapter.notifyItemRemoved(clienteId);
+    }
+
+    public void adicionarPedidosAoCliente(ArrayList<produtoSelecao> produtosSelecionados) {
+        SQLiteDatabase db = banco.getWritableDatabase();
+        double totalPedido = 0.0;
+
+        // Calcular o total do pedido
+        for (produtoSelecao produto : produtosSelecionados) {
+            try {
+                double valorProduto = Double.parseDouble(produto.getValor_venda());
+                totalPedido += valorProduto;
+            } catch (NumberFormatException e) {
+                // Lidar com o caso em que o valor não é um número válido
+                e.printStackTrace();
+            }
+        }
+
+
+        for (produtoSelecao produto : produtosSelecionados) {
+            ContentValues values = new ContentValues();
+            values.put("ID_CLIENTE", clienteParaEditar.getId()); // Use o ID do cliente que está sendo editado
+            values.put("STATUS_PED_COMPRA", "Pendente");
+            values.put("DTA_PED_COMPRA", System.currentTimeMillis()); // Usa a data atual
+            values.put("VALOR_PED_COMPRA", produto.getValor_venda()); // Use o valor do produto
+
+            long idPedido = db.insert("TB_PEDIDO_COMPRA", null, values);
+
+            if (idPedido != -1) {
+                Toast.makeText(context, "Pedido adicionado com sucesso.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Falha ao adicionar pedido", Toast.LENGTH_SHORT).show();
+            }
+        }
+        db.close();
     }
 }
-*/

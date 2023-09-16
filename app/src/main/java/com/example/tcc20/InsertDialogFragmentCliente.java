@@ -2,7 +2,6 @@ package com.example.tcc20;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,8 +39,8 @@ public class InsertDialogFragmentCliente extends DialogFragment {
         View view = inflater.inflate(R.layout.insert_dialog_cliente, container, false);
 
         Button btnInsertCliente = view.findViewById(R.id.btnInsertCliente);
-        EditText etxtNomeCliente = view.findViewById(R.id.etxtNomeProd), etxtEmailCliente = view.findViewById(R.id.etxtEmailCliente),
-                etxtStatusCliente = view.findViewById(R.id.etxtStatusCliente), extFoneCliente = view.findViewById(R.id.extFoneCliente);
+        EditText etxtNomeCliente = view.findViewById(R.id.etxtNomeCliente), etxtEmailCliente = view.findViewById(R.id.etxtEmailCliente),
+                etxtStatusCliente = view.findViewById(R.id.etxtStatusCliente), extFoneCliente = view.findViewById(R.id.etxtFoneCliente);
 
         btnInsertCliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +55,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
                 String dta_cadastro = dateFormat.format(calendar.getTime());;
 
                 Cliente novoCliente = new Cliente(-1, nome, email, status, dta_cadastro,  fone);
-                adicionarProdutoNoBanco(novoCliente, adapter);
+                adicionarClienteNoBanco(novoCliente, adapter);
 
                 dismiss(); // Feche o diálogo após a inserção
             }
@@ -65,7 +64,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
         return view;
     }
 
-    public void adicionarProdutoNoBanco(Cliente cliente, adapterCliente adapter) {
+    public void adicionarClienteNoBanco(Cliente cliente, adapterCliente adapter) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();
