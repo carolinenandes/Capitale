@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class EditDialogFragmentCliente extends DialogFragment {
 
@@ -113,18 +116,6 @@ public class EditDialogFragmentCliente extends DialogFragment {
         dialog.show(getParentFragmentManager(), "selecao_produtos_dialog");
     }
 
-
-    // Callback para lidar com o retorno do Dialog de seleção de produtos
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (String.valueOf(requestCode).equals(SELECIONAR_PRODUTOS_REQUEST_KEY) && resultCode == Activity.RESULT_OK) {
-            ArrayList<produtoSelecao> produtosSelecionados = data.getParcelableArrayListExtra("produtos_selecionados");
-            adicionarPedidosAoCliente(produtosSelecionados);
-        }
-    }
-
-
     private void atualizarClienteNoBanco(Cliente cliente, adapterCliente adapter) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
@@ -167,7 +158,13 @@ public class EditDialogFragmentCliente extends DialogFragment {
         SQLiteDatabase db = banco.getWritableDatabase();
         double totalPedido = 0.0;
 
-        // Calcular o total do pedido
+        Log.d("TAG", "Tentando adicionar pedidos. Número de produtos selecionados: " + produtosSelecionados.size());
+
+        if (produtosSelecionados == null) {
+            Log.e("TAG", "A lista de produtos selecionados está nula");
+            return;
+        }
+
         for (produtoSelecao produto : produtosSelecionados) {
             try {
                 double valorProduto = Double.parseDouble(produto.getValor_venda());
@@ -178,21 +175,23 @@ public class EditDialogFragmentCliente extends DialogFragment {
             }
         }
 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dta_ped_compra = dateFormat.format(calendar.getTime());;
 
-        for (produtoSelecao produto : produtosSelecionados) {
-            ContentValues values = new ContentValues();
-            values.put("ID_CLIENTE", clienteParaEditar.getId()); // Use o ID do cliente que está sendo editado
-            values.put("STATUS_PED_COMPRA", "Pendente");
-            values.put("DTA_PED_COMPRA", System.currentTimeMillis()); // Usa a data atual
-            values.put("VALOR_PED_COMPRA", produto.getValor_venda()); // Use o valor do produto
+        ContentValues values = new ContentValues();
+        values.put("ID_CLIENTE", clienteParaEditar.getId()); // Use o ID do cliente que está sendo editado
+        values.put("STATUS_PED_COMPRA", "Pendente");
+        values.put("DTA_PED_COMPRA", dta_ped_compra); // Usa a data atual
+        values.put("VALOR_PED_COMPRA", totalPedido); // Use o total do pedido
 
-            long idPedido = db.insert("TB_PEDIDO_COMPRA", null, values);
+        // Insira os dados no banco de dados
+        long idPedido = db.insertWithOnConflict("TB_PEDIDO_COMPRA", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
-            if (idPedido != -1) {
-                Toast.makeText(context, "Pedido adicionado com sucesso.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "Falha ao adicionar pedido", Toast.LENGTH_SHORT).show();
-            }
+        if (idPedido != -1) {
+            Toast.makeText(context, "Pedido adicionado com sucesso.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Falha ao adicionar pedido", Toast.LENGTH_SHORT).show();
         }
         db.close();
     }

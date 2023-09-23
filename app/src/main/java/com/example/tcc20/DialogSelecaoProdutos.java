@@ -38,15 +38,6 @@ public class DialogSelecaoProdutos extends DialogFragment {
 
     private OnProdutosSelecionadosListener listener;
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            listener = (OnProdutosSelecionadosListener) getTargetFragment();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getTargetFragment().toString() + " deve implementar OnProdutosSelecionadosListener");
-        }
-    }
 
     @NonNull
     @Override
@@ -71,10 +62,11 @@ public class DialogSelecaoProdutos extends DialogFragment {
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putParcelableArrayListExtra("produtos_selecionados", produtosSelecionados);
-                getParentFragmentManager().setFragmentResult(SELECIONAR_PRODUTOS_REQUEST_KEY, new Bundle());
-                dismiss();
+                // Obtenha os produtos selecionados do adapter
+                produtosSelecionados = adapter.getProdutosSelecionados();
+
+                // Chame o método de confirmação de seleção
+                confirmarSelecao();
             }
         });
 
@@ -85,7 +77,11 @@ public class DialogSelecaoProdutos extends DialogFragment {
     }
 
     private void confirmarSelecao() {
-        ArrayList<produtoSelecao> produtosSelecionados = adapter.getProdutosSelecionados();
+        // Verifique se o adapter está null
+        if (adapter != null) {
+            // Obtenha os produtos selecionados
+            ArrayList<produtoSelecao> produtosSelecionados = adapter.getProdutosSelecionados();
+        }
 
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("produtos_selecionados", produtosSelecionados);
@@ -94,34 +90,38 @@ public class DialogSelecaoProdutos extends DialogFragment {
         dismiss();
     }
 
+
     public void pegarProdutos(SQLiteDatabase database) {
-            try {
-                String sql = "SELECT * FROM TB_PRODUTO";
-                Cursor cursor = database.rawQuery(sql, null);
+        try {
+            String sql = "SELECT * FROM TB_PRODUTO";
+            Cursor cursor = database.rawQuery(sql, null);
 
-                if (cursor != null && cursor.moveToFirst()) {
-                    do {
-                        int id = cursor.getInt(0);
-                        String nome = cursor.getString(1);
-                        int qtd = cursor.getInt(2);
-                        String valor_venda = cursor.getString(3);
-                        String valor_custo = cursor.getString(4);
-                        String desc = cursor.getString(5);
-                        int vendas = cursor.getInt(6);
-                        String status = cursor.getString(7);
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getInt(0);
+                    String nome = cursor.getString(1);
+                    int qtd = cursor.getInt(2);
+                    String valor_venda = cursor.getString(3);
+                    String valor_custo = cursor.getString(4);
+                    String desc = cursor.getString(5);
+                    int vendas = cursor.getInt(6);
+                    String status = cursor.getString(7);
 
-                        produtoSelecao produto = new produtoSelecao(id, nome, qtd, valor_venda, valor_custo, desc, vendas, status);
-                        listProdutos.add(produto);
-                    } while (cursor.moveToNext());
+                    produtoSelecao produto = new produtoSelecao(id, nome, qtd, valor_venda, valor_custo, desc, vendas, status);
+                    listProdutos.add(produto);
+                } while (cursor.moveToNext());
 
-                    cursor.close();
-                }
-
-                adapter.notifyDataSetChanged();
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                cursor.close();
             }
+
+            // Atualize o adapter sobre as mudanças
+            adapter.notifyDataSetChanged();
+
+            // Obtenha os produtos selecionados do adapter
+            produtosSelecionados = adapter.getProdutosSelecionados();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-
