@@ -17,9 +17,16 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class EditDialogFragmentCliente extends DialogFragment {
 
@@ -167,25 +174,30 @@ public class EditDialogFragmentCliente extends DialogFragment {
 
         for (produtoSelecao produto : produtosSelecionados) {
             try {
-                double valorProduto = Double.parseDouble(produto.getValor_venda());
+                String valorProdutoString = produto.getValor_venda().replace(",", ".");
+                double valorProduto = Double.parseDouble(valorProdutoString);
                 totalPedido += valorProduto;
             } catch (NumberFormatException e) {
-                // Lidar com o caso em que o valor não é um número válido
                 e.printStackTrace();
             }
         }
 
+        // Arredonda o valor para duas casas decimais
+        totalPedido = Math.round(totalPedido * 100.0) / 100.0;
+
+        // Formata o valor para o formato desejado
+        String valorFormatado = String.format(Locale.getDefault(), "%.2f", totalPedido).replace(".", ",");
+
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dta_ped_compra = dateFormat.format(calendar.getTime());;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String dta_ped_compra = dateFormat.format(calendar.getTime());
 
         ContentValues values = new ContentValues();
-        values.put("ID_CLIENTE", clienteParaEditar.getId()); // Use o ID do cliente que está sendo editado
+        values.put("ID_CLIENTE", clienteParaEditar.getId());
         values.put("STATUS_PED_COMPRA", "Pendente");
-        values.put("DTA_PED_COMPRA", dta_ped_compra); // Usa a data atual
-        values.put("VALOR_PED_COMPRA", totalPedido); // Use o total do pedido
+        values.put("DTA_PED_COMPRA", dta_ped_compra);
+        values.put("VALOR_PED_COMPRA", valorFormatado);
 
-        // Insira os dados no banco de dados
         long idPedido = db.insertWithOnConflict("TB_PEDIDO_COMPRA", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
         if (idPedido != -1) {
@@ -196,3 +208,4 @@ public class EditDialogFragmentCliente extends DialogFragment {
         db.close();
     }
 }
+

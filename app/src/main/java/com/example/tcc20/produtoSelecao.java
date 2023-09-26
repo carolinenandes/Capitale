@@ -125,4 +125,10 @@ public class produtoSelecao implements Parcelable {
         dest.writeString(nome);
         dest.writeByte((byte) (selected ? 1 : 0));
     }
+
+    // Pega quantos produtos está selecionado
+    public int getQtdSelecionada() {
+        return selected ? qtd : 0;
+    }
 }
+
