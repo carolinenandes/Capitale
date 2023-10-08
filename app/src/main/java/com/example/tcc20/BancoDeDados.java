@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 public class BancoDeDados extends SQLiteOpenHelper {
 
@@ -134,15 +133,94 @@ public class BancoDeDados extends SQLiteOpenHelper {
         }
     }
 
+    public Cursor rawQuery(String sql, String[] selectionArgs) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(sql, selectionArgs);
+    }
+
 
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        // Crie a tabela TB_USUARIO
+        String createTableUsuario = "CREATE TABLE IF NOT EXISTS TB_USUARIO (" +
+                "ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NOME_EMPRESA VARCHAR(60) NOT NULL UNIQUE," +
+                "SENHA_USUARIO VARCHAR(30) NOT NULL," +
+                "NOME_USUARIO VARCHAR(40) NOT NULL," +
+                "EMAIL_USUARIO VARCHAR(60) NOT NULL UNIQUE," +
+                "STATUS_USUARIO VARCHAR(60)," +
+                "DTA_CADASTRO_USUARIO DATE," +
+                "SOBRENOME_USUARIO VARCHAR(60)," +
+                "CNPJ_USUARIO VARCHAR(20) NOT NULL UNIQUE," +
+                "SALDO_EMPRESA_USUARIO NUMERIC DEFAULT 0," +
+                "TELEFONE_EMPRESA VARCHAR(16)" +
+                ");";
 
+        // Crie a tabela TB_CLIENTE
+        String createTableCliente = "CREATE TABLE IF NOT EXISTS TB_CLIENTE (" +
+                "ID_CLIENTE INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NOME_CLIENTE VARCHAR(40) NOT NULL," +
+                "EMAIL_CLIENTE VARCHAR(60) NOT NULL UNIQUE," +
+                "STATUS_CLIENTE VARCHAR(60)," +
+                "DTA_CADASTRO_CLIENTE DATE UNIQUE," +
+                "FONE_CLIENTE VARCHAR(16)" +
+                ");";
+
+        // Crie a tabela TB_PRODUTO
+        String createTableProduto = "CREATE TABLE IF NOT EXISTS TB_PRODUTO (" +
+                "ID_PROD INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NOME_PROD VARCHAR(60) NOT NULL," +
+                "QTD_PROD DECIMAL(4,1)," +
+                "VALOR_VENDA_PROD DECIMAL(6,2)," +
+                "VALOR_CUSTO_PROD DECIMAL(6,2)," +
+                "DESC_PROD VARCHAR(100)," +
+                "QTD_VENDA DECIMAL(4,1)," +
+                "STATUS_PROD VARCHAR" +
+                ");";
+
+        // Crie a tabela TB_METAS_FINANCEIRAS
+        String createTableMetas = "CREATE TABLE IF NOT EXISTS TB_METAS_FINANCEIRAS (" +
+                "ID_META INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NOME_META VARCHAR(60) NOT NULL," +
+                "SALDO_EMPRESA_USUARIO NUMERIC DEFAULT 0," +
+                "VALOR_META DECIMAL(6,2)" +
+                ");";
+
+        // Crie a tabela TB_GASTOS_GANHOS
+        String createTableGastosGanhos = "CREATE TABLE IF NOT EXISTS TB_GASTOS_GANHOS (" +
+                "GASTO NUMERIC(4,2)," +
+                "GANHO NUMERIC(4,2)," +
+                "LUCRO NUMERIC(4,2)" +
+                ");";
+
+        // Crie a tabela TB_PEDIDO_COMPRA
+        String createTablePedidoCompra = "CREATE TABLE IF NOT EXISTS TB_PEDIDO_COMPRA (" +
+                "ID_PED_COMPRA INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "DTA_PED_COMPRA DATE," +
+                "VALOR_PED_COMPRA DECIMAL(6,2)," +
+                "ID_CLIENTE INTEGER DEFAULT 0," +
+                "STATUS_PED_COMPRA VARCHAR(60)" +
+                ");";
+
+        // Execute as queries para criar as tabelas
+        sqLiteDatabase.execSQL(createTableUsuario);
+        sqLiteDatabase.execSQL(createTableCliente);
+        sqLiteDatabase.execSQL(createTableProduto);
+        sqLiteDatabase.execSQL(createTableMetas);
+        sqLiteDatabase.execSQL(createTableGastosGanhos);
+        sqLiteDatabase.execSQL(createTablePedidoCompra);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
+    }
+
+    // Método para executar queries SQL
+    public void executarQuery(String query, String[] args) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query, args);
     }
 }
