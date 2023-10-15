@@ -47,22 +47,22 @@ class BarChartActivity : AppCompatActivity() {
         barChart.data = barData
 
         barChart.legend.apply {
-            isEnabled = true
-            textColor = Color.WHITE
-            textSize = 12f
-            formSize = 10f
-            formToTextSpace = 5f
-            xEntrySpace = 10f
-            yEntrySpace = 5f
-            form = Legend.LegendForm.CIRCLE
-            verticalAlignment = Legend.LegendVerticalAlignment.TOP
-            horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-            orientation = Legend.LegendOrientation.HORIZONTAL
+            isEnabled = true // Habilita a exibição da legenda
+            textColor = Color.WHITE // Define a cor do texto da legenda
+            textSize = 12f // Define o tamanho do texto da legenda
+            formSize = 10f // Define o tamanho do símbolo da legenda (quadrado colorido)
+            formToTextSpace = 5f // Espaço entre o símbolo e o texto
+            xEntrySpace = 10f // Espaço horizontal entre as entradas da legenda
+            yEntrySpace = 5f // Espaço vertical entre as entradas da legenda
+            form = Legend.LegendForm.CIRCLE // Define o estilo do símbolo (pode ser SQUARE, CIRCLE, LINE)
+            verticalAlignment = Legend.LegendVerticalAlignment.TOP // Posição vertical da legenda
+            horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT // Posição horizontal da legenda
+            orientation = Legend.LegendOrientation.HORIZONTAL // Orientação da legenda
         }
 
         val legendEntries = mutableListOf<LegendEntry>()
 
-        // Adicione entradas personalizadas à legenda
+// Adicione entradas personalizadas à legenda
         val labels = arrayOf("Gasto", "Ganho", "Lucro")
         val colors = intArrayOf(Color.GREEN, Color.YELLOW, Color.RED)
 
@@ -75,11 +75,11 @@ class BarChartActivity : AppCompatActivity() {
             legendEntries.add(legendEntry)
         }
 
-        barChart.legend.setCustom(legendEntries)
+        barChart.legend.setCustom(legendEntries) // Define as entradas personalizadas da legenda
 
-        barChart.setFitBars(true)
-        barChart.description.text = "Relatório de Finanças"
-        barChart.description.setTextColor(Color.WHITE)
-        barChart.animateY(2000)
+        barChart.setFitBars(true) // Ajusta o tamanho das barras para preencher completamente o espaço disponível
+        barChart.description.text = "Relatório de Finanças" // Define o texto da descrição
+        barChart.description.setTextColor(Color.WHITE) // Define a cor do texto da descrição
+        barChart.animateY(2000) // Animação de entrada das barras (eixo Y)
     }
 }

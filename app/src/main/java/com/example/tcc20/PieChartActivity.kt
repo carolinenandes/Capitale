@@ -45,19 +45,19 @@ class PieChartActivity : AppCompatActivity() {
 
         pieChart.data = pieData
 
-        pieChart.description.isEnabled = false
-
-        pieChart.setHoleColor(Color.TRANSPARENT)
-        pieChart.isDrawHoleEnabled = true
-        pieChart.holeRadius = 60f
-        pieChart.transparentCircleRadius = 65f
-        pieChart.rotationAngle = 0f
-        pieChart.isRotationEnabled = true
-        pieChart.isHighlightPerTapEnabled = true
-        pieChart.setTouchEnabled(true)
-        pieChart.animateXY(1400, 1400)
-        pieChart.legend.isEnabled = false
-        pieChart.setEntryLabelColor(Color.BLACK)
-        pieChart.setEntryLabelTextSize(12f)
+        // Configurações adicionais do gráfico de pizza
+        pieChart.description.isEnabled = false // Desabilita a descrição do gráfico
+        pieChart.setHoleColor(Color.TRANSPARENT) // Define a cor do centro do gráfico
+        pieChart.isDrawHoleEnabled = true // Habilita o buraco no centro do gráfico
+        pieChart.holeRadius = 60f // Define o raio do buraco no centro do gráfico
+        pieChart.transparentCircleRadius = 65f // Define o raio do círculo transparente ao redor do buraco
+        pieChart.rotationAngle = 0f // Define o ângulo de rotação inicial do gráfico
+        pieChart.isRotationEnabled = true // Habilita a rotação do gráfico
+        pieChart.isHighlightPerTapEnabled = true // Habilita o destaque ao tocar
+        pieChart.setTouchEnabled(true) // Habilita a interação por toque
+        pieChart.animateXY(1400, 1400) // Animação de entrada (X e Y)
+        pieChart.legend.isEnabled = false // Desabilita a legenda
+        pieChart.setEntryLabelColor(Color.BLACK) // Define a cor do texto das entradas
+        pieChart.setEntryLabelTextSize(12f) // Define o tamanho do texto das entradas
     }
 }
