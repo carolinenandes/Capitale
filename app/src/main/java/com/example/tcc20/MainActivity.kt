@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         goPieChart=findViewById(R.id.go_pie_chart)
         goRadarChart=findViewById(R.id.go_radar_chart)
 
-        // Inicialize a classe Gastos_Lucros com a instância de BancoDeDados
+        // Inicializa a classe Gastos_Lucros com a instância de BancoDeDados
         val db = BancoDeDados(this)
         gastosLucros = Gasto_Lucros(db)
 

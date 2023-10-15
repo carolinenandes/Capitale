@@ -63,6 +63,64 @@ public class Gasto_Lucros {
         return lucro;
     }
 
+    public Float obterGasto() {
+        String query = "SELECT GASTO FROM TB_GASTOS_GANHOS WHERE ROWID = 1";
+        Cursor cursor = database.rawQuery(query, null);
+
+        Float gasto = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            gasto = cursor.getFloat(cursor.getColumnIndex("GASTO"));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        Log.d("Gasto_Lucros", "Valor do Gasto: " + gasto);
+        return gasto;
+    }
+
+    public Float obterGanho() {
+        String query = "SELECT GANHO FROM TB_GASTOS_GANHOS WHERE ROWID = 1";
+        Cursor cursor = database.rawQuery(query, null);
+
+        Float ganho = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            ganho = cursor.getFloat(cursor.getColumnIndex("GANHO"));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        Log.d("Gasto_Lucros", "Valor do Ganho: " + ganho);
+        return ganho;
+    }
+
+    public Float obterLucro() {
+        String query = "SELECT LUCRO FROM TB_GASTOS_GANHOS WHERE ROWID = 1";
+        Cursor cursor = database.rawQuery(query, null);
+
+        Float lucro = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            lucro = cursor.getFloat(cursor.getColumnIndex("LUCRO"));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        Log.d("Gasto_Lucros", "Valor do Lucro: " + lucro);
+        return lucro;
+    }
+
+
+
+
+
     public void atualizarGastoGanhoLucro(float gasto, float ganho) {
         Log.d("Gasto_Lucros", "Valores antes da atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
 

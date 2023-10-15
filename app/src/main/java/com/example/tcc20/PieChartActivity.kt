@@ -4,47 +4,60 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.sunayanpradhan.androidcharts.R
 
 class PieChartActivity : AppCompatActivity() {
 
-    lateinit var pieChart:PieChart
+    lateinit var pieChart: PieChart
+    lateinit var gastosLucros: Gasto_Lucros
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pie_chart)
 
-        pieChart=findViewById(R.id.pie_chart)
+        pieChart = findViewById(R.id.pie_chart)
 
+        // Inicializa a classe Gastos_Lucros com a instância de BancoDeDados
+        val db = BancoDeDados(this)
+        gastosLucros = Gasto_Lucros(db)
 
-        val list:ArrayList<PieEntry> = ArrayList()
+        val gasto: Float? = gastosLucros.obterGasto()
+        val ganho: Float? = gastosLucros.obterGanho()
+        val lucro: Float? = gastosLucros.obterLucro()
 
-        list.add(PieEntry(100f,"100"))
-        list.add(PieEntry(101f,"101"))
-        list.add(PieEntry(102f,"102"))
-        list.add(PieEntry(103f,"103"))
-        list.add(PieEntry(104f,"104"))
+        val list: ArrayList<PieEntry> = ArrayList()
 
-        val pieDataSet= PieDataSet(list,"List")
+        list.add(PieEntry(gasto ?: 0f, "Gasto"))
+        list.add(PieEntry(ganho ?: 0f, "Ganho"))
+        list.add(PieEntry(lucro ?: 0f, "Lucro"))
 
-        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS,255)
-        pieDataSet.valueTextColor= Color.BLACK
-        pieDataSet.valueTextSize=15f
+        val pieDataSet = PieDataSet(list, "")
 
-        val pieData= PieData(pieDataSet)
+        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        pieDataSet.valueTextColor = Color.BLACK
+        pieDataSet.valueTextSize = 15f
 
-        pieChart.data= pieData
+        val pieData = PieData(pieDataSet)
 
-        pieChart.description.text= "Pie Chart"
+        pieChart.data = pieData
 
-        pieChart.centerText="List"
+        pieChart.description.isEnabled = false
 
-        pieChart.animateY(2000)
-
-
-
-
+        pieChart.setHoleColor(Color.TRANSPARENT)
+        pieChart.isDrawHoleEnabled = true
+        pieChart.holeRadius = 60f
+        pieChart.transparentCircleRadius = 65f
+        pieChart.rotationAngle = 0f
+        pieChart.isRotationEnabled = true
+        pieChart.isHighlightPerTapEnabled = true
+        pieChart.setTouchEnabled(true)
+        pieChart.animateXY(1400, 1400)
+        pieChart.legend.isEnabled = false
+        pieChart.setEntryLabelColor(Color.BLACK)
+        pieChart.setEntryLabelTextSize(12f)
     }
 }
