@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -41,7 +41,16 @@ public class ProdActivity extends AppCompatActivity {
         productList = new ArrayList<>(); // Inicialize a lista primeiro
         adapter = new adapterProd(this, productList, banco);
 
-
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                carregarDadosDoBanco();
+                adapter.notifyDataSetChanged();
+                // Depois que a atualização estiver concluída, chama:
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         btnEditarProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +99,7 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                // Verifique se é um evento de toque longo
+                // Verifica se é um evento de toque longo
                 if (e.getAction() == MotionEvent.ACTION_DOWN) {
                     View childView = rv.findChildViewUnder(e.getX(), e.getY());
                     int position = rv.getChildAdapterPosition(childView);
