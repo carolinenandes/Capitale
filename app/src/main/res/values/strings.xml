@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TCC2.0</string>
+    <string name="app_name">Capitale</string>
     <string name="btnProd">Prod</string>
     <string name="titleProd">Produtos</string>
     <string name="btnAddProd">Adicionar Produto</string>
@@ -12,5 +12,18 @@
     <string name="txtQtd">Quantidade:</string>
     <string name="txtId">Id:</string>
     <string name="header">header</string>
+
+    <string name="outrasfuncoes_string">Outras funções</string>
+    <string name="title_home_string">Home</string>
+    <string name="title_metas_string">Metas</string>
+    <string name="title_financas_string">Finanças</string>
+    <string name="title_clientes_string">Clientes</string>
+    <string name="title_produtos_string">Produtos</string>
+    <string name="empresa_string">Empresa</string>
+    <string name="nome_string">Nome</string>
+    <string name="valor_saldo_string">R$ Saldo</string>
+    <string name="title_saldo_atual_string">Saldo atual:</string>
+    <string name="title_mainfunctions_string">O que deseja fazer agora?</string>
+    <string name="noticias_string">Notícias</string>
 
 </resources>

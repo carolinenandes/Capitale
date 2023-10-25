@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- home styles -->
+
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+
+	</style>
+	<style name="semibold60px" parent="TextAppearance.AppCompat">
+		<item name="android:fontFamily">@font/inter_semibold</item>
+		<item name="android:textColor">@color/text_semiblack</item>
+		<item name="android:textSize">60px</item>
+	</style>
+	<style name="bold60px" parent="TextAppearance.AppCompat">
+		<item name="android:fontFamily">@font/inter_bold</item>
+		<item name="android:textColor">@color/text_semiblack</item>
+		<item name="android:textSize">60px</item>
+	</style>
+	<style name="semibold45px" parent="TextAppearance.AppCompat">
+		<item name="android:fontFamily">@font/inter_bold</item>
+		<item name="android:textColor">@color/text_semiblack</item>
+		<item name="android:textSize">45px</item>
+	</style>
+	<style name="noticiaLike" parent="TextAppearance.AppCompat">
+		<item name="android:fontFamily">@font/inter_semibold</item>
+		<item name="android:textColor">@color/noticias_color</item>
+		<item name="android:textSize">45px</item>
+	</style>
+</resources>

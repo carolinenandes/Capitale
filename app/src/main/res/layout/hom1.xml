@@ -20,20 +20,22 @@
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent" >
 
-		<RelativeLayout android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+		<LinearLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
-			<RelativeLayout android:id="@+id/page_home"
+			<!--<RelativeLayout android:id="@+id/page_home"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
+				android:layout_height="match_parent"
 				android:layout_marginStart="0dp"
-				android:layout_marginTop="0dp"/>
+				android:layout_marginTop="0dp"/>-->
 
-				<RelativeLayout android:id="@+id/functions"
+				<LinearLayout android:id="@+id/functions"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginStart="20dp"
-					android:layout_marginTop="291dp">
+					android:layout_marginTop="291dp"
+					android:orientation="vertical">
 
 					<TextView
 						android:id="@+id/outrasfuncoes"
@@ -42,11 +44,11 @@
 						android:layout_marginLeft="1dp"
 						android:layout_marginTop="17dp"
 						android:text="@string/outrasfuncoes_string"
-						android:textColor="@color/outrasfuncoes_color"
+						android:textColor="@color/text_semiblack"
 						android:textSize="20sp"
 						android:textStyle="bold" />
 
-				</RelativeLayout>
+				</LinearLayout>
 
 
 				<RelativeLayout android:id="@+id/menubar"
@@ -67,6 +69,7 @@
 						android:layout_height="69dp"
 						android:layout_marginStart="0dp"
 						android:layout_marginTop="0dp"
+						android:layout_marginBottom="0dp"
 						android:contentDescription="menubar_back"
 						android:src="@drawable/menubar_back_shape" />
 
@@ -246,6 +249,7 @@
 							android:background="@drawable/header_back_shape"
 							android:contentDescription="@string/header"
 							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintHorizontal_bias="0.0"
 							app:layout_constraintStart_toStartOf="parent"
 							app:layout_constraintTop_toTopOf="parent" />
 
@@ -256,7 +260,7 @@
 							android:layout_marginStart="16dp"
 							android:layout_marginTop="28dp"
 							android:text="@string/empresa_string"
-							android:textColor="@color/outrasfuncoes_color"
+							android:textColor="@color/text_semiblack"
 							android:textSize="13sp"
 							android:textStyle="bold"
 							app:layout_constraintStart_toStartOf="@+id/header_back"
@@ -269,7 +273,7 @@
 							android:layout_marginStart="16dp"
 							android:layout_marginTop="42dp"
 							android:text="@string/nome_string"
-							android:textColor="@color/outrasfuncoes_color"
+							android:textColor="@color/text_semiblack"
 							android:textSize="18sp"
 							android:textStyle="bold"
 							app:layout_constraintStart_toStartOf="@+id/header_back"
@@ -282,7 +286,7 @@
 							android:layout_marginStart="16dp"
 							android:layout_marginTop="20dp"
 							android:text="@string/valor_saldo_string"
-							android:textColor="@color/outrasfuncoes_color"
+							android:textColor="@color/text_semiblack"
 							android:textSize="20sp"
 							android:textStyle="bold"
 							app:layout_constraintStart_toStartOf="@+id/header_back"
@@ -295,7 +299,7 @@
 							android:layout_marginStart="16dp"
 							android:layout_marginTop="106dp"
 							android:text="@string/title_saldo_atual_string"
-							android:textColor="@color/outrasfuncoes_color"
+							android:textColor="@color/text_semiblack"
 							android:textSize="15sp"
 							android:textStyle="bold"
 							app:layout_constraintStart_toStartOf="@+id/header_back"
@@ -327,7 +331,7 @@
 						android:layout_marginLeft="0dp"
 						android:layout_marginTop="0dp"
 						android:text="@string/title_mainfunctions_string"
-						android:textColor="@color/outrasfuncoes_color"
+						android:textColor="@color/text_semiblack"
 						android:textSize="20sp"
 						android:textStyle="bold" />
 
@@ -377,5 +381,5 @@
 
 
 				</RelativeLayout>
-	</RelativeLayout>
+	</LinearLayout>
 		</ScrollView>

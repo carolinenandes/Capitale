@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/btnHomeMenu"
+        android:title="@string/title_home_string"
+        android:icon="@drawable/vector_home_azul"/>
+    <item android:id="@+id/btnMetasMenu"
+        android:title="@string/title_metas_string"
+        android:icon="@drawable/vector_metas"/>
+    <item android:id="@+id/btnFinancasMenu"
+        android:title="@string/title_financas_string"
+        android:icon="@drawable/vector_financas"/>
+    <item android:id="@+id/btnClientesMenu"
+        android:title="@string/title_clientes_string"
+        android:icon="@drawable/vector_clientes"/>
+    <item android:id="@+id/btnProdutosMenu"
+        android:title="@string/title_produtos_string"
+        android:icon="@drawable/vector_produtos"/>
+</menu>
