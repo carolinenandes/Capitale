@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.sunayanpradhan.androidcharts.R;
+
 public class SlideScreen extends AppCompatActivity {
 
     @Override

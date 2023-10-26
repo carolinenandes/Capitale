@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="133dp"
+        android:layout_marginEnd="287dp"
         android:fontFamily="sans-serif-black"
         android:text="Lucros e Gastos"
         android:textColor="@color/black"
@@ -62,7 +62,7 @@
     android:layout_below="@id/uultsem">
 
     <Button
-        android:id="@+id/go_bar_chart"
+        android:id="@+id/go_bar_chart_button"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="15dp"
@@ -75,13 +75,13 @@
 
     <Button
 
-        android:id="@+id/radar_chart"
+        android:id="@+id/pie_chart_button"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="30sp"
+        android:layout_marginStart="190sp"
         android:background="#8177FE"
         android:gravity="center"
-        android:text="Gráfico em radar "
+        android:text="Gráfico em pizza "
         android:textColor="@color/black"
         android:textSize="10dp"
         android:textStyle="bold" />
