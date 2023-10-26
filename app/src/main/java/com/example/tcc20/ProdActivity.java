@@ -34,23 +34,28 @@ public class ProdActivity extends AppCompatActivity {
 
         Button btnEditarProd = findViewById(R.id.btnEditarProd);
         Button btnAddProd = findViewById(R.id.btnAddProd);
-        Button btnRefresh = findViewById(R.id.btnRefresh);
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
         productList = new ArrayList<>(); // Inicialize a lista primeiro
         adapter = new adapterProd(this, productList, banco);
 
+
+        //Atualiza a página deslizando para baixo.
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                // Limpa a lista antes de recarregar os dados
+                productList.clear();
+
                 carregarDadosDoBanco();
                 adapter.notifyDataSetChanged();
-                // Depois que a atualização estiver concluída, chama:
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
         btnEditarProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,17 +70,6 @@ public class ProdActivity extends AppCompatActivity {
                     Log.d("ProdActivity", "Nenhum item selecionado para edição");
                     Toast.makeText(ProdActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-
-        //Atualiza a página
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = getIntent();
-                finish(); // Fecha a Activity atual
-                startActivity(intent);
             }
         });
 

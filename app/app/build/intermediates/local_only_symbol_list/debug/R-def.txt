@@ -1,0 +1,27 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id bar_chart
+id go_bar_chart
+id go_pie_chart
+id go_radar_chart
+id pie_chart
+id radar_chart
+layout activity_bar_chart
+layout activity_main
+layout activity_pie_chart
+layout activity_radar_chart
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.AndroidCharts
+xml backup_rules
+xml data_extraction_rules
