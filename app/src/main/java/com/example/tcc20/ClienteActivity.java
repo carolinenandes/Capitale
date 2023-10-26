@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,12 +32,24 @@ public class ClienteActivity extends AppCompatActivity {
 
         Button btnVerCliente = findViewById(R.id.btnVerCliente);
         Button btnAddCliente = findViewById(R.id.btnInsertCliente);
-        Button btnRefresh = findViewById(R.id.btnRefresh);
         recyclerviewCliente = findViewById(R.id.recyclerviewCliente);
 
         bancoDeDados = new BancoDeDados(this);
         clienteList = new ArrayList<>();
         adapter = new adapterCliente(this, clienteList);
+
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Limpa a lista antes de recarregar os dados
+                clienteList.clear();
+
+                carregarDadosDoBanco();
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         btnVerCliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +66,6 @@ public class ClienteActivity extends AppCompatActivity {
             }
         });
 
-        btnRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-            }
-        });
 
         btnAddCliente.setOnClickListener(new View.OnClickListener() {
             @Override
