@@ -2,7 +2,7 @@
 <resources>
 	<!-- home strings -->
 
-	<string name="app_name">Page 1</string>
+<!--	<string name="app_name">Page 1</string>-->
 	<string name="ek_img_content">ExportKit Image</string>
 	<string name="outrasfuncoes_string">Outras funções</string>
 	<string name="title_home_string">Home</string>

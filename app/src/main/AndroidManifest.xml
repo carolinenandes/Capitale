@@ -15,35 +15,35 @@
         android:theme="@style/Theme.TCC20"
         tools:targetApi="31">
         <activity
-            android:name=".financas"
+            android:name="com.example.tcc20.SplashScreen"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.tcc20.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SlideScreen"
+            android:name="com.example.tcc20.SlideScreen"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ProdActivity"
+            android:name="com.example.tcc20.ProdActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashScreen"
+            android:name="com.example.tcc20.financas"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
