@@ -7,6 +7,7 @@
     android:fillViewport="true">
 
 <RelativeLayout
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".financas">
@@ -47,10 +48,44 @@
         android:textStyle="bold" />
 
     <ImageView
+        android:id="@+id/uultsem"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:src="@drawable/uultsemxmeses"
            android:layout_marginTop="170dp"/>
+<LinearLayout
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_below="@id/uultsem">
+
+    <Button
+        android:id="@+id/go_bar_chart"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:background="#8177FE"
+        android:gravity="center"
+        android:text="Grafico colunas"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <Button
+
+        android:id="@+id/radar_chart"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30sp"
+        android:background="#8177FE"
+        android:gravity="center"
+        android:text="Gráfico em radar "
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        android:textStyle="bold" />
+</LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
