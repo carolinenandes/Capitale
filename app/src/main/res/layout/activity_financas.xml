@@ -99,5 +99,11 @@
         android:src="@drawable/ccenterline"
         android:contentDescription="TODO" />
 
+    <Button
+        android:id="@+id/btnAdicionaVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAdicionaVenda" />
+
 </RelativeLayout>
 </ScrollView>

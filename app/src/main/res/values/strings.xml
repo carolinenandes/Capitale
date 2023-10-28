@@ -14,5 +14,6 @@
     <string name="header">header</string>
     <string name="gr_fico_em_pizza">Gráfico em pizza</string>
     <string name="grafico_colunas">Grafico colunas</string>
+    <string name="btnAdicionaVenda" />
 
 </resources>
