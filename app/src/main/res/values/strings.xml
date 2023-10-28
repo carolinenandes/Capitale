@@ -12,5 +12,7 @@
     <string name="txtQtd">Quantidade:</string>
     <string name="txtId">Id:</string>
     <string name="header">header</string>
+    <string name="gr_fico_em_pizza">Gráfico em pizza</string>
+    <string name="grafico_colunas">Grafico colunas</string>
 
 </resources>

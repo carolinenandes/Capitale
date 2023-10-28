@@ -31,7 +31,7 @@
         android:layout_marginEnd="106dp"
         android:text="Finanças"
         android:textColor="@color/black"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
 
@@ -53,46 +53,51 @@
            android:layout_height="wrap_content"
            android:src="@drawable/uultsemxmeses"
            android:layout_marginTop="170dp"/>
-<LinearLayout
-    android:layout_marginStart="0dp"
-    android:layout_marginTop="100dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_below="@id/uultsem">
 
-    <Button
-        android:id="@+id/go_bar_chart_button"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="15dp"
-        android:background="#8177FE"
-        android:gravity="center"
-        android:text="Grafico colunas"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/uultsem"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
 
-    <Button
+        <Button
+            android:id="@+id/go_bar_chart_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:background="#8177FE"
+            android:gravity="center"
+            android:text="@string/grafico_colunas"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="bold" />
 
-        android:id="@+id/pie_chart_button"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="190sp"
-        android:background="#8177FE"
-        android:gravity="center"
-        android:text="Gráfico em pizza "
-        android:textColor="@color/black"
-        android:textSize="10dp"
-        android:textStyle="bold" />
-</LinearLayout>
+        <Button
+
+            android:id="@+id/pie_chart_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="190sp"
+            android:background="#8177FE"
+            android:gravity="center"
+            android:text="@string/gr_fico_em_pizza"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginTop="500dp"
-        android:src="@drawable/ccenterline"/>
+        android:src="@drawable/ccenterline"
+        android:contentDescription="TODO" />
 
 </RelativeLayout>
 </ScrollView>
