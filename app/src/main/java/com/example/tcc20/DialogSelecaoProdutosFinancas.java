@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
     private ArrayList<produtoSelecao> produtosSelecionados = new ArrayList<>();
     private static final String SELECIONAR_PRODUTOS_REQUEST_KEY = "selecionar_produtos_request";
     Context context;
-
+    Gasto_Lucros gasto_lucros;
 
 
     public DialogSelecaoProdutosFinancas(Context context, BancoDeDados bancoDeDados ) {
@@ -63,9 +64,8 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
 
         bancoDeDados = new BancoDeDados(getContext());
         SQLiteDatabase database = bancoDeDados.getReadableDatabase();
-
+        Gasto_Lucros gasto_lucros = new Gasto_Lucros(bancoDeDados);
         pegarProdutos(database);
-
         showDialogSelecaoProdutos();
 
         // Configure o RecyclerView e o Adapter
@@ -83,6 +83,7 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
 
                 // Chame o método de confirmação de seleção
                 confirmarSelecao();
+                gasto_lucros.GanhoGastoLucro();
             }
         });
 
@@ -103,6 +104,7 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         bundle.putParcelableArrayList("produtos_selecionados", produtosSelecionados);
 
         getParentFragmentManager().setFragmentResult(SELECIONAR_PRODUTOS_REQUEST_KEY, bundle);
+
         dismiss();
     }
 

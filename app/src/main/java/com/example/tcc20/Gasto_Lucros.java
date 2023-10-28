@@ -1,5 +1,6 @@
 package com.example.tcc20;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.database.Cursor;
 
@@ -63,6 +64,7 @@ public class Gasto_Lucros {
         return lucro;
     }
 
+    @SuppressLint("Range")
     public Float obterGasto() {
         String query = "SELECT GASTO FROM TB_GASTOS_GANHOS WHERE ROWID = 1";
         Cursor cursor = database.rawQuery(query, null);
@@ -81,6 +83,7 @@ public class Gasto_Lucros {
         return gasto;
     }
 
+    @SuppressLint("Range")
     public Float obterGanho() {
         String query = "SELECT GANHO FROM TB_GASTOS_GANHOS WHERE ROWID = 1";
         Cursor cursor = database.rawQuery(query, null);
@@ -99,6 +102,7 @@ public class Gasto_Lucros {
         return ganho;
     }
 
+    @SuppressLint("Range")
     public Float obterLucro() {
         String query = "SELECT LUCRO FROM TB_GASTOS_GANHOS WHERE ROWID = 1";
         Cursor cursor = database.rawQuery(query, null);
@@ -117,10 +121,6 @@ public class Gasto_Lucros {
         return lucro;
     }
 
-
-
-
-
     public void atualizarGastoGanhoLucro(float gasto, float ganho) {
         Log.d("Gasto_Lucros", "Valores antes da atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
 
@@ -130,4 +130,13 @@ public class Gasto_Lucros {
         Log.d("Gasto_Lucros", "Valores após a atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
     }
 
+
+    public void GanhoGastoLucro(){
+        float gasto, ganho;
+
+        gasto = obterSomaGastos();
+        ganho = obterSomaGanhos();
+
+        atualizarGastoGanhoLucro(gasto, ganho);
+    }
 }

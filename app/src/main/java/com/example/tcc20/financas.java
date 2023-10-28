@@ -15,7 +15,6 @@ public class financas extends AppCompatActivity {
     Button go_bar_chart, go_pie_chart, btnAdicionaVenda;
     Gasto_Lucros gasto_lucros;
     BancoDeDados db;
-    Float gasto, ganho;
 
 
     @Override
@@ -53,15 +52,13 @@ public class financas extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DialogSelecaoProdutosFinancas dialog = new DialogSelecaoProdutosFinancas(getApplicationContext(), db);
+
                 dialog.show(getSupportFragmentManager(), "select_dialog");
             }
         });
 
-        gasto = gasto_lucros.obterSomaGastos();
-        ganho = gasto_lucros.obterSomaGanhos();
-
-        gasto_lucros.atualizarGastoGanhoLucro(gasto, ganho);
-
-
+        gasto_lucros.GanhoGastoLucro();
     }
+
+
 }
