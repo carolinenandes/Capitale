@@ -33,7 +33,7 @@ public class Gasto_Lucros {
     }
 
     public Float obterSomaGanhos() {
-        String query = "SELECT SUM(VALOR_PED_COMPRA) FROM TB_PEDIDO_COMPRA";
+        String query = "SELECT SUM(VALOR_PED_COMPRA) FROM TB_PEDIDO_COMPRA WHERE STATUS_PED_COMPRA = 'Pago'";
         Cursor cursor = database.rawQuery(query, null);
 
         Float somaGanhos = 0.0f;

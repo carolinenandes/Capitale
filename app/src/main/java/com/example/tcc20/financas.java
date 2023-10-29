@@ -12,9 +12,10 @@ import com.sunayanpradhan.androidcharts.R;
 
 public class financas extends AppCompatActivity {
 
-    Button go_bar_chart, go_pie_chart, btnAdicionaVenda;
+    Button go_bar_chart, go_pie_chart, btnAdicionaVenda, btnVerPedidos;
     Gasto_Lucros gasto_lucros;
     BancoDeDados db;
+    adapterPedidosSelecao adapter;
 
 
     @Override
@@ -26,6 +27,7 @@ public class financas extends AppCompatActivity {
         go_bar_chart = findViewById(R.id.go_bar_chart_button);
         go_pie_chart = findViewById(R.id.pie_chart_button);
         btnAdicionaVenda = findViewById(R.id.btnAdicionaVenda);
+        btnVerPedidos = findViewById(R.id.btnVerPedidos);
 
         db = new BancoDeDados(getApplicationContext());
 
@@ -52,10 +54,20 @@ public class financas extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DialogSelecaoProdutosFinancas dialog = new DialogSelecaoProdutosFinancas(getApplicationContext(), db);
-
                 dialog.show(getSupportFragmentManager(), "select_dialog");
             }
         });
+
+        btnVerPedidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogVerPedidos dialog = new DialogVerPedidos(db, adapter);
+                dialog.show(getSupportFragmentManager(), "insert_dialog");
+
+            }
+        });
+
+
 
         gasto_lucros.GanhoGastoLucro();
     }

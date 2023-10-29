@@ -15,5 +15,8 @@
     <string name="gr_fico_em_pizza">Gráfico em pizza</string>
     <string name="grafico_colunas">Grafico colunas</string>
     <string name="btnAdicionaVenda" />
+    <string name="btnExcluirPedido">Excluir</string>
+    <string name="btnConfirmaPgto">Confirma Pagamento</string>
+    <string name="txtNomeCliente">Cliente:</string>
 
 </resources>

@@ -30,7 +30,6 @@ import java.util.Locale;
 
 public class DialogSelecaoProdutosFinancas extends DialogFragment {
     private RecyclerView recyclerView;
-    private TextView txtNome;
     private Button btnConfirmar;
     private adapterProdutosSelecao adapter;
     private BancoDeDados bancoDeDados;
