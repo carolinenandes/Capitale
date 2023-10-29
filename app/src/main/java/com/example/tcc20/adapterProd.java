@@ -1,14 +1,11 @@
 package com.example.tcc20;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +55,7 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemListaProd = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_adapter_produtos, parent, false);
+        View itemListaProd = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_adapter_metas, parent, false);
         return new MyViewHolder(itemListaProd, this); // Passe a referência do adaptador
     }
 

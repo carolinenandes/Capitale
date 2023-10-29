@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import android.content.Context;
-import android.content.Intent;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +18,10 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProdActivity extends AppCompatActivity {
-    private RecyclerView recyclerviewProd;
-    private ArrayList<Produto> productList;
-    private adapterProd adapter;
+public class metasFinanceirasActivity extends AppCompatActivity {
+    private RecyclerView recyclerviewMetas;
+    private ArrayList<Metas> metasList;
+    private adapterMetas adapter;
     public BancoDeDados banco;
     private ItemTouchHelper itemTouchHelper;
 
@@ -30,15 +29,14 @@ public class ProdActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prod);
+        setContentView(R.layout.activity_metas);
 
-        Button btnEditarProd = findViewById(R.id.btnEditarProd);
-        Button btnAddProd = findViewById(R.id.btnAddProd);
-        recyclerviewProd = findViewById(R.id.recyclerviewProd);
+        Button btnAddProd = findViewById(R.id.btnAddMetas);
+        recyclerviewMetas = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
-        productList = new ArrayList<>(); // Inicialize a lista primeiro
-        adapter = new adapterProd(this, productList, banco);
+        metasList = new ArrayList<>(); // Inicialize a lista primeiro
+        adapter = new adapterProd(this, metasList, banco);
 
 
         //Atualiza a página deslizando para baixo.
@@ -47,7 +45,7 @@ public class ProdActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 // Limpa a lista antes de recarregar os dados
-                productList.clear();
+                metasList.clear();
 
                 carregarDadosDoBanco();
                 adapter.notifyDataSetChanged();
@@ -56,19 +54,19 @@ public class ProdActivity extends AppCompatActivity {
         });
 
 
-        btnEditarProd.setOnClickListener(new View.OnClickListener() {
+        btnEditarMetas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Verifique se um item foi selecionado
                 int selectedItemPosition = adapter.getSelectedPosition();
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
-                    Produto produtoSelecionado = productList.get(selectedItemPosition);
+                    Produto produtoSelecionado = metasList.get(selectedItemPosition);
                     EditDialogFragmentProd editDialog = new EditDialogFragmentProd(banco, adapter, produtoSelecionado);
                     editDialog.show(getSupportFragmentManager(), "edit_dialog");
                 } else {
                     // Informe ao usuário que nenhum item foi selecionado
-                    Log.d("ProdActivity", "Nenhum item selecionado para edição");
-                    Toast.makeText(ProdActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
+                    Log.d("metasFinanceirasActivity", "Nenhum item selecionado para edição");
+                    Toast.makeText(metasFinanceirasActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -82,15 +80,15 @@ public class ProdActivity extends AppCompatActivity {
         });
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerviewProd.setLayoutManager(layoutManager);
-        recyclerviewProd.setHasFixedSize(true);
-        recyclerviewProd.setAdapter(adapter);
+        recyclerviewMetas.setLayoutManager(layoutManager);
+        recyclerviewMetas.setHasFixedSize(true);
+        recyclerviewMetas.setAdapter(adapter);
 
         carregarDadosDoBanco();
 
 
 
-        recyclerviewProd.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        recyclerviewMetas.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
                 // Verifica se é um evento de toque longo

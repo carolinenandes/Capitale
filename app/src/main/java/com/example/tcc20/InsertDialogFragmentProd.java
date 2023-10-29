@@ -34,10 +34,10 @@ public class InsertDialogFragmentProd extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.insert_dialog_prod, container, false);
+        View view = inflater.inflate(R.layout.insert_dialog_metas, container, false);
 
         Button btnInsertProd = view.findViewById(R.id.btnAddProd);
-        EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd), etxQtdProd = view.findViewById(R.id.etxQtdProd),
+        EditText etxtNomeProd = view.findViewById(R.id.etxtNomeMeta), etxQtdProd = view.findViewById(R.id.etxValorMeta),
                 etxtValorVenda = view.findViewById(R.id.etxtValorVenda), etxtValorCusto_prod = view.findViewById(R.id.etxtValorCusto_prod),
                 etxtDescProd = view.findViewById(R.id.etxtDescProd), etxtStatusProd = view.findViewById(R.id.etxtStatusProd),
                 etxtQtdVendas = view.findViewById(R.id.etxtQtdVendas);

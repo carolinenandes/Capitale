@@ -35,14 +35,14 @@ public class EditDialogFragmentProd extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.edit_dialog_prod, container, false);
+        View view = inflater.inflate(R.layout.edit_dialog_metas, container, false);
 
         context = getContext();
 
-        Button btnEditProd = view.findViewById(R.id.btnEditProd);
-        Button btnExcluir = view.findViewById(R.id.btnExcluir);
-        EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd);
-        EditText etxQtdProd = view.findViewById(R.id.etxQtdProd);
+        Button btnEditProd = view.findViewById(R.id.btnEditMeta);
+        Button btnExcluir = view.findViewById(R.id.btnExcluirMeta);
+        EditText etxtNomeProd = view.findViewById(R.id.etxtNomeMeta);
+        EditText etxQtdProd = view.findViewById(R.id.etxValorMeta);
         EditText etxtValorVenda = view.findViewById(R.id.etxtValorVenda);
         EditText etxtValorCustoProd = view.findViewById(R.id.etxtValorCusto_prod);
         EditText etxtDescProd = view.findViewById(R.id.etxtDescProd);

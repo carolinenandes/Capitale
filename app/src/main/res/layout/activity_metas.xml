@@ -19,12 +19,12 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/titleProd"
+        android:id="@+id/titleMetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:text="@string/titleProd"
+        android:text="@string/titleMetas"
         app:layout_constraintStart_toEndOf="@+id/btnVoltar"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,18 +51,18 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
-        android:id="@+id/btnAddProd"
+        android:id="@+id/btnAddMetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
+        android:layout_marginStart="232dp"
         android:layout_marginTop="664dp"
-        android:text="@string/btnAddProd"
+        android:text="@string/btnAddMetas"
         app:cornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnEditarProd"
+        android:id="@+id/btnEditarAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

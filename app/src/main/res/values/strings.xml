@@ -30,5 +30,11 @@
     <string name="btnEditProd">Editar</string>
     <string name="btnEditarProd">Editar</string>
     <string name="btnExcluir">Excluir</string>
+    <string name="btnAddMetas">Adicionar Metas</string>
+    <string name="titleMetas">Metas Financeiras</string>
+    <string name="hintNomeMeta">Nome da meta</string>
+    <string name="hintValorMeta">Valor da Meta</string>
+    <string name="btnExcluirMeta">Excluir</string>
+    <string name="btnEditMeta">Editar</string>
 
 </resources>
