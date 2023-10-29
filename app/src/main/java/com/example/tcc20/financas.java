@@ -63,9 +63,9 @@ public class financas extends AppCompatActivity {
             public void onClick(View view) {
                 DialogVerPedidos dialog = new DialogVerPedidos(db, adapter);
                 dialog.show(getSupportFragmentManager(), "insert_dialog");
-
             }
         });
+
 
 
 

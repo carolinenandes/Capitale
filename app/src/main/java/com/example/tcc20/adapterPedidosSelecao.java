@@ -1,12 +1,11 @@
 package com.example.tcc20;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,16 +28,15 @@ public class adapterPedidosSelecao extends RecyclerView.Adapter<adapterPedidosSe
 
     // ViewHolder para representar os itens na RecyclerView
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtIdPedido, txtData, txtNomeCliente;
-        Spinner spinnerStatus;
+        TextView txtIdPedido, txtData, txtNomeCliente, txtPrecoPedido;
         CheckBox checkboxPedidos;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txtIdPedido = itemView.findViewById(R.id.txtIdPedido);
             txtData= itemView.findViewById(R.id.txtData);
+            txtPrecoPedido= itemView.findViewById(R.id.txtPrecoPedido);
             txtNomeCliente = itemView.findViewById(R.id.txtNomeCliente);
-            spinnerStatus = itemView.findViewById(R.id.spinnerStatus);
             checkboxPedidos = itemView.findViewById(R.id.checkboxPedidos);
         }
     }
@@ -56,14 +54,16 @@ public class adapterPedidosSelecao extends RecyclerView.Adapter<adapterPedidosSe
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         pedidoSelecao pedido = listPedidos.get(position);
 
-        holder.txtIdPedido.setText(String.valueOf(pedido.getId()));
-        holder.txtData.setText(pedido.getDta_ped_compra());
-        holder.txtNomeCliente.setText(pedido.getNome_cliente());
+        holder.txtIdPedido.setText(String.valueOf("ID: " + pedido.getId()));
+        holder.txtData.setText("Data: " + pedido.getDta_ped_compra());
+        holder.txtPrecoPedido.setText("Preço: " + pedido.getValor_ped_compra());
+        holder.txtNomeCliente.setText("Cliente: " + pedido.getNome_cliente());
         holder.checkboxPedidos.setChecked(pedido.isSelected());
 
         // Configura o listener para marcar/desmarcar o pedido
         holder.checkboxPedidos.setOnCheckedChangeListener((buttonView, isChecked) -> {
             pedido.setSelected(isChecked);
+
         });
     }
 

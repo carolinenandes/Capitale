@@ -2,6 +2,7 @@ package com.example.tcc20;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -30,6 +32,7 @@ public class DialogVerPedidos extends DialogFragment {
     private ArrayList<pedidoSelecao> pedidosSelecionados = new ArrayList<>();
     private static final String SELECIONAR_PEDIDOS_REQUEST_KEY = "selecionar_pedidos_request";
     Context context;
+    Gasto_Lucros gasto_lucros;
 
     public DialogVerPedidos(Context context, BancoDeDados bancoDeDados ) {
         this.context = context;
@@ -58,6 +61,7 @@ public class DialogVerPedidos extends DialogFragment {
         bancoDeDados = new BancoDeDados(getContext());
         SQLiteDatabase database = bancoDeDados.getReadableDatabase();
         Cursor cursor = pegarPedidos(database);
+        Gasto_Lucros gasto_lucros = new Gasto_Lucros(bancoDeDados);
 
         // Configure o RecyclerView e o Adapter
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -69,11 +73,49 @@ public class DialogVerPedidos extends DialogFragment {
         btnConfirmaPgto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtenha os produtos selecionados do adapter
-                pedidosSelecionados = adapter.getPedidosSelecionados();
+                // Obtenha os pedidos selecionados do adapter
+                ArrayList<pedidoSelecao> pedidosSelecionados = adapter.getPedidosSelecionados();
 
-                // Chame o método de confirmação de seleção
-                confirmarSelecao();
+                // Verifique se há pedidos selecionados
+                if (!pedidosSelecionados.isEmpty()) {
+                    // Atualize o status dos pedidos para "Pago"
+                    for (pedidoSelecao pedido : pedidosSelecionados) {
+                        atualizarStatusPedido(pedido.getId(), "Pago");
+                    }
+
+                    // Atualize a interface do usuário (se necessário)
+                    adapter.notifyDataSetChanged();
+
+                    // Chame o método de confirmação de seleção
+                    confirmarSelecao();
+                    gasto_lucros.GanhoGastoLucro();
+                }
+            }
+        });
+
+        btnExcluirPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Obtem os pedidos selecionados do adapter
+                ArrayList<pedidoSelecao> pedidosSelecionados = adapter.getPedidosSelecionados();
+
+                // Verifica se há pedidos selecionados
+                if (!pedidosSelecionados.isEmpty()) {
+                    // Exclui os pedidos selecionados do banco de dados
+                    for (pedidoSelecao pedido : pedidosSelecionados) {
+                        excluirPedido(pedido.getId());
+                    }
+
+                    // Atualiza a interface do usuário (se necessário)
+                    adapter.notifyDataSetChanged();
+
+                    // Informa o usuário sobre a exclusão bem-sucedida
+                    Toast.makeText(getContext(), "Pedidos excluídos com sucesso.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Nenhum pedido selecionado para exclusão.", Toast.LENGTH_SHORT).show();
+                }
+                dismiss();
             }
         });
 
@@ -94,8 +136,8 @@ public class DialogVerPedidos extends DialogFragment {
         bundle.putParcelableArrayList("pedidos_selecionados", pedidosSelecionados);
 
         getParentFragmentManager().setFragmentResult(SELECIONAR_PEDIDOS_REQUEST_KEY, bundle);
-
         dismiss();
+
     }
 
     public Cursor pegarPedidos(SQLiteDatabase database) {
@@ -149,4 +191,31 @@ public class DialogVerPedidos extends DialogFragment {
 
         return nome_cliente;
     }
+
+    // Método para atualizar o status do pedido no banco de dados
+    private void atualizarStatusPedido(int idPedido, String novoStatus) {
+        SQLiteDatabase database = bancoDeDados.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("STATUS_PED_COMPRA", novoStatus);
+        int rowsAffected = database.update("TB_PEDIDO_COMPRA", values, "ID_PED_COMPRA = ?", new String[]{String.valueOf(idPedido)});
+
+        //pop-up para confirmação
+        if (rowsAffected > 0) {
+            Toast.makeText(getContext(), "Pedido pago.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Falha ao atualizar pedido", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Método para excluir um pedido
+    private void excluirPedido(int idPedido) {
+        SQLiteDatabase database = bancoDeDados.getWritableDatabase();
+        int rowsDeleted = database.delete("TB_PEDIDO_COMPRA", "ID_PED_COMPRA = ?", new String[]{String.valueOf(idPedido)});
+
+        if (rowsDeleted > 0) {
+            Log.d("DEBUG", "Pedido excluído com sucesso.");
+        } else {
+            Log.d("DEBUG", "Falha ao excluir pedido.");
+        }
+}
 }
