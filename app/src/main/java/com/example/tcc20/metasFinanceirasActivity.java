@@ -32,11 +32,12 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_metas);
 
         Button btnAddProd = findViewById(R.id.btnAddMetas);
+        Button btnEditMetas = findViewById(R.id.btnEditMeta);
         recyclerviewMetas = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
         metasList = new ArrayList<>(); // Inicialize a lista primeiro
-        adapter = new adapterProd(this, metasList, banco);
+        adapter = new adapterMetas(this, metasList, banco);
 
 
         //Atualiza a página deslizando para baixo.
@@ -54,18 +55,18 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         });
 
 
-        btnEditarMetas.setOnClickListener(new View.OnClickListener() {
+        btnEditMetas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Verifique se um item foi selecionado
                 int selectedItemPosition = adapter.getSelectedPosition();
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
-                    Produto produtoSelecionado = metasList.get(selectedItemPosition);
-                    EditDialogFragmentProd editDialog = new EditDialogFragmentProd(banco, adapter, produtoSelecionado);
+                    Metas produtoSelecionado = metasList.get(selectedItemPosition);
+                    EditDialogFragmentMetas editDialog = new EditDialogFragmentMetas(banco, adapter, produtoSelecionado);
                     editDialog.show(getSupportFragmentManager(), "edit_dialog");
                 } else {
                     // Informe ao usuário que nenhum item foi selecionado
-                    Log.d("metasFinanceirasActivity", "Nenhum item selecionado para edição");
+                    Log.d("metasActivity", "Nenhum item selecionado para edição");
                     Toast.makeText(metasFinanceirasActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -74,7 +75,7 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         btnAddProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertDialogFragmentProd dialog = new InsertDialogFragmentProd(banco, adapter);
+                InsertDialogFragmentMetas dialog = new InsertDialogFragmentMetas(banco, adapter);
                 dialog.show(getSupportFragmentManager(), "insert_dialog");
             }
         });
@@ -123,22 +124,18 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         try {
             banco.openDB();
 
-            String sql = "SELECT * FROM TB_PRODUTO";
+            String sql = "SELECT * FROM TB_METAS_FINANCEIRAS";
             Cursor cursor = banco.db.rawQuery(sql, null);
 
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     int id = cursor.getInt(0);
-                    String nome = cursor.getString(1);
-                    int qtd = cursor.getInt(2);
-                    String valor_venda = cursor.getString(3);
-                    String valor_custo = cursor.getString(4);
-                    String desc = cursor.getString(5);
-                    int vendas = cursor.getInt(6);
-                    String status = cursor.getString(7);
+                    String nome_meta = cursor.getString(1);
+                    int valorMeta = cursor.getInt(2);
+                    String saldoEmpresa = cursor.getString(3);
 
-                    Produto produto = new Produto(id, nome, qtd, valor_venda, valor_custo, desc, vendas, status);
-                    productList.add(produto);
+                    Metas metas = new Metas(id, nome_meta, valorMeta, saldoEmpresa);
+                    metasList.add(metas);
                 } while (cursor.moveToNext());
 
                 cursor.close();

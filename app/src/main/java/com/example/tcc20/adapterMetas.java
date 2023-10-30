@@ -5,6 +5,7 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,31 +15,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Classe do adapter
-public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> {
-    private List<Produto> listProd;
+public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder> {
+    private List<Metas> listMetas;
     private Context context;
     private OnItemDeletedListener listener; // Interface para lidar com eventos de exclusão
     private SparseBooleanArray selectedItems; // Para armazenar os itens selecionados
-    private adapterProd adapter;
+    private adapterMetas adapter;
     private BancoDeDados banco;
 
 
     // Método para configurar o adapteer
-    public adapterProd(Context context, List<Produto> listProd, BancoDeDados banco) {
+    public adapterMetas(Context context, List<Metas> listMetas, BancoDeDados banco) {
         this.context = context;
-        this.listProd = listProd;
+        this.listMetas = listMetas;
         selectedItems = new SparseBooleanArray();
         this.banco = banco;
         this.adapter = this;
     }
 
-    public static void onItemSwipedToDelete(Produto productId, int position) {
+    public static void onItemSwipedToDelete(Metas productId, int position) {
     }
 
 
     private int getItemPosition(int productId) {
-        for (int i = 0; i < listProd.size(); i++) {
-            if (listProd.get(i).getId() == productId) {
+        for (int i = 0; i < listMetas.size(); i++) {
+            if (listMetas.get(i).getId() == productId) {
                 return i;
             }
         }
@@ -62,18 +63,13 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Produto product = listProd.get(position);
+        Metas metas = listMetas.get(position);
 
         holder.itemView.setActivated(isSelected(position)); // Define a seleção visual
-        holder.id.setText("ID: " + String.valueOf(product.getId()));
-        holder.nome.setText("Nome: " + product.getNome());
-        holder.qtd.setText("Quantidade: " + String.valueOf(product.getQtd()));
-        holder.valor_venda.setText("Valor: " + product.getValor_venda());
-        holder.valor_custo.setText("Custo: " + product.getValor_custo());
-        holder.desc.setText("Descrição: " + product.getDesc());
-        holder.qtd_venda.setText("Vendidos: " + String.valueOf(product.getVendas()));
-        holder.status.setText("Status: " + product.getStatus());
-
+        holder.id.setText("ID: " + String.valueOf(metas.getId()));
+        holder.nome.setText("Nome: " + metas.getNome_meta());
+        holder.valor_meta.setText("Valor: " + metas.getValor_meta());
+        holder.valor_inicial.setText("R$: 0");
 
         // Configurar o deslize para excluir
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -106,18 +102,18 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
 
 
     public void removeItem(int position) {
-        listProd.remove(position);
+        listMetas.remove(position);
         notifyItemRemoved(position);
     }
 
     public interface OnItemDeletedListener {
-        void onItemSwipedToDelete(Produto produto);
+        void onItemSwipedToDelete(Metas produto);
     }
 
 
     @Override
     public int getItemCount() {
-        return listProd.size();
+        return listMetas.size();
     }
 
     private int selectedItemPosition = RecyclerView.NO_POSITION;
@@ -167,21 +163,19 @@ public class adapterProd extends RecyclerView.Adapter<adapterProd.MyViewHolder> 
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView id, nome, qtd, valor_venda, valor_custo, desc, qtd_venda, status;
-        adapterProd adapter;
+        TextView id, nome, valor_meta, valor_inicial;
+        adapterMetas adapter;
+        ProgressBar progressBar;
 
-        public MyViewHolder(@NonNull View itemView, adapterProd adapter) {
+        public MyViewHolder(@NonNull View itemView, adapterMetas adapter) {
             super(itemView);
 
             // Recupera elementos da lista
-            id = itemView.findViewById(R.id.txtId);
-            nome = itemView.findViewById(R.id.txtNome);
-            qtd = itemView.findViewById(R.id.txtQtd);
-            valor_venda = itemView.findViewById(R.id.txtValorvenda);
-            valor_custo = itemView.findViewById(R.id.txtValorcusto);
-            desc = itemView.findViewById(R.id.txtDesc);
-            qtd_venda = itemView.findViewById(R.id.txtQtdvenda);
-            status = itemView.findViewById(R.id.txtStatus);
+            nome = itemView.findViewById(R.id.txtNomeMeta);
+            valor_inicial = itemView.findViewById(R.id.txtValorInicial);
+            valor_meta = itemView.findViewById(R.id.txtValorMeta);
+            progressBar = itemView.findViewById(R.id.progressBar);
+
 
             this.adapter = adapter;
 
