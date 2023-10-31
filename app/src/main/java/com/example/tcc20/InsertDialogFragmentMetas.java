@@ -44,10 +44,10 @@ public class InsertDialogFragmentMetas extends DialogFragment {
             @Override
             public void onClick(View v) {
                 String nomeMeta = etxtNomeMeta.getText().toString();
-                int valorMeta = Integer.parseInt(etxValorMeta.getText().toString());
-                String saldoEmpresa = "1000";
+                String valorMeta = String.valueOf(Integer.parseInt(etxValorMeta.getText().toString()));
+                int saldoEmpresa = 1000;
 
-                Metas novoMetas = new Metas(-1, nomeMeta, valorMeta,  saldoEmpresa);
+                Metas novoMetas = new Metas(-1, nomeMeta, saldoEmpresa ,  valorMeta);
                 adicionarMetaNoBanco(novoMetas, adapter);
 
                 dismiss(); // Feche o diálogo após a inserção

@@ -31,8 +31,8 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metas);
 
-        Button btnAddProd = findViewById(R.id.btnAddMetas);
-        Button btnEditMetas = findViewById(R.id.btnEditMeta);
+        Button btnEditMetas = findViewById(R.id.btnEditMetas);
+        Button btnAddMetas = findViewById(R.id.btnAddMetas);
         recyclerviewMetas = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
@@ -61,18 +61,18 @@ public class metasFinanceirasActivity extends AppCompatActivity {
                 // Verifique se um item foi selecionado
                 int selectedItemPosition = adapter.getSelectedPosition();
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
-                    Metas produtoSelecionado = metasList.get(selectedItemPosition);
-                    EditDialogFragmentMetas editDialog = new EditDialogFragmentMetas(banco, adapter, produtoSelecionado);
+                    Metas metaSelecionada = metasList.get(selectedItemPosition);
+                    EditDialogFragmentMetas editDialog = new EditDialogFragmentMetas(banco, adapter, metaSelecionada);
                     editDialog.show(getSupportFragmentManager(), "edit_dialog");
                 } else {
                     // Informe ao usuário que nenhum item foi selecionado
-                    Log.d("metasActivity", "Nenhum item selecionado para edição");
-                    Toast.makeText(metasFinanceirasActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
+                    Log.d("metasActivity", "Nenhuma meta selecionada para edição");
+                    Toast.makeText(metasFinanceirasActivity.this, "Selecione uma meta para editar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        btnAddProd.setOnClickListener(new View.OnClickListener() {
+        btnAddMetas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 InsertDialogFragmentMetas dialog = new InsertDialogFragmentMetas(banco, adapter);
@@ -86,8 +86,6 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         recyclerviewMetas.setAdapter(adapter);
 
         carregarDadosDoBanco();
-
-
 
         recyclerviewMetas.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
@@ -129,13 +127,14 @@ public class metasFinanceirasActivity extends AppCompatActivity {
 
             if (cursor != null && cursor.moveToFirst()) {
                 do {
-                    int id = cursor.getInt(0);
-                    String nome_meta = cursor.getString(1);
-                    int valorMeta = cursor.getInt(2);
-                    String saldoEmpresa = cursor.getString(3);
+                    int id = cursor.getInt(cursor.getColumnIndex("ID_META"));
+                    String nome = cursor.getString(cursor.getColumnIndex("NOME_META"));
+                    int saldoEmpresaUsuario = cursor.getInt(cursor.getColumnIndex("SALDO_EMPRESA_USUARIO"));
+                    String valorMeta = cursor.getString(cursor.getColumnIndex("VALOR_META"));
 
-                    Metas metas = new Metas(id, nome_meta, valorMeta, saldoEmpresa);
-                    metasList.add(metas);
+                    // Crie um objeto Metas com os dados do cursor
+                    Metas meta = new Metas(id, nome, saldoEmpresaUsuario, valorMeta);
+                    metasList.add(meta);
                 } while (cursor.moveToNext());
 
                 cursor.close();
@@ -148,4 +147,5 @@ public class metasFinanceirasActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }

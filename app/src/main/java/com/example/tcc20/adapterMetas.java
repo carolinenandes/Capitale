@@ -66,7 +66,6 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
         Metas metas = listMetas.get(position);
 
         holder.itemView.setActivated(isSelected(position)); // Define a seleção visual
-        holder.id.setText("ID: " + String.valueOf(metas.getId()));
         holder.nome.setText("Nome: " + metas.getNome_meta());
         holder.valor_meta.setText("Valor: " + metas.getValor_meta());
         holder.valor_inicial.setText("R$: 0");
