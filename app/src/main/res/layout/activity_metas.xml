@@ -31,14 +31,11 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
-        android:layout_width="415dp"
-        android:layout_height="662dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_width="410dp"
+        android:layout_height="658dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
         <!-- Aqui você coloca o conteúdo que será atualizado ao deslizar -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewProd"

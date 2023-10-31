@@ -36,5 +36,6 @@
     <string name="hintValorMeta">Valor da Meta</string>
     <string name="btnExcluirMeta">Excluir</string>
     <string name="btnEditMeta">Editar</string>
+    <string name="txtValorInicial">R$: 0</string>
 
 </resources>

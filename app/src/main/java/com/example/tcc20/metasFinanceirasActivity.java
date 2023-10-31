@@ -7,12 +7,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -31,8 +37,11 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metas);
 
+        TextView txtValorMeta = findViewById(R.id.txtValorMeta);
+        TextView txtValorInicial = findViewById(R.id.txtValorInicial);
         Button btnEditMetas = findViewById(R.id.btnEditMetas);
         Button btnAddMetas = findViewById(R.id.btnAddMetas);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
         recyclerviewMetas = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
@@ -79,6 +88,7 @@ public class metasFinanceirasActivity extends AppCompatActivity {
                 dialog.show(getSupportFragmentManager(), "insert_dialog");
             }
         });
+
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerviewMetas.setLayoutManager(layoutManager);

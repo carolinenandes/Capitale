@@ -1,10 +1,16 @@
 package com.example.tcc20;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.text.InputType;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -52,7 +58,7 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
         this.listener = listener;
     }
 
-    //Este 4 paragrafos abaixo fazem com que o recyclerview funcione perfeitamente, apenas repliquem mudando as variavies
+    //Este 4 paragrafos abaixo fazem com que o recyclerview funcione perfeitamente, apenas repliquem mudando as variaveis
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,18 +72,66 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
         Metas metas = listMetas.get(position);
 
         holder.itemView.setActivated(isSelected(position)); // Define a seleção visual
-        holder.nome.setText("Nome: " + metas.getNome_meta());
+        holder.nome.setText (metas.getNome_meta());
         holder.valor_meta.setText("Valor: " + metas.getValor_meta());
-        holder.valor_inicial.setText("R$: 0");
 
-        // Configurar o deslize para excluir
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("progress_prefs", Context.MODE_PRIVATE);
+        int progress = sharedPreferences.getInt("progress_" + metas.getId(), 0);
+        holder.progressBar.setProgress(progress);
+        holder.progressBar.setSecondaryProgress(progress);
+
+
+        holder.valor_inicial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int position = holder.getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    toggleItemSelection(position);
-                }
+                // Exibir um diálogo para inserir o valor inicial
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Insira o Valor Atual da sua meta");
+
+                final EditText input = new EditText(context);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                builder.setView(input);
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String valorInicialStr = input.getText().toString();
+                        double valorInicial = Double.parseDouble(valorInicialStr);
+
+                        // Obter o valor da meta
+                        double valorMeta = Double.parseDouble(metas.getValor_meta());
+
+                        // Calcular a porcentagem
+                        double porcentagem = (valorInicial / valorMeta) * 100;
+
+                        // Atualiza a ProgressBar
+                        holder.progressBar.setProgress((int) porcentagem);
+
+                        // Atualiza o texto da ProgressBar
+                        holder.progressBar.setSecondaryProgress((int) porcentagem);
+
+                        // Atualiza o texto do valor inicial
+                        holder.valor_inicial.setText("R$: " + valorInicialStr);
+
+                        // Salvar a porcentagem no SharedPreferences
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("progress_prefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("progress_" + metas.getId(), (int) porcentagem);
+
+                        // Salvar o valor inicial no SharedPreferences
+                        editor.putString("valor_inicial_" + metas.getId(), valorInicialStr);
+                        editor.apply();
+                    }
+                });
+
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
             }
         });
 
@@ -162,7 +216,7 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView id, nome, valor_meta, valor_inicial;
+        TextView  nome, valor_meta, valor_inicial;
         adapterMetas adapter;
         ProgressBar progressBar;
 
