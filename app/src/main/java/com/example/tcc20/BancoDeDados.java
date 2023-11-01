@@ -1,5 +1,6 @@
 package com.example.tcc20;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.Cursor;
@@ -189,8 +190,10 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "    ID_META INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    NOME_META VARCHAR(60) NOT NULL,\n" +
                 "    SALDO_EMPRESA_USUARIO NUMERIC DEFAULT 0,\n" +
-                "    VALOR_META DECIMAL(6,2)\n" +
+                "    VALOR_META DECIMAL(6,2),\n" +
+                "    VALOR_META_ATUAL DECIMAL(6,2)\n" +  // Adiciona a nova coluna
                 ");";
+
 
         // Crie a tabela TB_GASTOS_GANHOS
         String createTableGastosGanhos = "CREATE TABLE IF NOT EXISTS TB_GASTOS_GANHOS (\n" +
@@ -214,15 +217,24 @@ public class BancoDeDados extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createTableEmpresa);
         sqLiteDatabase.execSQL(createTableCliente);
         sqLiteDatabase.execSQL(createTableProduto);
-        sqLiteDatabase.execSQL(createTableMetas);
+        sqLiteDatabase.execSQL(createTableMetas);  // Inclui a nova tabela TB_METAS_FINANCEIRAS
         sqLiteDatabase.execSQL(createTableGastosGanhos);
         sqLiteDatabase.execSQL(createTablePedidoCompra);
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    public void atualizarValorMetaAtual(int metaId, double valorInicial) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("VALOR_META_ATUAL", valorInicial);
+        String whereClause = "ID_META = ?";
+        String[] whereArgs = {String.valueOf(metaId)};
+        db.update("TB_METAS_FINANCEIRAS", values, whereClause, whereArgs);
+        db.close();
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.example.tcc20;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.InputType;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -28,14 +30,16 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
     private SparseBooleanArray selectedItems; // Para armazenar os itens selecionados
     private adapterMetas adapter;
     private BancoDeDados banco;
+    private metasFinanceirasActivity metasActivity;
 
 
     // Método para configurar o adapteer
-    public adapterMetas(Context context, List<Metas> listMetas, BancoDeDados banco) {
+    public adapterMetas(Context context, List<Metas> listMetas, BancoDeDados banco, metasFinanceirasActivity metasActivity) {
         this.context = context;
         this.listMetas = listMetas;
         selectedItems = new SparseBooleanArray();
         this.banco = banco;
+        this.metasActivity = metasActivity;
         this.adapter = this;
     }
 
@@ -74,6 +78,7 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
         holder.itemView.setActivated(isSelected(position)); // Define a seleção visual
         holder.nome.setText (metas.getNome_meta());
         holder.valor_meta.setText("Valor: " + metas.getValor_meta());
+        holder.valor_inicial.setText("R$: " + metas.getValor_atual_meta());
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("progress_prefs", Context.MODE_PRIVATE);
         int progress = sharedPreferences.getInt("progress_" + metas.getId(), 0);
@@ -98,31 +103,32 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
                         String valorInicialStr = input.getText().toString();
                         double valorInicial = Double.parseDouble(valorInicialStr);
 
-                        // Obter o valor da meta
+                        // Obter o ID da meta
+                        int metaId = metas.getId();
+
+                        // Atualiza o valor na tabela do banco de dados
+                        banco.atualizarValorMetaAtual(metaId, valorInicial);
+
+                        // Recarrega os dados do banco de dados
+                        metasActivity.carregarDadosDoBanco();
+
+                        // Calcule a nova porcentagem
                         double valorMeta = Double.parseDouble(metas.getValor_meta());
-
-                        // Calcular a porcentagem
                         double porcentagem = (valorInicial / valorMeta) * 100;
-
-                        // Atualiza a ProgressBar
-                        holder.progressBar.setProgress((int) porcentagem);
-
-                        // Atualiza o texto da ProgressBar
-                        holder.progressBar.setSecondaryProgress((int) porcentagem);
-
-                        // Atualiza o texto do valor inicial
-                        holder.valor_inicial.setText("R$: " + valorInicialStr);
 
                         // Salvar a porcentagem no SharedPreferences
                         SharedPreferences sharedPreferences = context.getSharedPreferences("progress_prefs", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt("progress_" + metas.getId(), (int) porcentagem);
-
-                        // Salvar o valor inicial no SharedPreferences
-                        editor.putString("valor_inicial_" + metas.getId(), valorInicialStr);
                         editor.apply();
+
+
+
+                        // Atualiza a exibição com os novos valores
+                        notifyDataSetChanged();
                     }
                 });
+
 
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override

@@ -37,16 +37,15 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metas);
 
-        TextView txtValorMeta = findViewById(R.id.txtValorMeta);
-        TextView txtValorInicial = findViewById(R.id.txtValorInicial);
+
         Button btnEditMetas = findViewById(R.id.btnEditMetas);
         Button btnAddMetas = findViewById(R.id.btnAddMetas);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
         recyclerviewMetas = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
+
         metasList = new ArrayList<>(); // Inicialize a lista primeiro
-        adapter = new adapterMetas(this, metasList, banco);
+        adapter = new adapterMetas(this, metasList, banco, this);
 
 
         //Atualiza a página deslizando para baixo.
@@ -141,9 +140,10 @@ public class metasFinanceirasActivity extends AppCompatActivity {
                     String nome = cursor.getString(cursor.getColumnIndex("NOME_META"));
                     int saldoEmpresaUsuario = cursor.getInt(cursor.getColumnIndex("SALDO_EMPRESA_USUARIO"));
                     String valorMeta = cursor.getString(cursor.getColumnIndex("VALOR_META"));
+                    String valorAtualMeta = cursor.getString(cursor.getColumnIndex("VALOR_META_ATUAL"));
 
                     // Crie um objeto Metas com os dados do cursor
-                    Metas meta = new Metas(id, nome, saldoEmpresaUsuario, valorMeta);
+                    Metas meta = new Metas(id, nome, saldoEmpresaUsuario, valorMeta, valorAtualMeta);
                     metasList.add(meta);
                 } while (cursor.moveToNext());
 
