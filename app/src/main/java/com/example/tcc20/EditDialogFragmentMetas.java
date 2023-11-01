@@ -20,6 +20,7 @@ public class EditDialogFragmentMetas extends DialogFragment {
     private adapterMetas adapter;
     private Metas metasParaEditar;
 
+
     // Construtor para passar o contexto
     public EditDialogFragmentMetas(Context context) {
         this.context = context;

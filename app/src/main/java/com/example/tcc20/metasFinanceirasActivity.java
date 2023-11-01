@@ -72,6 +72,7 @@ public class metasFinanceirasActivity extends AppCompatActivity {
                     Metas metaSelecionada = metasList.get(selectedItemPosition);
                     EditDialogFragmentMetas editDialog = new EditDialogFragmentMetas(banco, adapter, metaSelecionada);
                     editDialog.show(getSupportFragmentManager(), "edit_dialog");
+                    metasList.clear();
                 } else {
                     // Informe ao usuário que nenhum item foi selecionado
                     Log.d("metasActivity", "Nenhuma meta selecionada para edição");

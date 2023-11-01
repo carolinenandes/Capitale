@@ -109,6 +109,9 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
                         // Atualiza o valor na tabela do banco de dados
                         banco.atualizarValorMetaAtual(metaId, valorInicial);
 
+                        // Limpa a lista antes de recarregar os dados
+                        listMetas.clear();
+
                         // Recarrega os dados do banco de dados
                         metasActivity.carregarDadosDoBanco();
 
@@ -122,13 +125,10 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
                         editor.putInt("progress_" + metas.getId(), (int) porcentagem);
                         editor.apply();
 
-
-
                         // Atualiza a exibição com os novos valores
                         notifyDataSetChanged();
                     }
                 });
-
 
                 builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
