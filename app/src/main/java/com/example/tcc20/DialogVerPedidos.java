@@ -30,6 +30,7 @@ public class DialogVerPedidos extends DialogFragment {
     private BancoDeDados bancoDeDados;
     List<pedidoSelecao> listPedidos = new ArrayList<pedidoSelecao>();
     private ArrayList<pedidoSelecao> pedidosSelecionados = new ArrayList<>();
+    private List<produtoSelecao> listProdutos = new ArrayList<>();
     private static final String SELECIONAR_PEDIDOS_REQUEST_KEY = "selecionar_pedidos_request";
     Context context;
     Gasto_Lucros gasto_lucros;
@@ -192,7 +193,7 @@ public class DialogVerPedidos extends DialogFragment {
         return nome_cliente;
     }
 
-    // Método para atualizar o status do pedido no banco de dados
+    // Método para atualizar o status do pedido e informações da tb_pedido no banco de dados
     private void atualizarStatusPedido(int idPedido, String novoStatus) {
         SQLiteDatabase database = bancoDeDados.getWritableDatabase();
         ContentValues values = new ContentValues();

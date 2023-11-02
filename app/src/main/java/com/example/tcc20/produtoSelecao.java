@@ -12,18 +12,20 @@ public class produtoSelecao implements Parcelable {
     private String valor_venda;
     private String valor_custo;
     private String desc;
+    private int numberPicker;
     private int vendas;
     private String status;
     private boolean selected;
 
 
-    public produtoSelecao(int id, String nome, int qtd, String valor_venda, String valor_custo, String desc, int vendas, String status) {
+    public produtoSelecao(int id, String nome, int qtd, String valor_venda, String valor_custo, String desc, int numberPicker,  int vendas, String status) {
         this.id = id;
         this.nome = nome;
         this.qtd = qtd;
         this.valor_venda = valor_venda;
         this.valor_custo = valor_custo;
         this.desc = desc;
+        this.numberPicker = numberPicker;
         this.vendas = vendas;
         this.status = status;
         this.selected = false; // Por padrão, o produto não está selecionado
@@ -79,6 +81,14 @@ public class produtoSelecao implements Parcelable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public int getNumberPicker() {
+        return numberPicker;
+    }
+
+    public void setNumberPicker(int numberPicker) {
+        this.numberPicker = numberPicker;
     }
 
     public int getVendas() {

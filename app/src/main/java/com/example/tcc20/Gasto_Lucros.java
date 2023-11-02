@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Gasto_Lucros {
 
     BancoDeDados database;
@@ -15,7 +18,7 @@ public class Gasto_Lucros {
 
 
     public Float obterSomaGastos() {
-        String query = "SELECT SUM(VALOR_CUSTO_PROD) FROM TB_PRODUTO";
+        String query = "SELECT SUM(VALOR_CUSTO_PED_COMPRA) FROM TB_PEDIDO_COMPRA WHERE STATUS_PED_COMPRA = 'Pago'";
         Cursor cursor = database.rawQuery(query, null);
 
         Float somaGastos = 0.0f;

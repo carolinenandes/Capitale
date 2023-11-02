@@ -27,7 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".financas"
+            android:name="com.example.tcc20.financas"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,14 +47,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PieChartActivity"
+            android:name="com.example.tcc20.PieChartActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".BarChartActivity"
+            android:name="com.example.tcc20.BarChartActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

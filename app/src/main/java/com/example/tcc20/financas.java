@@ -10,12 +10,16 @@ import android.widget.Button;
 
 import com.sunayanpradhan.androidcharts.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class financas extends AppCompatActivity {
 
     Button go_bar_chart, go_pie_chart, btnAdicionaVenda, btnVerPedidos;
     Gasto_Lucros gasto_lucros;
     BancoDeDados db;
     adapterPedidosSelecao adapter;
+    List<produtoSelecao> listProdutos = new ArrayList<>();
 
 
     @Override

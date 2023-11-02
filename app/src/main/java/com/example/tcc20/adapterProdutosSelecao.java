@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,7 @@ public class adapterProdutosSelecao extends RecyclerView.Adapter<adapterProdutos
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtNomeProduto, txtPrecoProduto;
         CheckBox checkBox;
+        NumberPicker numberPicker;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -35,7 +37,7 @@ public class adapterProdutosSelecao extends RecyclerView.Adapter<adapterProdutos
             txtNomeProduto = itemView.findViewById(R.id.txtNome);
             txtPrecoProduto= itemView.findViewById(R.id.txtValorVenda);
             checkBox = itemView.findViewById(R.id.checkBox);
-
+            numberPicker = itemView.findViewById(R.id.numberPicker);
         }
     }
 
@@ -51,6 +53,22 @@ public class adapterProdutosSelecao extends RecyclerView.Adapter<adapterProdutos
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         produtoSelecao produto = listProdutos.get(position);
+
+        // Encontra a referência ao NumberPicker
+        NumberPicker numberPicker = holder.itemView.findViewById(R.id.numberPicker);
+
+        // Configura o NumberPicker
+        numberPicker.setMinValue(1); // Valor mínimo (1 por exemplo)
+        numberPicker.setMaxValue(20); // Valor máximo (10 por exemplo)
+        numberPicker.setValue(produto.getNumberPicker()); // Valor inicial
+
+        // Adiciona um listener para lidar com mudanças no valor
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                produto.setNumberPicker(newVal);
+            }
+        });
 
         holder.txtNomeProduto.setText(produto.getNome());
         holder.txtPrecoProduto.setText(produto.getValor_venda());

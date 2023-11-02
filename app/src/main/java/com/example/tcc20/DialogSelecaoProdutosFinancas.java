@@ -61,11 +61,13 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         recyclerView = view.findViewById(R.id.recyclerViewProdutos);
         btnConfirmar = view.findViewById(R.id.btnConfirmar);
 
+
         bancoDeDados = new BancoDeDados(getContext());
         SQLiteDatabase database = bancoDeDados.getReadableDatabase();
         Gasto_Lucros gasto_lucros = new Gasto_Lucros(bancoDeDados);
         pegarProdutos(database);
         showDialogSelecaoProdutos();
+        
 
         // Configure o RecyclerView e o Adapter
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -79,6 +81,17 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
             public void onClick(View v) {
                 // Obtenha os produtos selecionados do adapter
                 produtosSelecionados = adapter.getProdutosSelecionados();
+
+                if (!produtosSelecionados.isEmpty()) {
+                    for (produtoSelecao produto : produtosSelecionados) {
+                        int novaQuantidade = produto.getNumberPicker();
+                        double qtdVendaAtualizada = produto.getVendas() + novaQuantidade;
+                        double qtdProdutoAtualizada = produto.getQtd() - novaQuantidade;
+
+                        // Atualiza as quantidades no banco de dados
+                        atualizarQuantidadesNoBancoDeDados(produto.getId(), qtdProdutoAtualizada, qtdVendaAtualizada);
+                    }
+                }
 
                 // Chame o método de confirmação de seleção
                 confirmarSelecao();
@@ -124,7 +137,9 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
                     int vendas = cursor.getInt(6);
                     String status = cursor.getString(7);
 
-                    produtoSelecao produto = new produtoSelecao(id, nome, qtd, valor_venda, valor_custo, desc, vendas, status);
+                    int numberPicker = 0;
+
+                    produtoSelecao produto = new produtoSelecao(id, nome, qtd, valor_venda, valor_custo, desc, numberPicker,  vendas, status);
                     listProdutos.add(produto);
                 } while (cursor.moveToNext());
 
@@ -153,6 +168,7 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
     public void adicionarPedidosAoBanco(ArrayList<produtoSelecao> produtosSelecionados) {
         SQLiteDatabase db = bancoDeDados.getWritableDatabase();
         double totalPedido = 0.0;
+        double totalCustoPedido = 0.0;
 
         Log.d("TAG", "Tentando adicionar pedidos. Número de produtos selecionados: " + produtosSelecionados.size());
 
@@ -164,18 +180,35 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         for (produtoSelecao produto : produtosSelecionados) {
             try {
                 String valorProdutoString = produto.getValor_venda().replace(",", ".");
+                String valorCustoProdutoString = produto.getValor_custo().replace(",",".");
+
+                double valorCustoProduto = Double.parseDouble(valorCustoProdutoString);
                 double valorProduto = Double.parseDouble(valorProdutoString);
-                totalPedido += valorProduto;
+
+                totalPedido += (valorProduto * produto.getNumberPicker());
+
+                // Calcula o custo total do produto multiplicando pelo número selecionado
+                double custoTotalProduto = valorCustoProduto * produto.getNumberPicker();
+
+                // Atualiza o valor do custo total do pedido
+                totalCustoPedido += custoTotalProduto;
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
 
         // Arredonda o valor para duas casas decimais
+        totalCustoPedido = Math.round(totalCustoPedido * 100.0) / 100.0;
+
+        // Formata o valor para o formato desejado
+        String valorCustoFormatado = String.format(Locale.getDefault(), "%.2f", totalCustoPedido).replace(".", ",");
+
+
+        // Arredonda o valor para duas casas decimais
         totalPedido = Math.round(totalPedido * 100.0) / 100.0;
 
         // Formata o valor para o formato desejado
-        String valorFormatado = String.format(Locale.getDefault(), "%.2f", totalPedido).replace(".", ",");
+        String valorCompraFormatado = String.format(Locale.getDefault(), "%.2f", totalPedido).replace(".", ",");
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -184,7 +217,8 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         ContentValues values = new ContentValues();
         values.put("STATUS_PED_COMPRA", "Pendente");
         values.put("DTA_PED_COMPRA", dta_ped_compra);
-        values.put("VALOR_PED_COMPRA", valorFormatado);
+        values.put("VALOR_PED_COMPRA", valorCompraFormatado);
+        values.put("VALOR_CUSTO_PED_COMPRA", valorCustoFormatado);
 
         long idPedido = db.insertWithOnConflict("TB_PEDIDO_COMPRA", null, values, SQLiteDatabase.CONFLICT_REPLACE);
 
@@ -193,6 +227,27 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         } else {
             Toast.makeText(context, "Falha ao adicionar pedido", Toast.LENGTH_SHORT).show();
         }
+        db.close();
+    }
+
+    private void atualizarQuantidadesNoBancoDeDados(int idProduto, double novaQuantidadeProduto, double novaQuantidadeVenda) {
+        SQLiteDatabase db = bancoDeDados.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("QTD_PROD", novaQuantidadeProduto);
+        values.put("QTD_VENDA", novaQuantidadeVenda);
+
+        String whereClause = "ID_PROD = ?";
+        String[] whereArgs = { String.valueOf(idProduto) };
+
+        int rowsUpdated = db.update("TB_PRODUTO", values, whereClause, whereArgs);
+
+        if (rowsUpdated > 0) {
+            Log.d("TAG", "Quantidades atualizadas com sucesso");
+        } else {
+            Log.e("TAG", "Falha ao atualizar quantidades");
+        }
+
         db.close();
     }
 

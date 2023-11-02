@@ -199,6 +199,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "ID_PED_COMPRA INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "DTA_PED_COMPRA DATE," +
                 "VALOR_PED_COMPRA DECIMAL(6,2)," +
+                "VALOR_CUSTO_PED_COMPRA DECIMAL(6,2)," +
                 "ID_CLIENTE INTEGER DEFAULT 0," +
                 "STATUS_PED_COMPRA VARCHAR(60)" +
                 ");";
