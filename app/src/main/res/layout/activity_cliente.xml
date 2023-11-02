@@ -11,7 +11,7 @@
         android:layout_width="104dp"
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="#00000000"
         android:drawableLeft="@drawable/btn_voltar"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/titleProd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
         android:text="@string/titleCliente"
         android:textColor="@color/black"
@@ -37,10 +37,10 @@
         android:layout_height="789dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnVoltar"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.121">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewCliente"
@@ -52,16 +52,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnVoltar"
-            app:layout_constraintVertical_bias="0.006" />
+            app:layout_constraintVertical_bias="0.006"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:listitem="@layout/clientreci" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
-        android:background="@drawable/btnlindo"
         android:id="@+id/btnInsertCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="770dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="1012dp"
+        android:background="@drawable/btnlindo"
         android:text="@string/btnAddCliente"
         app:cornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,8 +73,8 @@
         android:id="@+id/btnVerCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="770dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="1024dp"
         android:text="@string/btnVerCliente"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

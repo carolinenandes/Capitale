@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/card_view_bg"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_cliente"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_width="458dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="16dp"
+            android:id="@+id/txticon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/circle"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="F" />
+
+        <ImageView
+            android:layout_width="448dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/retangulotransparente" />
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/txtusuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/txtdata"
+            android:layout_alignTop="@+id/txticon"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/txticon"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            tools:text="Facebook" />
+
+        <TextView
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:id="@+id/txtassunto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txtusuario"
+            android:layout_below="@+id/txtusuario"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="Facebook Facebook Facebook Facebook" />
+
+
+        <TextView
+
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:id="@+id/txtpreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txtusuario"
+            android:layout_below="@+id/txtassunto"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            tools:text="Preview Preview"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:id="@+id/txtdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="20dp"
+            tools:text="20 mai"
+            android:layout_marginEnd="24dp"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

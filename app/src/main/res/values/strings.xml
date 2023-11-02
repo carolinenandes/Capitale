@@ -40,5 +40,6 @@
     <string name="btnInsertCliente">Adicionar Cliente</string>
     <string name="btnEditCliente">Editar</string>
     <string name="btnAdicionarPedido">Pedido</string>
+    <string name="f">F</string>
 
 </resources>
