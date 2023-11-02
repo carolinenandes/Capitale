@@ -65,6 +65,7 @@ public class InsertDialogFragmentMetas extends DialogFragment {
         values.put("NOME_META", metas.getNome_meta());
         values.put("SALDO_EMPRESA_USUARIO", metas.getSaldo_empresa_usuario());
         values.put("VALOR_META", metas.getValor_meta());
+        values.put("VALOR_META_ATUAL", 0);
 
         long newRowId = db.insert("TB_METAS_FINANCEIRAS", null, values);
         db.close();

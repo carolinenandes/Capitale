@@ -48,7 +48,7 @@ public class EditDialogFragmentMetas extends DialogFragment {
 
         // Preenche os campos de edição com os detalhes do produto a ser editado
         etxtNomeMeta.setText(metasParaEditar.getNome_meta());
-        etxValorMeta.setText(String.valueOf(metasParaEditar.getSaldo_empresa_usuario()));
+        etxValorMeta.setText(String.valueOf(metasParaEditar.getValor_meta()));
 
         btnEditMeta.setOnClickListener(new View.OnClickListener() {
             @Override
