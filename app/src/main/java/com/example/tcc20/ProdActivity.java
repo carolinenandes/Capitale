@@ -17,9 +17,6 @@ public class ProdActivity extends AppCompatActivity {
     private adapterProd adapter;
     private BancoDeDados banco;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

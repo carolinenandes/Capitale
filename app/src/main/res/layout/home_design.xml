@@ -14,7 +14,17 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">-->
 
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/homeContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
+        android:id="@+id/homeContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -30,7 +40,7 @@
             android:background="@drawable/header_back_shape"
             android:orientation="horizontal">
 
-             <TextView
+            <TextView
                 android:id="@+id/valor_saldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,10 +51,10 @@
                 android:textAppearance="@style/semibold45px"
                 android:textColor="@color/text_semiblack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nome" />
+                app:layout_constraintTop_toBottomOf="@+id/txtHeaderNome" />
 
             <TextView
-                android:id="@+id/saldo_atual"
+                android:id="@+id/txtHeaderSaldoAtual"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
@@ -54,10 +64,10 @@
                 android:textAppearance="@style/semibold45px"
                 android:textColor="@color/text_semiblack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nome" />
+                app:layout_constraintTop_toBottomOf="@+id/txtHeaderNome" />
 
             <TextView
-                android:id="@+id/empresa"
+                android:id="@+id/txtHeaderEmpresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -67,10 +77,10 @@
                 android:textAppearance="@style/semibold45px"
                 android:textColor="@color/text_semiblack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/nome" />
+                app:layout_constraintTop_toTopOf="@+id/txtHeaderNome" />
 
             <TextView
-                android:id="@+id/nome"
+                android:id="@+id/txtHeaderNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -82,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/profilepic"
+                android:id="@+id/imgHeaderProfilePic"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="59dp"
@@ -142,7 +152,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_noticias"
+                    android:id="@+id/btn_2noticias"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -175,7 +185,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/btn_noticias"
+                    android:id="@+id/btn_3noticias"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
@@ -201,7 +211,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_noticias"
+                    android:id="@+id/btn_4noticias"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
