@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="#C5C0FF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,74 +8,121 @@
     android:layout_height="match_parent">
 
 
+    <View
+        android:id="@+id/containervieww"
+        android:layout_width="match_parent"
+        android:layout_height="770dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="248dp"
+        android:background="@drawable/shapedocliente"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:text="Insira o seu cliente"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
+        app:layout_constraintTop_toTopOf="@id/containervieww" />
 
     <EditText
-        android:fontFamily="@font/inter_semibold"
-        android:layout_gravity="center"
+        android:textStyle="bold"
         android:id="@+id/etxtNomeCliente"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:textSize="26dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="208dp"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="@string/hintNomeCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="26dp"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
+        app:layout_constraintTop_toTopOf="@id/containervieww" />
 
     <EditText
-        android:fontFamily="@font/inter_semibold"
+        android:textStyle="bold"
         android:id="@+id/etxtFoneCliente"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="26dp"
-        android:layout_marginTop="48dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="@string/hintFoneCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="26dp"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtNomeCliente" />
 
     <EditText
-        android:fontFamily="@font/inter_semibold"
+        android:textStyle="bold"
         android:id="@+id/etxtStatusCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="26dp"
         android:layout_gravity="center"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="@string/hintStatusCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="26dp"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtFoneCliente" />
 
     <EditText
-        android:fontFamily="@font/inter_semibold"
         android:id="@+id/etxtEmailCliente"
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textSize="26dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="@string/hintEmailCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
     <Button
+        android:textSize="15dp"
         android:id="@+id/btnInsertCliente"
+        android:layout_width="217dp"
+        android:layout_height="67dp"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:fontFamily="@font/inter_medium"
+        android:background="@drawable/btncliente"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="36dp"
         android:text="@string/btnInsertCliente"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
-</LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

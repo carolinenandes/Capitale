@@ -34,10 +34,9 @@
 
         <TextView
             android:textStyle="bold"
-            android:id="@+id/txtusuario"
+            android:id="@+id/txtNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/txtdata"
             android:layout_alignTop="@+id/txticon"
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@+id/txticon"
@@ -48,11 +47,11 @@
         <TextView
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:id="@+id/txtassunto"
+            android:id="@+id/txtfone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtusuario"
-            android:layout_below="@+id/txtusuario"
+            android:layout_alignStart="@+id/txtNome"
+            android:layout_below="@+id/txtNome"
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:text="Facebook Facebook Facebook Facebook" />
@@ -72,19 +71,7 @@
 <!--            tools:text="Preview Preview"-->
 <!--            android:layout_marginEnd="24dp"/>-->
 
-        <TextView
 
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:id="@+id/txtdata"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:textSize="20dp"
-            tools:text="20 mai"
-            android:layout_marginEnd="24dp"/>
 
 
     </RelativeLayout>

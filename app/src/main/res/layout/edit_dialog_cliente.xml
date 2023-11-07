@@ -1,91 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#C5C0FF"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <View
+        android:id="@+id/containervieww"
+        android:layout_width="match_parent"
+        android:layout_height="770dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="228dp"
+        android:background="@drawable/shapedocliente"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:text="Insira o seu Produto"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
+        app:layout_constraintTop_toTopOf="@id/containervieww" />
+
 
     <EditText
         android:id="@+id/etxtNomeCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="192dp"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="@string/hintNome"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
+        app:layout_constraintTop_toTopOf="@id/containervieww" />
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/etxtEmailCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/inter_medium"
         android:ems="10"
+        android:textSize="26dp"
         android:hint="@string/hintEmailCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtNomeCliente" />
 
     <EditText
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/inter_medium"
         android:id="@+id/etxtFoneCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/hintFoneCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
 
     <EditText
         android:id="@+id/etxtStatusCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
+        android:fontFamily="@font/inter_medium"
         android:hint="@string/hintStatusCliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtFoneCliente" />
 
     <Button
+        android:textColor="@color/black"
+        android:textSize="16dp"
         android:id="@+id/btnEditCliente"
-        android:layout_width="68dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:background="@drawable/btncliente"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="108dp"
         android:text="@string/btnEditCliente"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/containervieww"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
     <Button
+        android:textColor="@color/black"
+        android:textSize="16dp"
         android:id="@+id/btnExcluir"
-        android:layout_width="68dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/btncliente"
         android:text="@string/btnExcluir"
-        app:layout_constraintStart_toEndOf="@+id/btnEditCliente"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditCliente"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toEndOf="@+id/btnAdicionarPedido"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
     <Button
+        android:textColor="@color/black"
+        android:textSize="16dp"
         android:id="@+id/btnAdicionarPedido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/btncliente"
         android:text="@string/btnAdicionarPedido"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditCliente" />
+        app:layout_constraintEnd_toStartOf="@+id/btnEditCliente"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/containervieww"
+        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
