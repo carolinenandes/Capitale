@@ -23,7 +23,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.tcc20.ClienteActivity"
+            android:name="."
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

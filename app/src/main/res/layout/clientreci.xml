@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:background="@drawable/card_view_bg"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/activity_cliente"
     android:layout_height="wrap_content"
     >
 
@@ -59,19 +58,19 @@
             tools:text="Facebook Facebook Facebook Facebook" />
 
 
-        <TextView
+<!--        <TextView-->
 
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:id="@+id/txtpreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtusuario"
-            android:layout_below="@+id/txtassunto"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            tools:text="Preview Preview"
-            android:layout_marginEnd="24dp"/>
+<!--            android:ellipsize="marquee"-->
+<!--            android:singleLine="true"-->
+<!--            android:id="@+id/txtpreview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignStart="@+id/txtusuario"-->
+<!--            android:layout_below="@+id/txtassunto"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="18sp"-->
+<!--            tools:text="Preview Preview"-->
+<!--            android:layout_marginEnd="24dp"/>-->
 
         <TextView
 
