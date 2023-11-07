@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#C5C0FF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <EditText
+        android:fontFamily="@font/inter_semibold"
+        android:layout_gravity="center"
         android:id="@+id/etxtNomeCliente"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="300dp"
+        android:textSize="26dp"
         android:ems="10"
         android:hint="@string/hintNomeCliente"
         android:inputType="textPersonName"
@@ -19,11 +25,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:fontFamily="@font/inter_semibold"
         android:id="@+id/etxtFoneCliente"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:textSize="26dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/hintFoneCliente"
         android:inputType="textPersonName"
@@ -32,10 +40,12 @@
         app:layout_constraintTop_toBottomOf="@+id/etxtNomeCliente" />
 
     <EditText
+        android:fontFamily="@font/inter_semibold"
         android:id="@+id/etxtStatusCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:textSize="26dp"
+        android:layout_gravity="center"
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="@string/hintStatusCliente"
@@ -44,22 +54,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtFoneCliente" />
 
-    <Button
-        android:id="@+id/btnInsertCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/btnInsertCliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
-
     <EditText
+        android:fontFamily="@font/inter_semibold"
         android:id="@+id/etxtEmailCliente"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
+        android:textSize="26dp"
         android:ems="10"
         android:hint="@string/hintEmailCliente"
         android:inputType="textPersonName"
@@ -67,4 +69,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnInsertCliente"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/btnInsertCliente"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
+</LinearLayout>
