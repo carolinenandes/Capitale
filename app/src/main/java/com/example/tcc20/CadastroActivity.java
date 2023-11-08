@@ -13,12 +13,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 
 public class CadastroActivity extends AppCompatActivity {
     //cadastro
     Button cadastrar;
     TextView entrar;
-    EditText nome, cnpj, telefone, email, academia, senha;
+    EditText nome, email, senha;
+    public String ret = "";
+
+    public static String nomex, emailx, senhax;
+    public String host = "https://tcccapitale.000webhostapp.com/public_html/";
+
+
     public BancoDeDados banco;
 
     @Override
@@ -41,59 +51,64 @@ public class CadastroActivity extends AppCompatActivity {
         });
 
         nome = findViewById(R.id.lblNome);
-        cnpj = findViewById(R.id.lblCnpj);
         senha = findViewById(R.id.lblSenha);
-        telefone = findViewById(R.id.lblTel);
         email = findViewById(R.id.lblEmail);
-        academia = findViewById(R.id.lblAcademia);
 
         // Método para cadastrar conta
         findViewById(R.id.btnCadastrar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nome_usuario = nome.getText().toString();
-                String nome_empresa = academia.getText().toString();
-                String senha_usuario = senha.getText().toString();
-                String email_usuario = email.getText().toString();
-                String cnpj_ = cnpj.getText().toString();
-                String telefone_ = telefone.getText().toString();
-
-                Usuario novoUsuario = new Usuario(nome_usuario, nome_empresa, senha_usuario, email_usuario, cnpj_, telefone_);
-                novoUsuario.setId_usuario(-1); // Definir o id_usuario separadamente
-
-
-                try {
-                    adicionarUsuarioNoBanco(novoUsuario);
-                    Intent trocar = new Intent(CadastroActivity.this, MainActivity.class);
-                    startActivity(trocar);
-                } catch (Exception e) {
-                    // Exibir uma mensagem de erro amigável ao usuário
-                    Toast.makeText(CadastroActivity.this, "Erro ao cadastrar usuário: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    // Logar o erro para depuração
-                    Log.e("CadastroActivity", "Erro ao cadastrar usuário", e);
-                }
+                adicionarUsuarioNoBanco();
             }
         });
+
     }
 
-    // Método de inserir dados na tabela utilizando BD
-    private void adicionarUsuarioNoBanco(Usuario usuario) throws Exception {
-        SQLiteDatabase db = banco.getWritableDatabase();
+    private void adicionarUsuarioNoBanco() {
+        String nomeUsuario = nome.getText().toString();
+        String emailUsuario = email.getText().toString();
+        String senhaUsuario = senha.getText().toString();
 
+        // Verificar se os campos foram preenchidos
+        if (nomeUsuario.isEmpty() || emailUsuario.isEmpty() || senhaUsuario.isEmpty()) {
+            Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        /*
+        // Inserir no banco de dados local (SQLite)
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("NOME_USUARIO", usuario.getNome_usuario());
-        values.put("NOME_EMPRESA", usuario.getNome_empresa());
-        values.put("SENHA_USUARIO", usuario.getSenha_usuario()); // Corrigido para "SENHA_USUARIO"
-        values.put("EMAIL_USUARIO", usuario.getEmail_usuario());
-        values.put("CNPJ_USUARIO", usuario.getCnpj());
-        values.put("TELEFONE_EMPRESA", usuario.getTelefone());
+        values.put("NOME_USUARIO", nomeUsuario);
+        values.put("EMAIL_USUARIO", emailUsuario);
+        values.put("SENHA_USUARIO", senhaUsuario);
 
         long newRowId = db.insert("TB_USUARIO", null, values);
-        db.close();
 
-        if (newRowId == -1) {
-            throw new Exception("Erro ao inserir usuário no banco de dados.");
+        if (newRowId != -1) {
+            Toast.makeText(this, "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
         }
+        db.close();*/
+
+        // Agora você pode enviar os dados para o servidor usando uma requisição HTTP
+        Ion.with(this)
+                .load(host + "inserir_usuario.php")
+                .setBodyParameter("nome_usuario", nomeUsuario)
+                .setBodyParameter("email_usuario", emailUsuario)
+                .setBodyParameter("senha_usuario", senhaUsuario)
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        // Verificar o resultado da requisição
+                        if (e != null) {
+                            Log.e("Erro", e.toString());
+                        } else {
+                            Log.d("Resultado", result);
+                        }
+                    }
+                });
     }
-}
+    }
