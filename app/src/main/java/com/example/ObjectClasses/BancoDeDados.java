@@ -1,8 +1,7 @@
-package com.example.tcc20;
+package com.example.ObjectClasses;
 
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -13,7 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 public class BancoDeDados extends SQLiteOpenHelper {
 
@@ -30,7 +28,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
     //Caminho onde ficara salvo o DB
     String DB_Path;
     //Classe para executar as operacoes do DB
-    SQLiteDatabase db;
+    public SQLiteDatabase db;
 
     public BancoDeDados(Context context) {
         super(context, DB_Name, null, 1);

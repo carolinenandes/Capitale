@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ObjectClasses.BancoDeDados;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -14,11 +15,14 @@ public class HomeActivity extends AppCompatActivity {
     TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
     ImageView imgHeaderProfilePic;
     BottomNavigationView bottomMenuBar;
+    public BancoDeDados banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_design);
+
+        banco = new BancoDeDados(getApplicationContext());
 
         TextView txtHeaderNome = (TextView) findViewById(R.id.txtHeaderNome);
         TextView txtHeaderEmpresa = (TextView) findViewById(R.id.txtHeaderEmpresa);

@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.TextView;
+
+import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.Produto;
+import com.example.ObjectClasses.adapterProd;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+//esta activity foi convertida em ProdutosFragment
 public class ProdActivity extends AppCompatActivity {
     private RecyclerView recyclerviewProd;
     private ArrayList<Produto> productList;

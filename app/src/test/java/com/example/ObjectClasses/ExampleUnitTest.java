@@ -1,4 +1,4 @@
-package com.example.tcc;
+package com.example.ObjectClasses;
 
 import org.junit.Test;
 
