@@ -105,44 +105,44 @@
         app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtFoneCliente" />
 
-    <Button
+    <ImageView
+        android:id="@+id/btnEditCliente"
+        android:layout_width="128dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="104dp"
+        android:src="@drawable/botaoeditaar"
+        android:text="@string/btnEditCliente"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:id="@+id/btnEditCliente"
-        android:layout_width="108dp"
-        android:layout_height="58dp"
-        android:background="@drawable/btncliente"
-        android:layout_marginStart="360dp"
-        android:layout_marginTop="108dp"
-        android:text="@string/btnEditCliente"
         app:layout_constraintStart_toEndOf="@id/containervieww"
         app:layout_constraintStart_toStartOf="@id/containervieww"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
-    <Button
+    <ImageView
+        android:id="@+id/btnExcluir"
+        android:layout_width="137dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/botaoexcluirr"
+        android:text="@string/btnExcluir"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:id="@+id/btnExcluir"
-        android:layout_width="108dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/btncliente"
-        android:text="@string/btnExcluir"
         app:layout_constraintEnd_toStartOf="@+id/btnEditCliente"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toEndOf="@+id/btnAdicionarPedido"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
-    <Button
+    <ImageView
+        android:id="@+id/btnAdicionarPedido"
+        android:layout_width="142dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="96dp"
+        android:src="@drawable/btnpedidooo"
+        android:text="@string/btnAdicionarPedido"
         android:textColor="@color/black"
         android:textSize="16dp"
-        android:id="@+id/btnAdicionarPedido"
-        android:layout_width="108dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="108dp"
-        android:background="@drawable/btncliente"
-        android:text="@string/btnAdicionarPedido"
         app:layout_constraintEnd_toStartOf="@+id/btnEditCliente"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/containervieww"
