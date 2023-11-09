@@ -19,4 +19,6 @@
 	<color name="header_back_color">#C4C0FF</color>
 	<color name="profilepic_color">#D9D9D9</color>
 	<color name="noticias_color">#363636</color>
+	<color name="inactive">#C4C4C4</color>
+	<color name="active">#8177FE</color>
 </resources>
