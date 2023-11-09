@@ -19,12 +19,11 @@ import com.koushikdutta.ion.Ion;
 
 
 public class CadastroActivity extends AppCompatActivity {
-    //cadastro
+
     Button cadastrar;
     TextView entrar;
     EditText nome, email, senha;
 
-    public static String nomex, emailx, senhax;
     public String host = "https://capit4le.000webhostapp.com/projeto/";
 
 
@@ -75,7 +74,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
 
 
-        // Inserir no banco de dados local (SQLite)
+        /*// Inserir no banco de dados local (SQLite)
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("NOME_USUARIO", nomeUsuario);
@@ -89,7 +88,7 @@ public class CadastroActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
         }
-        db.close();
+        db.close();*/
 
         // Agora você pode enviar os dados para o servidor usando uma requisição HTTP
         Ion.with(this)
