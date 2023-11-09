@@ -23,10 +23,9 @@ public class CadastroActivity extends AppCompatActivity {
     Button cadastrar;
     TextView entrar;
     EditText nome, email, senha;
-    public String ret = "";
 
     public static String nomex, emailx, senhax;
-    public String host = "https://tcccapitale.000webhostapp.com/public_html/";
+    public String host = "https://capit4le.000webhostapp.com/projeto/";
 
 
     public BancoDeDados banco;
@@ -75,7 +74,7 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
 
-        /*
+
         // Inserir no banco de dados local (SQLite)
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -90,11 +89,11 @@ public class CadastroActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
         }
-        db.close();*/
+        db.close();
 
         // Agora você pode enviar os dados para o servidor usando uma requisição HTTP
         Ion.with(this)
-                .load(host + "inserir_usuario.php")
+                .load(host + "cadastro.php")
                 .setBodyParameter("nome_usuario", nomeUsuario)
                 .setBodyParameter("email_usuario", emailUsuario)
                 .setBodyParameter("senha_usuario", senhaUsuario)

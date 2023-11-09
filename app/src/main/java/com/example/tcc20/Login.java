@@ -51,16 +51,6 @@ public class Login extends AppCompatActivity {
 
     private boolean verificarCredenciais(String email, String senha) {
 
-        SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM TB_USUARIO WHERE EMAIL_USUARIO = ? AND SENHA_USUARIO = ?",
-                new String[]{email, senha});
-
-        boolean credenciaisValidas = cursor.getCount() > 0;
-
-        cursor.close();
-        db.close();
-
-        return credenciaisValidas;
     }
 }
 
