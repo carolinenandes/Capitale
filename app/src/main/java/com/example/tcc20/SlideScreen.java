@@ -23,6 +23,7 @@ public class SlideScreen extends AppCompatActivity {
     TextView[] dots;
     ViewPagerAdapter viewPagerAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

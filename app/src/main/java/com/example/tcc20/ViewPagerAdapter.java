@@ -18,7 +18,7 @@ public class ViewPagerAdapter  extends PagerAdapter {
   Context context;
 
   int images[] = {
-        R.drawable.moneyverse,
+        R.drawable.moneyversebusinessanalytics,
         R.drawable.carteirapog,
         R.drawable.grafics
 
