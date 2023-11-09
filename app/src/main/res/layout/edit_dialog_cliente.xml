@@ -37,6 +37,8 @@
 
 
     <EditText
+        android:drawableLeft=""
+        android:background="@drawable/btncliente"
         android:id="@+id/etxtNomeCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,10 +109,10 @@
 
     <ImageView
         android:id="@+id/btnEditCliente"
-        android:layout_width="128dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="360dp"
-        android:layout_marginTop="104dp"
+        android:layout_width="142dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="308dp"
+        android:layout_marginTop="96dp"
         android:src="@drawable/botaoeditaar"
         android:text="@string/btnEditCliente"
         android:textColor="@color/black"
@@ -121,15 +123,15 @@
 
     <ImageView
         android:id="@+id/btnExcluir"
-        android:layout_width="137dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="142dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="96dp"
         android:src="@drawable/botaoexcluirr"
         android:text="@string/btnExcluir"
         android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/btnEditCliente"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toEndOf="@+id/btnAdicionarPedido"
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
