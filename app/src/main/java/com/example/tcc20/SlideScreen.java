@@ -45,10 +45,13 @@ public class SlideScreen extends AppCompatActivity {
         btnprox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (getitem(0) > 0 ){
+                if (getitem(1) > 0 ){
                     mSlideViewPager.setCurrentItem(getitem(1),true);
                 } else {
-                    Intent i = new Intent (SlideScreen,this,home)
+//                    ADICIONAR O INTENT AQUI MEN
+                    Intent i = new Intent (SlideScreen.this,MainActivity.class);
+                    startActivity(i);
+                    finish();
                 }
 
             }
@@ -58,6 +61,11 @@ public class SlideScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+
+                Intent i = new Intent (SlideScreen.this,MainActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -68,6 +76,9 @@ public class SlideScreen extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(this);
 
         mSlideViewPager.setAdapter(viewPagerAdapter);
+
+        setupIndicator(0);
+        mSlideViewPager.addOnPageChangeListener(viewListener);
     }
 
     public void setupIndicator(int position) {
@@ -78,10 +89,10 @@ public class SlideScreen extends AppCompatActivity {
         for(int i = 0 ; i < dots.length ; i++) {
 
             dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&8226"));
+            dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(35);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                dots[i].setTextColor(getResources().getColor(R.color.inactive,getApplicationContext().getTheme());
+                dots[i].setTextColor(getResources().getColor(R.color.inactive,getApplicationContext().getTheme()));
             }
             mDotLayout.addView(dots[i]);
         }

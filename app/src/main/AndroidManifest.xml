@@ -22,7 +22,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashScreen"
+            android:name=".financas"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -43,7 +43,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".financas"
+            android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.Design.NoActionBar">
             <intent-filter>
