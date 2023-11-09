@@ -19,6 +19,7 @@ public class Login extends AppCompatActivity {
 
     public BancoDeDados banco;
     EditText emailUsuario, senhaUsuario;
+    Button btnLogin, btnEsqSenha;
 
     public String host = "https://capit4le.000webhostapp.com/projeto/";
 
@@ -27,7 +28,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnEsqSenha = findViewById(R.id.btnEsqSenha);
         emailUsuario = findViewById(R.id.Email);
         senhaUsuario = findViewById(R.id.Senha);
 
@@ -41,6 +43,15 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnEsqSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, esqSenhaActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void verificarCredenciais() {
