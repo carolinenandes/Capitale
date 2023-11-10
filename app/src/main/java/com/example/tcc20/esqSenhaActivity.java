@@ -2,12 +2,15 @@ package com.example.tcc20;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -36,21 +39,14 @@ public class esqSenhaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 esqueceuSenha();
-
-                Intent intent = new Intent(esqSenhaActivity.this, MainActivity.class);
-                startActivity(intent);
             }
-
         });
     }
 
     private void esqueceuSenha(){
-        // Obtenha o email e a senha inseridos pelo usuário
-        String  etxtEmail = emailUsuario.getText().toString();
-        String  etxtSenhaNova = novaSenhaUsuario.getText().toString();
+        String etxtEmail = emailUsuario.getText().toString();
+        String etxtSenhaNova = novaSenhaUsuario.getText().toString();
 
-
-        // Agora você pode enviar os dados para o servidor usando uma requisição HTTP
         Ion.with(this)
                 .load(host + "esqSenha.php")
                 .setBodyParameter("email_usuario", etxtEmail)
@@ -59,14 +55,37 @@ public class esqSenhaActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<String>() {
                     @Override
                     public void onCompleted(Exception e, String result) {
-                        // Verificar o resultado da requisição
                         if (e != null) {
                             Log.e("Erro", e.toString());
+                            // Se a atualização remota falhar, tente localmente
+                            atualizarSenhaLocalmente(etxtEmail, etxtSenhaNova);
                         } else {
-                            Log.d("Resultado", result);
+                            if (result.trim().equalsIgnoreCase("Senha atualizada no servidor")) {
+                                // Se o servidor indicar que a senha foi atualizada com sucesso
+                                Toast.makeText(esqSenhaActivity.this, "Senha atualizada remotamente", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Se o servidor indicar um erro ou a senha não foi atualizada
+                                Toast.makeText(esqSenhaActivity.this, "Erro ao atualizar senha remotamente", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
+    }
 
+    private void atualizarSenhaLocalmente(String email, String novaSenha) {
+        SQLiteDatabase db = bancoDeDados.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("SENHA_USUARIO", novaSenha);
+
+        int rowsAffected = db.update("TB_USUARIO", values, "EMAIL_USUARIO=?", new String[]{email});
+
+        if (rowsAffected > 0) {
+            Toast.makeText(esqSenhaActivity.this, "Senha atualizada localmente", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(esqSenhaActivity.this, "Erro ao atualizar senha localmente", Toast.LENGTH_SHORT).show();
+        }
+
+        db.close();
     }
 }

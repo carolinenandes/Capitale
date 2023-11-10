@@ -39,8 +39,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 verificarCredenciais();
-                Intent intent = new Intent(Login.this, MainActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -65,6 +63,72 @@ public class Login extends AppCompatActivity {
             return;
         }
 
+        // Flag para acompanhar se o login remoto foi bem-sucedido
+        final boolean[] loginRemotoSucesso = {false};
+
+        // Enviando os dados para o servidor usando uma requisição HTTP
+        Ion.with(this)
+                .load(host + "login.php")
+                .setBodyParameter("email_usuario", email)
+                .setBodyParameter("senha_usuario", senha)
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        // Verifica o resultado da requisição
+                        if (e != null) {
+                            Log.e("Erro", e.toString());
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Login.this, "Erro na conexão. Verifique sua conexão com a internet.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            // Utiliza runOnUiThread para exibir o Toast na thread principal
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(Login.this, result, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            // Verifica se o login remoto foi bem-sucedido
+                            if (result.equals("Login bem-sucedido")) {
+                                loginRemotoSucesso[0] = true;
+                            }
+
+                            // Verifica se o login remoto foi bem-sucedido
+                            if (loginRemotoSucesso[0]) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(Login.this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                                // Se não, realiza o login localmente
+                                loginLocalmente();
+                            }
+                        }
+
+                        // Verifica se o login remoto foi bem-sucedido
+                        if (loginRemotoSucesso[0]) {
+                            // Se sim, navega para a MainActivity
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // opcional, fecha a atividade atual para evitar que o usuário retorne ao login
+                        }
+                    }
+                });
+    }
+
+    //Método para logar localmente
+    private void loginLocalmente()
+    {
+        // Obtenha o email e a senha inseridos pelo usuário
+        String  email = emailUsuario.getText().toString();
+        String  senha = senhaUsuario.getText().toString();
 
         // Inserir no banco de dados local (SQLite)
         SQLiteDatabase db = banco.getWritableDatabase();
@@ -75,30 +139,11 @@ public class Login extends AppCompatActivity {
         long newRowId = db.insert("TB_USUARIO", null, values);
 
         if (newRowId != -1) {
-            Toast.makeText(this, "Usuário encontrado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sucesso no login", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Erro ao encontrar usuário", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
         }
         db.close();
-
-        // Agora você pode enviar os dados para o servidor usando uma requisição HTTP
-        Ion.with(this)
-                .load(host + "login.php")
-                .setBodyParameter("email_usuario", email)
-                .setBodyParameter("senha_usuario", senha)
-                .asString()
-                .setCallback(new FutureCallback<String>() {
-                    @Override
-                    public void onCompleted(Exception e, String result) {
-                        // Verificar o resultado da requisição
-                        if (e != null) {
-                            Log.e("Erro", e.toString());
-                        } else {
-                            Log.d("Resultado", result);
-                        }
-                    }
-                });
-
     }
 }
 

@@ -73,24 +73,10 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
 
+        // Flag para acompanhar se o cadastro remoto foi bem-sucedido
+        final boolean[] cadastroRemotoSucesso = {false};
 
-        /*// Inserir no banco de dados local (SQLite)
-        SQLiteDatabase db = banco.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("NOME_USUARIO", nomeUsuario);
-        values.put("EMAIL_USUARIO", emailUsuario);
-        values.put("SENHA_USUARIO", senhaUsuario);
-
-        long newRowId = db.insert("TB_USUARIO", null, values);
-
-        if (newRowId != -1) {
-            Toast.makeText(this, "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
-        }
-        db.close();*/
-
-        // Agora você pode enviar os dados para o servidor usando uma requisição HTTP
+        // Registrar o usuário remotamente
         Ion.with(this)
                 .load(host + "cadastro.php")
                 .setBodyParameter("nome_usuario", nomeUsuario)
@@ -100,13 +86,50 @@ public class CadastroActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<String>() {
                     @Override
                     public void onCompleted(Exception e, String result) {
-                        // Verificar o resultado da requisição
+                        // Verifica o resultado da requisição
                         if (e != null) {
                             Log.e("Erro", e.toString());
                         } else {
-                            Log.d("Resultado", result);
+                            // Utiliza runOnUiThread para exibir o Toast na thread principal
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(CadastroActivity.this, result, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                            // Atualiza a flag com base no resultado do cadastro remoto
+                            cadastroRemotoSucesso[0] = true;
+                        }
+
+                        // Verifica se o cadastro local é necessário
+                        if (!cadastroRemotoSucesso[0]) {
+                            cadastrarLocalmente();
                         }
                     }
                 });
     }
+
+    //Método para cadastrar localmente
+    private void cadastrarLocalmente() {
+        String nomeUsuario = nome.getText().toString();
+        String emailUsuario = email.getText().toString();
+        String senhaUsuario = senha.getText().toString();
+
+        // Inserir no banco de dados local (SQLite)
+        SQLiteDatabase db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("NOME_USUARIO", nomeUsuario);
+        values.put("EMAIL_USUARIO", emailUsuario);
+        values.put("SENHA_USUARIO", senhaUsuario);
+
+        long newRowId = db.insert("TB_USUARIO", null, values);
+
+        if (newRowId != -1) {
+            Toast.makeText(this, "Cadastrado localmente com sucesso", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Erro ao cadastrar localmente", Toast.LENGTH_SHORT).show();
+        }
+        db.close();
     }
+}
