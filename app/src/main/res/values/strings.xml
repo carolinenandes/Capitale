@@ -13,15 +13,17 @@
     <string name="txtId">Id:</string>
     <string name="header">header</string>
 
-<!--  SlideScreen  -->
-<!--    Titulos-->
+    <!--  SlideScreen  -->
+    <!--    Titulos-->
     <string name="heading_one">Aqui o seu dinheiro rende </string>
     <string name="heading_two">Fácil e simples de usar</string>
     <string name="heading_three">Gráficos inteligentes</string>
 
-<!-- Descrições SlideScreen  -->
+    <!-- Descrições SlideScreen  -->
     <string name="desc_one">Controle de gastos e metas financeiras</string>
     <string name="desc_two">Design dinâmico e amigável</string>
     <string name="desc_three">Acompanhe o desemprenho de sua Microempresa atráves de gráficos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
