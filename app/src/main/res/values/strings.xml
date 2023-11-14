@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capitale</string>
+    <string name="app_name">TCC2.0</string>
     <string name="btnProd">Prod</string>
     <string name="titleProd">Produtos</string>
     <string name="btnAddProd">Adicionar Produto</string>
@@ -12,6 +12,19 @@
     <string name="txtQtd">Quantidade:</string>
     <string name="txtId">Id:</string>
     <string name="header">header</string>
+
+    <!--  SlideScreen  -->
+    <!--    Titulos-->
+    <string name="heading_one">Aqui o seu dinheiro rende </string>
+    <string name="heading_two">Fácil e simples de usar</string>
+    <string name="heading_three">Gráficos inteligentes</string>
+
+    <!-- Descrições SlideScreen  -->
+    <string name="desc_one">Controle de gastos e metas financeiras</string>
+    <string name="desc_two">Design dinâmico e amigável</string>
+    <string name="desc_three">Acompanhe o desemprenho de sua Microempresa atráves de gráficos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="outrasfuncoes_string">Outras funções</string>
     <string name="title_home_string">Home</string>

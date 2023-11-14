@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:flow_horizontalAlign="center"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image_title"
+        android:layout_width="match_parent"
+        android:layout_height="372dp"
+        android:src="@drawable/carteirapog" />
+
+    <TextView
+        android:id="@+id/title_ti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/heading_one"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_marginTop="40dp"
+    android:textAlignment="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/raleway_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/desc_one"
+        android:textStyle="italic"
+        android:textSize="15dp"/>
+</LinearLayout>
