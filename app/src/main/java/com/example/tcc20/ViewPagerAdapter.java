@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.tcc20.R;
+
 public class ViewPagerAdapter  extends PagerAdapter {
 
 //Aqui é aonde vai mudar as fotos, descrições e títulos

@@ -1,45 +1,31 @@
 <resources>
-    <string name="app_name">TCC2.0</string>
-    <string name="btnProd">Prod</string>
-    <string name="titleProd">Produtos</string>
-    <string name="btnAddProd">Adicionar Produto</string>
-    <string name="txtNome">Nome</string>
-    <string name="txtStatus">Status</string>
-    <string name="txtValorvenda">Valor:</string>
-    <string name="txtValorcusto">Custo:</string>
-    <string name="txtQtdvenda">Vendidos:</string>
-    <string name="txtDesc">Descrição:</string>
-    <string name="txtQtd">Quantidade:</string>
-    <string name="txtId">Id:</string>
-    <string name="header">header</string>
 
-    <!--  SlideScreen  -->
-    <!--    Titulos-->
-    <string name="heading_one">Aqui o seu dinheiro rende </string>
-    <string name="heading_two">Fácil e simples de usar</string>
-    <string name="heading_three">Gráficos inteligentes</string>
+	<string name="outrasfuncoes_string">Outras funções</string>
+	<string name="title_home_string">Home</string>
+	<string name="title_metas_string">Metas</string>
+	<string name="title_financas_string">Finanças</string>
+	<string name="title_clientes_string">Clientes</string>
+	<string name="title_produtos_string">Produtos</string>
+	<string name="empresa_string">Empresa</string>
+	<string name="nome_string">Nome</string>
+	<string name="valor_saldo_string">R$ Saldo</string>
+	<string name="title_saldo_atual_string">Saldo atual:</string>
+	<string name="title_mainfunctions_string">O que deseja fazer agora?</string>
+	<string name="noticias_string">Notcias</string>
 
-    <!-- Descrições SlideScreen  -->
-    <string name="desc_one">Controle de gastos e metas financeiras</string>
-    <string name="desc_two">Design dinâmico e amigável</string>
-    <string name="desc_three">Acompanhe o desemprenho de sua Microempresa atráves de gráficos</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="newNoticias"> Como o marco legal das garantias pode beneficiar os pequenos negócios</string>
+	<string name="newNoticias2">Pequenas e médias empresas crescem 9,4% no terceiro trimestre</string>
 
-    <string name="outrasfuncoes_string">Outras funções</string>
-    <string name="title_home_string">Home</string>
-    <string name="title_metas_string">Metas</string>
-    <string name="title_financas_string">Finanças</string>
-    <string name="title_clientes_string">Clientes</string>
-    <string name="title_produtos_string">Produtos</string>
-    <string name="empresa_string">Empresa</string>
-    <string name="nome_string">Nome</string>
-    <string name="valor_saldo_string">R$ Saldo</string>
-    <string name="title_saldo_atual_string">Saldo atual:</string>
-    <string name="title_mainfunctions_string">O que deseja fazer agora?</string>
-    <string name="noticias_string">Notícias</string>
-    <string name="img">imagem</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+	<!--  SlideScreen  -->
+	<!--    Titulos-->
+	<string name="heading_one">Aqui o seu dinheiro rende </string>
+	<string name="heading_two">Fácil e simples de usar</string>
+	<string name="heading_three">Gráficos inteligentes</string>
+
+	<!-- Descrições SlideScreen  -->
+	<string name="desc_one">Controle de gastos e metas financeiras</string>
+	<string name="desc_two">Design dinâmico e amigável</string>
+	<string name="desc_three">Acompanhe o desemprenho de sua Microempresa atráves de gráficos</string>
+
 
 </resources>

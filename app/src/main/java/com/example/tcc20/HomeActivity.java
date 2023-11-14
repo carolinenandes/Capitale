@@ -4,23 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.NoticiasViews.NewsFragment;
 import com.example.ObjectClasses.BancoDeDados;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
     TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
-    ImageView imgHeaderProfilePic;
+    ImageView imgHeaderProfilePic, btnNoticias;
     BottomNavigationView bottomMenuBar;
     public BancoDeDados banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_design);
+        setContentView(R.layout.activity_home);
+
+        ImageView btnNoticias = (ImageView) findViewById(R.id.btnNoticias);
 
         banco = new BancoDeDados(getApplicationContext());
 
@@ -59,6 +64,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
             return true;
+        });
+
+        //abrir tela noticias
+        btnNoticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment selectedfragment = new NewsFragment();
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainer, selectedfragment)
+                        .commit();
+            }
         });
     }
 }

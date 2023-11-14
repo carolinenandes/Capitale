@@ -48,15 +48,15 @@
                 android:text="source"/>
 
             <ImageView
-                android:clickable="true"
                 android:id="@+id/readMore"
                 android:layout_width="165dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:onClick="openNewsUrl"
                 android:src="@drawable/lermais"
-                tools:ignore="SpeakableTextPresentCheck,UsingOnClickInXml"
-                android:focusable="true" />
+                tools:ignore="SpeakableTextPresentCheck,UsingOnClickInXml,ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
 
 
 

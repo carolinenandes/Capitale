@@ -50,7 +50,7 @@ public class SlideScreen extends AppCompatActivity {
                     mSlideViewPager.setCurrentItem(getitem(1),true);
                 } else {
 //                    ADICIONAR O INTENT AQUI MEN
-                    Intent i = new Intent (SlideScreen.this,MainActivity.class);
+                    Intent i = new Intent (SlideScreen.this,HomeActivity.class);
                     startActivity(i);
                     finish();
                 }
@@ -64,7 +64,7 @@ public class SlideScreen extends AppCompatActivity {
 
 
 
-                Intent i = new Intent (SlideScreen.this,MainActivity.class);
+                Intent i = new Intent (SlideScreen.this,HomeActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -93,14 +93,15 @@ public class SlideScreen extends AppCompatActivity {
             dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(35);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                dots[i].setTextColor(getResources().getColor(R.color.inactive,getApplicationContext().getTheme()));
+                dots[i].setTextColor(getResources().getColor(R.color.colorPrimaryDark,getApplicationContext().getTheme()));
             }
             mDotLayout.addView(dots[i]);
         }
 
 
+        //troquei a cor era active
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dots[position].setTextColor(getResources().getColor(R.color.active,getApplicationContext().getTheme()));
+            dots[position].setTextColor(getResources().getColor(R.color.colorPrimary,getApplicationContext().getTheme()));
         }
     }
 

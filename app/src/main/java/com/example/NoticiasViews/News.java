@@ -1,4 +1,4 @@
-package com.example.tcc20;
+package com.example.NoticiasViews;
 
 public class News {
     private String title;

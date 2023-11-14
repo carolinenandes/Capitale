@@ -135,7 +135,7 @@
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <ImageView android:id="@+id/btnNoticias"
                         android:layout_width="200px"
                         android:layout_height="180px"
                         android:layout_marginStart="5dp"
@@ -185,32 +185,6 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/btn_3noticias"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="96dp"
-                        android:layout_height="180px"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/vector_noticias" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/noticias_string"
-                        android:textAppearance="@style/noticiaLike"
-                        android:textSize="60px" />
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:id="@+id/btn_4noticias"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -240,6 +214,7 @@
             </LinearLayout>
 
             <TextView
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
