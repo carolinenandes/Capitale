@@ -27,5 +27,43 @@
 	<string name="desc_two">Design dinâmico e amigável</string>
 	<string name="desc_three">Acompanhe o desemprenho de sua Microempresa atráves de gráficos</string>
 
+    <string name="app_name">TCC2.0</string>
+    <string name="btnProd">Prod</string>
+    <string name="titleProd">Produtos</string>
+    <string name="btnAddProd">Adicionar Produto</string>
+    <string name="txtNome">Nome</string>
+    <string name="txtStatus">Status</string>
+    <string name="txtValorvenda">Valor:</string>
+    <string name="txtValorcusto">Custo:</string>
+    <string name="txtQtdvenda">Vendidos:</string>
+    <string name="txtDesc">Descrição:</string>
+    <string name="txtQtd">Quantidade:</string>
+    <string name="txtId">Id:</string>
+    <string name="hintNome">Nome do metas</string>
+    <string name="hintQtd">Quantidade</string>
+    <string name="hintValorVenda">Valor de venda</string>
+    <string name="hintValorCusto">Custo de produção</string>
+    <string name="hintDesc">Descrição</string>
+    <string name="hintStatus">Status</string>
+    <string name="hintQtdVenda">Quantidade de vendas</string>
+
+    <string name="label_id">ID: %s</string>
+    <string name="label_nome">Nome: %s</string>
+    <string name="label_qtd">Quantidade: %s</string>
+    <string name="label_valor_venda">Valor de Venda: %s</string>
+    <string name="label_valor_custo">Valor de Custo: %s</string>
+    <string name="label_desc">Descrição: %s</string>
+    <string name="label_qtd_venda">Quantidade de Vendas: %s</string>
+    <string name="label_status">Status: %s</string>
+    <string name="btnEditProd">Editar</string>
+    <string name="btnEditarProd">Editar</string>
+    <string name="btnExcluir">Excluir</string>
+    <string name="btnAddMetas">Adicionar Metas</string>
+    <string name="titleMetas">Metas Financeiras</string>
+    <string name="hintNomeMeta">Nome da meta</string>
+    <string name="hintValorMeta">Valor da Meta</string>
+    <string name="btnExcluirMeta">Excluir</string>
+    <string name="btnEditMeta">Editar</string>
+    <string name="txtValorInicial">R$: 0</string>
 
 </resources>

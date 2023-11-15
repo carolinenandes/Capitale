@@ -1,4 +1,4 @@
-package com.example.ObjectClasses;
+package com.example.tcc20;
 
 //Classe do produto com getters and setters
 public class Produto {

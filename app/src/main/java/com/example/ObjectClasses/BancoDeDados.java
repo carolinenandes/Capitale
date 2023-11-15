@@ -1,5 +1,6 @@
 package com.example.ObjectClasses;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
@@ -126,7 +127,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
         verificarECopiarDB();
 
         try {
-            db = SQLiteDatabase.openDatabase(DB_Path + DB_Name, null, SQLiteDatabase.OPEN_READWRITE);
+            db = getWritableDatabase();
         } catch (SQLiteException e) {
             e.printStackTrace();
         }
@@ -136,11 +137,102 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        // Cria a tabela TB_USUARIO
+        String createTableUsuario = "CREATE TABLE IF NOT EXISTS TB_USUARIO (\n" +
+                "    ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    NOME_USUARIO VARCHAR(40) NOT NULL,\n" +
+                "    SOBRENOME_USUARIO VARCHAR(60),\n" +
+                "    EMAIL_USUARIO VARCHAR(60) NOT NULL UNIQUE,\n" +
+                "    SENHA_USUARIO VARCHAR(30) NOT NULL,\n" +
+                "    TELEFONE_EMPRESA VARCHAR(16),\n" +
+                "    STATUS_USUARIO VARCHAR(60),\n" +
+                "    DTA_CADASTRO_USUARIO DATE\n" +
+                ");";
 
+        //Cria a tabela TB_EMPRESA
+        String createTableEmpresa = "CREATE TABLE IF NOT EXISTS TB_EMPRESA (\n" +
+                "    ID_EMPRESA INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    NOME_EMPRESA VARCHAR(60) NOT NULL UNIQUE,\n" +
+                "    EMAIL_EMPRESA VARCHAR(60) NOT NULL UNIQUE,\n" +
+                "    STATUS_USUARIO VARCHAR(60),\n" +
+                "    DTA_CADASTRO_USUARIO DATE,\n" +
+                "    CNPJ_EMPRESA VARCHAR(20) NOT NULL UNIQUE,\n" +
+                "    SALDO_EMPRESA NUMERIC DEFAULT 0,\n" +
+                "    TELEFONE_EMPRESA VARCHAR(16)\n" +
+                ");";
+
+        // Cria a tabela TB_CLIENTE
+        String createTableCliente = "CREATE TABLE IF NOT EXISTS TB_CLIENTE (\n" +
+                "    ID_CLIENTE INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    NOME_CLIENTE VARCHAR(40) NOT NULL,\n" +
+                "    EMAIL_CLIENTE VARCHAR(60) NOT NULL UNIQUE,\n" +
+                "    STATUS_CLIENTE VARCHAR(60),\n" +
+                "    DTA_CADASTRO_CLIENTE DATE UNIQUE,\n" +
+                "    FONE_CLIENTE VARCHAR(16)\n" +
+                ");";
+
+        // Crie a tabela TB_PRODUTO
+        String createTableProduto = "CREATE TABLE IF NOT EXISTS TB_PRODUTO (\n" +
+                "    ID_PROD INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    NOME_PROD VARCHAR(60) NOT NULL,\n" +
+                "    QTD_PROD DECIMAL(4,1),\n" +
+                "    VALOR_VENDA_PROD DECIMAL(6,2),\n" +
+                "    VALOR_CUSTO_PROD DECIMAL(6,2),\n" +
+                "    DESC_PROD VARCHAR(100),\n" +
+                "    QTD_VENDA DECIMAL(4,1),\n" +
+                "    STATUS_PROD VARCHAR\n" +
+                ");";
+
+        // Crie a tabela TB_METAS_FINANCEIRAS
+        String createTableMetas = "CREATE TABLE IF NOT EXISTS TB_METAS_FINANCEIRAS (\n" +
+                "    ID_META INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    NOME_META VARCHAR(60) NOT NULL,\n" +
+                "    SALDO_EMPRESA_USUARIO NUMERIC DEFAULT 0,\n" +
+                "    VALOR_META DECIMAL(6,2),\n" +
+                "    VALOR_META_ATUAL DECIMAL(6,2)\n" +  // Adiciona a nova coluna
+                ");";
+
+
+        // Crie a tabela TB_GASTOS_GANHOS
+        String createTableGastosGanhos = "CREATE TABLE IF NOT EXISTS TB_GASTOS_GANHOS (\n" +
+                "    GASTO NUMERIC(4,2),\n" +
+                "    GANHO NUMERIC(4,2),\n" +
+                "    LUCRO NUMERIC(4,2)\n" +
+                ");";
+
+        // Crie a tabela TB_PEDIDO_COMPRA
+        String createTablePedidoCompra = "CREATE TABLE IF NOT EXISTS TB_PEDIDO_COMPRA (\n" +
+                "    ID_PED_COMPRA INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    DTA_PED_COMPRA DATE,\n" +
+                "    VALOR_PED_COMPRA DECIMAL(6,2),\n" +
+                "    ID_CLIENTE INTEGER DEFAULT 0,\n" +
+                "    STATUS_PED_COMPRA VARCHAR(60)\n" +
+                ");";
+
+
+        // Execute as queries para criar as tabelas
+        sqLiteDatabase.execSQL(createTableUsuario);
+        sqLiteDatabase.execSQL(createTableEmpresa);
+        sqLiteDatabase.execSQL(createTableCliente);
+        sqLiteDatabase.execSQL(createTableProduto);
+        sqLiteDatabase.execSQL(createTableMetas);  // Inclui a nova tabela TB_METAS_FINANCEIRAS
+        sqLiteDatabase.execSQL(createTableGastosGanhos);
+        sqLiteDatabase.execSQL(createTablePedidoCompra);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    public void atualizarValorMetaAtual(int metaId, double valorInicial) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("VALOR_META_ATUAL", valorInicial);
+        String whereClause = "ID_META = ?";
+        String[] whereArgs = {String.valueOf(metaId)};
+        db.update("TB_METAS_FINANCEIRAS", values, whereClause, whereArgs);
+        db.close();
+    }
+
 }
