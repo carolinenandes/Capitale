@@ -3,15 +3,19 @@ package com.example.tcc20;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.Metas.MetasFragment;
 import com.example.NoticiasViews.NewsFragment;
 import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.Empresa;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -77,5 +81,32 @@ public class HomeActivity extends AppCompatActivity {
                         .commit();
             }
         });
+    }
+
+    public void carregarDadosDoBanco() {
+        try {
+            banco.openDB();
+
+            String sql = "SELECT * FROM TB_EMPRESA";
+            Cursor cursor = banco.db.rawQuery(sql, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getInt(cursor.getColumnIndex("id_empresa"));
+                    String nome = cursor.getString(cursor.getColumnIndex("nome_empresa")1);
+                    String saldo = cursor.getString(cursor.getColumnIndex("saldo_empresa"));
+
+                    Empresa empresa = new Empresa(id, nome, saldo);
+                    txtHeaderEmpresa.setText(nome);
+                } while (cursor.moveToNext());
+
+                cursor.close();
+            }
+
+            banco.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

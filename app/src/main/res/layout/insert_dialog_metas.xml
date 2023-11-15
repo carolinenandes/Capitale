@@ -12,6 +12,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:ems="10"
+        style="@style/hintText"
         android:hint="@string/hintNomeMeta"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -25,19 +26,21 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="36dp"
         android:ems="10"
+        style="@style/hintText"
         android:hint="@string/hintValorMeta"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtNomeMeta" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnAddMetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
         android:text="@string/btnAddMetas"
+        android:background="@drawable/btnadicionar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxValorMeta" />
 

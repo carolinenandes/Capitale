@@ -61,7 +61,7 @@
     <string name="btnAddMetas">Adicionar Metas</string>
     <string name="titleMetas">Metas Financeiras</string>
     <string name="hintNomeMeta">Nome da meta</string>
-    <string name="hintValorMeta">Valor da Meta</string>
+    <string name="hintValorMeta">Valor da meta</string>
     <string name="btnExcluirMeta">Excluir</string>
     <string name="btnEditMeta">Editar</string>
     <string name="txtValorInicial">R$: 0</string>

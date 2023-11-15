@@ -1,8 +1,7 @@
-package com.example.tcc20;
+package com.example.Metas;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.Metas;
+import com.example.tcc20.R;
 
 
 public class InsertDialogFragmentMetas extends DialogFragment {

@@ -1,4 +1,4 @@
-package com.example.tcc20;
+package com.example.Metas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,19 +7,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.Metas;
+import com.example.tcc20.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class metasFinanceirasActivity extends AppCompatActivity {
         banco = new BancoDeDados(this);
 
         metasList = new ArrayList<>(); // Inicialize a lista primeiro
-        adapter = new adapterMetas(this, metasList, banco, this);
+        adapter = new adapterMetas(this, metasList, banco, new MetasFragment());
 
 
         //Atualiza a página deslizando para baixo.

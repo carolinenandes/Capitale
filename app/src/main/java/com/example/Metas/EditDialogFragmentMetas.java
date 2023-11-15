@@ -1,4 +1,4 @@
-package com.example.tcc20;
+package com.example.Metas;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
+
+import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.Metas;
+import com.example.tcc20.R;
 
 public class EditDialogFragmentMetas extends DialogFragment {
 
@@ -32,6 +36,7 @@ public class EditDialogFragmentMetas extends DialogFragment {
         this.adapter = adapter;
         this.metasParaEditar = produto;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

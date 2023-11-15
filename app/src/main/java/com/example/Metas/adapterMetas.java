@@ -1,13 +1,10 @@
-package com.example.tcc20;
+package com.example.Metas;
 
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.text.InputType;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.Metas;
+import com.example.tcc20.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +31,16 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
     private SparseBooleanArray selectedItems; // Para armazenar os itens selecionados
     private adapterMetas adapter;
     private BancoDeDados banco;
-    private metasFinanceirasActivity metasActivity;
+    private MetasFragment metasFragment;
 
 
     // Método para configurar o adapteer
-    public adapterMetas(Context context, List<Metas> listMetas, BancoDeDados banco, metasFinanceirasActivity metasActivity) {
+    public adapterMetas(Context context, List<Metas> listMetas, BancoDeDados banco, MetasFragment metasFragment) {
         this.context = context;
         this.listMetas = listMetas;
         selectedItems = new SparseBooleanArray();
         this.banco = banco;
-        this.metasActivity = metasActivity;
+        this.metasFragment = metasFragment;
         this.adapter = this;
     }
 
@@ -113,7 +114,7 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
                         listMetas.clear();
 
                         // Recarrega os dados do banco de dados
-                        metasActivity.carregarDadosDoBanco();
+                        metasFragment.carregarDadosDoBanco();
 
                         // Calcule a nova porcentagem
                         double valorMeta = Double.parseDouble(metas.getValor_meta());
