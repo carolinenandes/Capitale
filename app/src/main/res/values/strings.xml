@@ -11,5 +11,35 @@
     <string name="txtDesc">Descrição:</string>
     <string name="txtQtd">Quantidade:</string>
     <string name="txtId">Id:</string>
+    <string name="hintNome">Nome do produto</string>
+    <string name="hintQtd">Quantidade</string>
+    <string name="hintValorVenda">Valor de venda</string>
+    <string name="hintValorCusto">Custo de produção</string>
+    <string name="hintDesc">Descrição</string>
+    <string name="hintStatusCliente">Status</string>
+    <string name="hintQtdVenda">Quantidade de vendas</string>
+
+    <string name="label_id">ID: %s</string>
+    <string name="label_nome">Nome: %s</string>
+    <string name="label_qtd">Quantidade: %s</string>
+    <string name="label_valor_venda">Valor de Venda: %s</string>
+    <string name="label_valor_custo">Valor de Custo: %s</string>
+    <string name="label_desc">Descrição: %s</string>
+    <string name="label_qtd_venda">Quantidade de Vendas: %s</string>
+    <string name="label_status">Status: %s</string>
+    <string name="btnEditProd">Editar</string>
+    <string name="btnEditarProd">Editar</string>
+    <string name="btnExcluir">Excluir</string>
+    <string name="txtFone">Telefone:</string>
+    <string name="btnAddCliente">Adicionar Cliente</string>
+    <string name="btnVerCliente">Ver</string>
+    <string name="titleCliente">Clientes</string>
+    <string name="hintFoneCliente">Telefone</string>
+    <string name="hintEmailCliente">Email</string>
+    <string name="hintNomeCliente">Nome do Cliente</string>
+    <string name="btnInsertCliente">Adicionar Cliente</string>
+    <string name="btnEditCliente">Editar</string>
+    <string name="btnAdicionarPedido">Pedido</string>
+    <string name="f">F</string>
 
 </resources>

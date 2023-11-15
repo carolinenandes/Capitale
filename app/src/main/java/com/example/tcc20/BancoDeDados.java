@@ -128,7 +128,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
         verificarECopiarDB();
 
         try {
-            db = SQLiteDatabase.openDatabase(DB_Path + DB_Name, null, SQLiteDatabase.OPEN_READWRITE);
+            db = getWritableDatabase();
         } catch (SQLiteException e) {
             e.printStackTrace();
         }
@@ -138,6 +138,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
 
     }
 
