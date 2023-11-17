@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sunayanpradhan.androidcharts.R;
+
 public class SlideScreen extends AppCompatActivity {
 
     ViewPager mSlideViewPager;

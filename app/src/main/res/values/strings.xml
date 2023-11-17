@@ -39,6 +39,13 @@
     <string name="txtDesc">Descrição:</string>
     <string name="txtQtd">Quantidade:</string>
     <string name="txtId">Id:</string>
+    <string name="header">header</string>
+    <string name="gr_fico_em_pizza">Gráfico em pizza</string>
+    <string name="grafico_colunas">Grafico colunas</string>
+    <string name="btnAdicionaVenda" />
+    <string name="btnExcluirPedido">Excluir</string>
+    <string name="btnConfirmaPgto">Confirma Pagamento</string>
+    <string name="txtNomeCliente">Cliente:</string>
     <string name="hintNomeProd">Nome do produto</string>
     <string name="hintQtd">Quantidade</string>
     <string name="hintValorVenda">Valor de venda</string>
