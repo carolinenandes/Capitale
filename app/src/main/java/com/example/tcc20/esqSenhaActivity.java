@@ -43,9 +43,12 @@ public class esqSenhaActivity extends AppCompatActivity {
         });
     }
 
-    private void esqueceuSenha(){
+    private void esqueceuSenha() {
         String etxtEmail = emailUsuario.getText().toString();
         String etxtSenhaNova = novaSenhaUsuario.getText().toString();
+
+        // Flag para acompanhar se a troca de senha remota foi bem-sucedida
+        final boolean[] trocaSenhaRemotaSucesso = {false};
 
         Ion.with(this)
                 .load(host + "esqSenha.php")
@@ -55,21 +58,48 @@ public class esqSenhaActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<String>() {
                     @Override
                     public void onCompleted(Exception e, String result) {
+                        // Verifica o resultado da requisição
                         if (e != null) {
                             Log.e("Erro", e.toString());
-                            // Se a atualização remota falhar, tente localmente
-                            atualizarSenhaLocalmente(etxtEmail, etxtSenhaNova);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Obtém o resultado da requisição
+                                    Toast.makeText(esqSenhaActivity.this, "Erro na conexão. Verifique sua conexão com a internet.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
-                            if (result.trim().equalsIgnoreCase("Senha atualizada no servidor")) {
-                                // Se o servidor indicar que a senha foi atualizada com sucesso
-                                Toast.makeText(esqSenhaActivity.this, "Senha atualizada remotamente", Toast.LENGTH_SHORT).show();
-                            } else {
-                                // Se o servidor indicar um erro ou a senha não foi atualizada
-                                Toast.makeText(esqSenhaActivity.this, "Erro ao atualizar senha remotamente", Toast.LENGTH_SHORT).show();
+                            // Utiliza runOnUiThread para exibir o Toast na thread principal
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Obtém o resultado da requisição
+                                    Toast.makeText(esqSenhaActivity.this, result, Toast.LENGTH_SHORT).show();
+
+                                    // Adiciona o log do resultado
+                                    Log.d("Resultado", result);
+                                }
+                            });
+
+                            // Verifica se o login remoto foi bem-sucedido
+                            if (result.equals("Senha atualizada com sucesso")) {
+                                trocaSenhaRemotaSucesso[0] = true;
+
+                                // Navega para a MainActivity após o login remoto
+                                Intent intent = new Intent(esqSenhaActivity.this, Login.class);
+                                startActivity(intent);
+                                finish(); // Opcional: fecha a atividade atual para evitar que o usuário retorne ao login
                             }
                         }
+
+                        // Realiza a troca de senha localmente apenas se a troca remota não for bem-sucedida
+                        if (!trocaSenhaRemotaSucesso[0]) {
+                            atualizarSenhaLocalmente(etxtEmail, etxtSenhaNova);
+                        }
                     }
-                });
+        });
+
+
     }
 
     private void atualizarSenhaLocalmente(String email, String novaSenha) {

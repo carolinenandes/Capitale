@@ -53,11 +53,11 @@ public class Login extends AppCompatActivity {
     }
 
     private void verificarCredenciais() {
-        // Obtenha o email e a senha inseridos pelo usuário
-       String  email = emailUsuario.getText().toString();
-       String  senha = senhaUsuario.getText().toString();
+        // Obtém o email e a senha inseridos pelo usuário
+        String email = emailUsuario.getText().toString();
+        String senha = senhaUsuario.getText().toString();
 
-        // Verificar se os campos foram preenchidos
+        // Verifica se os campos foram preenchidos
         if (email.isEmpty() || senha.isEmpty()) {
             Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
@@ -81,6 +81,7 @@ public class Login extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    // Obtém o resultado da requisição
                                     Toast.makeText(Login.this, "Erro na conexão. Verifique sua conexão com a internet.", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -89,6 +90,7 @@ public class Login extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    // Obtém o resultado da requisição
                                     Toast.makeText(Login.this, result, Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -96,39 +98,26 @@ public class Login extends AppCompatActivity {
                             // Verifica se o login remoto foi bem-sucedido
                             if (result.equals("Login bem-sucedido")) {
                                 loginRemotoSucesso[0] = true;
-                            }
 
-                            // Verifica se o login remoto foi bem-sucedido
-                            if (loginRemotoSucesso[0]) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(Login.this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                                // Se não, realiza o login localmente
-                                loginLocalmente();
+                                // Navega para a MainActivity após o login remoto
+                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 
-                        // Verifica se o login remoto foi bem-sucedido
-                        if (loginRemotoSucesso[0]) {
-                            // Se sim, navega para a MainActivity
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
-                            finish(); // opcional, fecha a atividade atual para evitar que o usuário retorne ao login
+                        // Realiza o login localmente apenas se o login remoto não for bem-sucedido
+                        if (!loginRemotoSucesso[0]) {
+                            loginLocalmente();
                         }
                     }
                 });
     }
-
-    //Método para logar localmente
-    private void loginLocalmente()
-    {
-        // Obtenha o email e a senha inseridos pelo usuário
-        String  email = emailUsuario.getText().toString();
-        String  senha = senhaUsuario.getText().toString();
+    // Método para logar localmente
+    private void loginLocalmente() {
+        // Obtém o email e a senha inseridos pelo usuário
+        String email = emailUsuario.getText().toString();
+        String senha = senhaUsuario.getText().toString();
 
         // Inserir no banco de dados local (SQLite)
         SQLiteDatabase db = banco.getWritableDatabase();
@@ -139,8 +128,15 @@ public class Login extends AppCompatActivity {
         long newRowId = db.insert("TB_USUARIO", null, values);
 
         if (newRowId != -1) {
+            // Verifica o resultado da operação de inserção local
             Toast.makeText(this, "Sucesso no login", Toast.LENGTH_SHORT).show();
+
+            // Navega para a MainActivity após o login local
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         } else {
+            // Verifica o resultado da operação de inserção local
             Toast.makeText(this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
         }
         db.close();

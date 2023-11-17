@@ -110,26 +110,31 @@ public class CadastroActivity extends AppCompatActivity {
                 });
     }
 
-    //Método para cadastrar localmente
+    // Método para cadastrar localmente
     private void cadastrarLocalmente() {
         String nomeUsuario = nome.getText().toString();
         String emailUsuario = email.getText().toString();
         String senhaUsuario = senha.getText().toString();
 
-        // Inserir no banco de dados local (SQLite)
-        SQLiteDatabase db = banco.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("NOME_USUARIO", nomeUsuario);
-        values.put("EMAIL_USUARIO", emailUsuario);
-        values.put("SENHA_USUARIO", senhaUsuario);
+        try {
+            // Insere no banco de dados local (SQLite)
+            SQLiteDatabase db = banco.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("NOME_USUARIO", nomeUsuario);
+            values.put("EMAIL_USUARIO", emailUsuario);
+            values.put("SENHA_USUARIO", senhaUsuario);
 
-        long newRowId = db.insert("TB_USUARIO", null, values);
+            long newRowId = db.insertOrThrow("TB_USUARIO", null, values);
 
-        if (newRowId != -1) {
-            Toast.makeText(this, "Cadastrado localmente com sucesso", Toast.LENGTH_SHORT).show();
-        } else {
+            if (newRowId != -1) {
+                Toast.makeText(this, "Cadastrado localmente com sucesso", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao cadastrar localmente", Toast.LENGTH_SHORT).show();
+            }
+            db.close();
+        } catch (Exception e) {
+            Log.e("Erro SQLite", e.toString());
             Toast.makeText(this, "Erro ao cadastrar localmente", Toast.LENGTH_SHORT).show();
         }
-        db.close();
     }
 }
