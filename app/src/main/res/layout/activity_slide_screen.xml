@@ -27,6 +27,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
+        android:textColor="@color/white"
         android:id="@+id/btnproximo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="32dp"
+        android:textColor="@color/white"
         android:background="#00000000"
         android:text="Voltar"
         android:textSize="20dp"
