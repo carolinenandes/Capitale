@@ -1,10 +1,8 @@
 package com.example.tcc20;
 
-import android.database.Cursor;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -13,10 +11,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -27,48 +23,30 @@ import com.example.ObjectClasses.adapterProd;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProdutosFragment extends Fragment {
-
-    HomeActivity context = (HomeActivity) requireContext();
-
+public class ProdActivity extends AppCompatActivity {
     private RecyclerView recyclerviewProd;
     private ArrayList<Produto> productList;
     private adapterProd adapter;
-    private BancoDeDados banco = context.banco;
+    public BancoDeDados banco;
+    private ItemTouchHelper itemTouchHelper;
 
-    public ProdutosFragment() {
-        // Required empty public constructor
-    }
-
-    public static ProdutosFragment newInstance(String param1, String param2) {
-        ProdutosFragment fragment = new ProdutosFragment();
-
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_prod);
 
-    }
+        Button btnEditarProd = findViewById(R.id.btnEditarProd);
+        Button btnAddProd = findViewById(R.id.btnAddProd);
+        recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_produtos, container, false);
-
-
-        Button btnEditarProd = view.findViewById(R.id.btnEditarProd);
-        Button btnAddProd = view.findViewById(R.id.btnAddProd);
-        recyclerviewProd = view.findViewById(R.id.recyclerviewProdutos);
-
-        banco = new BancoDeDados(context);
+        banco = new BancoDeDados(this);
         productList = new ArrayList<Produto>(); // Inicialize a lista primeiro
-        adapter = new adapterProd(context, productList, banco);
+        adapter = new adapterProd(this, productList, banco);
 
 
         //Atualiza a página deslizando para baixo.
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh_Layout);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -90,11 +68,11 @@ public class ProdutosFragment extends Fragment {
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
                     Produto produtoSelecionado = productList.get(selectedItemPosition);
                     EditDialogFragmentProd editDialog = new EditDialogFragmentProd(banco, adapter, produtoSelecionado);
-                    editDialog.show(getParentFragmentManager(), "edit_dialog");
+                    editDialog.show(getSupportFragmentManager(), "edit_dialog");
                 } else {
                     // Informe ao usuário que nenhum item foi selecionado
                     Log.d("ProdActivity", "Nenhum item selecionado para edição");
-                    Toast.makeText(context, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProdActivity.this, "Selecione um produto para editar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -103,11 +81,11 @@ public class ProdutosFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 InsertDialogFragmentProd dialog = new InsertDialogFragmentProd(banco, adapter);
-                dialog.show(getParentFragmentManager(), "insert_dialog");
+                dialog.show(getSupportFragmentManager(), "insert_dialog");
             }
         });
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerviewProd.setLayoutManager(layoutManager);
         recyclerviewProd.setHasFixedSize(true);
         recyclerviewProd.setAdapter(adapter);
@@ -144,7 +122,6 @@ public class ProdutosFragment extends Fragment {
                 // Não precisa implementar nada aqui, mas é necessário fornecer uma implementação.
             }
         });
-        return view;
     }
 
     // Método para carregar os dados do banco de dados e preencher a lista

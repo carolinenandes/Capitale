@@ -39,7 +39,7 @@
     <string name="txtDesc">Descrição:</string>
     <string name="txtQtd">Quantidade:</string>
     <string name="txtId">Id:</string>
-    <string name="hintNome">Nome do metas</string>
+    <string name="hintNomeProd">Nome do produto</string>
     <string name="hintQtd">Quantidade</string>
     <string name="hintValorVenda">Valor de venda</string>
     <string name="hintValorCusto">Custo de produção</string>
