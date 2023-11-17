@@ -12,27 +12,19 @@
     android:layout_height="match_parent"
     tools:context=".financas">
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="42dp"
-        android:src="@drawable/btnvoltar" />
-
     <TextView
+
+        style="@style/bold60px"
         android:layout_width="161dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="93dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="106dp"
+        android:fontFamily="@font/inter_bold"
         android:text="Finanças"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+        android:textColor="@color/black" />
 
 
     <TextView
@@ -51,7 +43,6 @@
         android:id="@+id/uultsem"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:src="@drawable/uultsemxmeses"
            android:layout_marginTop="170dp"/>
 
     <LinearLayout
@@ -91,6 +82,12 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
