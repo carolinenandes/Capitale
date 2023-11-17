@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:layout_margin="15dp"
     >
     <LinearLayout
@@ -27,14 +28,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:textStyle="bold"
+                android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Esse é o título"
-                android:textSize="16dp"
-                android:textColor="@color/black"
                 android:fontFamily="@font/raleway_medium"
-                android:id="@+id/titleTextView"/>
+                android:text="Esse é o título"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:textColor="@color/black"

@@ -50,7 +50,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="270dp"
         android:layout_marginTop="620dp"
-        android:background="@drawable/adicionarProd"
+        android:background="@drawable/adicionar_prod"
         android:text="@string/btnAddProd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

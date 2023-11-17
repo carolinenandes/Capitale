@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <EditText
@@ -113,7 +114,8 @@
         android:background="@drawable/btneditar"
         android:text="@string/btnEditProd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btnExcluir"
@@ -124,6 +126,7 @@
         android:background="@drawable/btnExcluir"
         android:text="@string/btnExcluir"
         app:layout_constraintStart_toEndOf="@+id/btnEditProd"
-        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.Metas.MetasFragment">
 
@@ -41,7 +42,8 @@
         android:layout_height="100dp"
         android:layout_marginStart="270dp"
         android:layout_marginTop="620dp"
-        android:background="@drawable/adicionarmeta" />
+        android:background="@drawable/adicionarmeta"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btnEditMetas"
@@ -49,10 +51,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="664dp"
-        android:text="@string/btnEditarProd"
         android:background="@drawable/btneditar"
+        android:text="@string/btnEditarProd"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </FrameLayout>
