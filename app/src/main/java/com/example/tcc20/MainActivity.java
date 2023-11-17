@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.Entrar.CadastroActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     Button button1, button2;

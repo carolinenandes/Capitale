@@ -34,7 +34,7 @@
 22-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:13:9-51
 23        <activity
 23-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:15:9-22:20
-24            android:name="com.example.tcc20.RadarChartActivity"
+24            android:name="com.example.Grafico.RadarChartActivity"
 24-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:16:13-47
 25            android:exported="false" >
 25-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:17:13-37
@@ -47,7 +47,7 @@
 29        </activity>
 30        <activity
 30-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:23:9-30:20
-31            android:name="com.example.tcc20.PieChartActivity"
+31            android:name="com.example.Grafico.PieChartActivity"
 31-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:24:13-45
 32            android:exported="false" >
 32-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:25:13-37
@@ -60,7 +60,7 @@
 36        </activity>
 37        <activity
 37-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:31:9-40:20
-38            android:name="com.example.tcc20.BarChartActivity"
+38            android:name="com.example.Grafico.BarChartActivity"
 38-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:32:13-45
 39            android:exported="false" >
 39-->D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:33:13-37

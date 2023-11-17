@@ -100,7 +100,7 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\rosas\.gradle\cach
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:13:9-51
 	android:dataExtractionRules
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:7:9-65
-activity#com.example.tcc20.RadarChartActivity
+activity#com.example.Grafico.RadarChartActivity
 ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:15:9-22:20
 	android:exported
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:17:13-37
@@ -112,13 +112,13 @@ ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:19:13-21
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:21:17-33
 	android:name
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:20:17-52
-activity#com.example.tcc20.PieChartActivity
+activity#com.example.Grafico.PieChartActivity
 ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:23:9-30:20
 	android:exported
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:25:13-37
 	android:name
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:24:13-45
-activity#com.example.tcc20.BarChartActivity
+activity#com.example.Grafico.BarChartActivity
 ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:31:9-40:20
 	android:exported
 		ADDED from D:\projeto-grafico\graficos\app\src\main\AndroidManifest.xml:33:13-37

@@ -7,12 +7,14 @@
     tools:context=".esqSenhaActivity">
 
     <EditText
-        android:id="@+id/etxtEmail"
+        android:id="@+id/etxtEmail_esq_senha"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
         android:layout_marginTop="88dp"
         android:ems="10"
+        style="@style/hintText"
         android:hint="Email"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -20,7 +22,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etxtNovaSenha"
+        android:id="@+id/etxtNovaSenha_esq_senha"
+        style="@style/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -30,15 +33,16 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtEmail_esq_senha" />
 
+    <!-- todo: criar drawable para "Alterar Senha" -->
     <Button
-        android:id="@+id/btnNovaSenha"
+        android:id="@+id/btnEsq_Senha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="153dp"
         android:layout_marginTop="92dp"
-        android:text="Button"
+        android:text="Alterar senha"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtNovaSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtNovaSenha_esq_senha" />
 </androidx.constraintlayout.widget.ConstraintLayout>

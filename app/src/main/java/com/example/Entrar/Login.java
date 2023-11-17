@@ -1,4 +1,4 @@
-package com.example.tcc20;
+package com.example.Entrar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tcc20.BancoDeDados;
+import com.example.tcc20.MainActivity;
+import com.example.tcc20.R;
+import com.example.tcc20.esqSenhaActivity;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 

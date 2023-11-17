@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sunayanpradhan.androidcharts.R;
+import com.example.Entrar.Login;
 
 public class SlideScreen extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class SlideScreen extends AppCompatActivity {
                     mSlideViewPager.setCurrentItem(getitem(1),true);
                 } else {
 //                    ADICIONAR O INTENT AQUI MEN
-                    Intent i = new Intent (SlideScreen.this,HomeActivity.class);
+                    Intent i = new Intent (SlideScreen.this, Login.class);
                     startActivity(i);
                     finish();
                 }
@@ -63,10 +63,7 @@ public class SlideScreen extends AppCompatActivity {
         btnpular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-                Intent i = new Intent (SlideScreen.this,HomeActivity.class);
+                Intent i = new Intent (SlideScreen.this,Login.class);
                 startActivity(i);
                 finish();
             }

@@ -1,14 +1,14 @@
-package com.example.tcc20
+package com.example.Grafico
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.tcc20.R
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.sunayanpradhan.androidcharts.R
 
 class RadarChartActivity : AppCompatActivity() {
 

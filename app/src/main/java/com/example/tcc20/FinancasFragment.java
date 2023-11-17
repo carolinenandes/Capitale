@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.Grafico.BarChartActivity;
+import com.example.Grafico.PieChartActivity;
 import com.example.ObjectClasses.BancoDeDados;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class FinancasFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context,PieChartActivity.class);
+                Intent intent = new Intent(context, PieChartActivity.class);
                 startActivity(intent);
             }
         });
@@ -72,7 +74,7 @@ public class FinancasFragment extends Fragment {
         go_bar_chart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,BarChartActivity.class);
+                Intent intent = new Intent(context, BarChartActivity.class);
                 startActivity(intent);
             }
         });

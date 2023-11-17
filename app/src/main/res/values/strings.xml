@@ -10,7 +10,7 @@
 	<string name="nome_string">Nome</string>
 	<string name="valor_saldo_string">R$ Saldo</string>
 	<string name="title_saldo_atual_string">Saldo atual:</string>
-	<string name="title_mainfunctions_string">O que deseja fazer agora?</string>
+	<string name="title_mainfunctions_string">O que deseja fazer agora\?</string>
 	<string name="noticias_string">Notcias</string>
 
 	<string name="newNoticias"> Como o marco legal das garantias pode beneficiar os pequenos negócios</string>

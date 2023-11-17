@@ -1,8 +1,11 @@
-package com.example.tcc20
+package com.example.Grafico
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.tcc20.BancoDeDados
+import com.example.tcc20.Gasto_Lucros
+import com.example.tcc20.R
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.LegendEntry
@@ -10,8 +13,6 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.sunayanpradhan.androidcharts.R
 
 class BarChartActivity : AppCompatActivity() {
 

@@ -21,21 +21,21 @@
         android:testOnly="true"
         android:theme="@style/Theme.AndroidCharts" >
         <activity
-            android:name="com.example.tcc20.RadarChartActivity"
+            android:name="com.example.Grafico.RadarChartActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.tcc20.PieChartActivity"
+            android:name="com.example.Grafico.PieChartActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.tcc20.BarChartActivity"
+            android:name="com.example.Grafico.BarChartActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
