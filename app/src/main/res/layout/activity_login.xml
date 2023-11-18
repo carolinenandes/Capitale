@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/custom_card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8177FE"
@@ -41,12 +42,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        style="@style/custom_card_view_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline2" >
+        app:layout_constraintTop_toTopOf="@id/guideline2">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,26 +56,26 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:textColor="@color/black"
-                android:fontFamily="@font/raleway_medium"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="160dp"
                 android:layout_marginTop="36dp"
+                android:fontFamily="@font/raleway_medium"
                 android:text="LOGIN"
+                android:textColor="@color/black"
                 android:textSize="30dp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:src="@drawable/logar_btnn"
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="112dp"
                 android:layout_marginEnd="16dp"
+                android:src="@drawable/logar_btnn"
                 android:text="Logar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +126,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
