@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.tcc20'
+    namespace 'com.example'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.tcc20"
+        applicationId "com.example"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -50,7 +50,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     implementation 'com.koushikdutta.ion:ion:3.0.10'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
