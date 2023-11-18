@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tcc20.BancoDeDados;
 import com.example.tcc20.R;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;

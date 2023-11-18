@@ -18,7 +18,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sunayanpradhan.androidcharts.R;
+import com.example.ObjectClasses.BancoDeDados;
 
 import java.util.ArrayList;
 import java.util.List;

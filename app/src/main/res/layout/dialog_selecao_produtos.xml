@@ -7,22 +7,26 @@
 
     <!--todo: adicionar titulo "Selecionar produtos"-->
 
+    <!-- todo: drawable para Confirmar-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProdutos"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="308dp"
+        android:layout_height="679dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnConfirmar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="644dp"
-        android:text="Button"
+        android:background="@drawable/btn_confirmar"
         app:layout_constraintStart_toStartOf="@+id/recyclerViewProdutos"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

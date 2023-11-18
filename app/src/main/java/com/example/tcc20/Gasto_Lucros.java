@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 import android.database.Cursor;
 
+import com.example.ObjectClasses.BancoDeDados;
+
 import java.util.ArrayList;
 import java.util.List;
 

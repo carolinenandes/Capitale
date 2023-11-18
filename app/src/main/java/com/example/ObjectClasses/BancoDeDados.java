@@ -3,6 +3,7 @@ package com.example.ObjectClasses;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -224,6 +225,12 @@ public class BancoDeDados extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+    // Método para executar queries SQL
+    public void executarQuery(String query, String[] args) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query, args);
+    }
+
 
     public void atualizarValorMetaAtual(int metaId, double valorInicial) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -235,4 +242,8 @@ public class BancoDeDados extends SQLiteOpenHelper {
         db.close();
     }
 
+    public Cursor rawQuery(String sql, String[] selectionArgs) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(sql, selectionArgs);
+    }
 }

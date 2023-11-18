@@ -52,7 +52,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-
+    implementation 'com.koushikdutta.ion:ion:3.0.10'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

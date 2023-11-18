@@ -10,10 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.tcc20.BancoDeDados;
-import com.example.tcc20.MainActivity;
+import com.example.ObjectClasses.BancoDeDados;
 import com.example.tcc20.R;
 import com.example.tcc20.esqSenhaActivity;
 import com.koushikdutta.async.future.FutureCallback;
@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
 
     public BancoDeDados banco;
     EditText emailUsuario, senhaUsuario;
-    Button btnLogin, btnEsqSenha;
+    ImageButton btnLogin, btnEsqSenha;
 
     public String host = "https://capit4le.000webhostapp.com/projeto/";
 

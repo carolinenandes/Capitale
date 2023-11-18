@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.Entrar.Login;
+import com.example.ObjectClasses.BancoDeDados;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
@@ -29,10 +30,10 @@ public class esqSenhaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_esq_senha);
 
-        btnNovaSenha = findViewById(R.id.btnNovaSenha);
+        btnNovaSenha = findViewById(R.id.btnEsq_Senha);
 
-        emailUsuario = findViewById(R.id.etxtEmail);
-        novaSenhaUsuario = findViewById(R.id.etxtNovaSenha);
+        emailUsuario = findViewById(R.id.etxtEmail_esq_senha);
+        novaSenhaUsuario = findViewById(R.id.etxtNovaSenha_esq_senha);
 
         bancoDeDados = new BancoDeDados(this);
 

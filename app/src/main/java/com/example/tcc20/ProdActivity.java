@@ -1,3 +1,4 @@
+/*
 package com.example.tcc20;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,7 @@ public class ProdActivity extends AppCompatActivity {
         recyclerviewProd = findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(this);
-        productList = new ArrayList<Produto>(); // Inicialize a lista primeiro
+        productList = new ArrayList<Produto>();
         adapter = new adapterProd(this, productList, banco);
 
 
@@ -158,3 +159,4 @@ public class ProdActivity extends AppCompatActivity {
         }
     }
 }
+*/
