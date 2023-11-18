@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.Entrar.Login;
@@ -20,7 +21,7 @@ import com.koushikdutta.ion.Ion;
 public class esqSenhaActivity extends AppCompatActivity {
 
     BancoDeDados bancoDeDados;
-    Button btnNovaSenha;
+    ImageView btnNovaSenha;
     EditText emailUsuario, novaSenhaUsuario;
 
     public String host = "https://capit4le.000webhostapp.com/projeto/";
