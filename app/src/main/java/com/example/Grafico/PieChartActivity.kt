@@ -3,7 +3,6 @@ package com.example.Grafico
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tcc20.BancoDeDados
 import com.example.tcc20.Gasto_Lucros
 import com.example.tcc20.R
 import com.github.mikephil.charting.charts.PieChart

@@ -21,7 +21,7 @@
 		<item name="android:textColor">@color/text_semiblack</item>
 		<item name="android:textSize">45px</item>
 	</style>
-	<style name="noticiaLike" parent="TextAppearance.AppCompat">
+	<style name="semibold45px" parent="TextAppearance.AppCompat">
 		<item name="android:fontFamily">@font/inter_semibold</item>
 		<item name="android:textColor">@color/noticias_color</item>
 		<item name="android:textSize">45px</item>

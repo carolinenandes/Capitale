@@ -26,7 +26,7 @@ public class FinancasFragment extends Fragment {
 
     Button go_bar_chart, go_pie_chart, btnAdicionaVenda, btnVerPedidos;
     Gasto_Lucros gasto_lucros;
-    com.example.tcc20.BancoDeDados db;
+    BancoDeDados db;
     adapterPedidosSelecao adapter;
     List<produtoSelecao> listProdutos = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class FinancasFragment extends Fragment {
         btnAdicionaVenda = view.findViewById(R.id.btnAdicionaVenda);
         btnVerPedidos = view.findViewById(R.id.btnVerPedidos);
 
-        db = new com.example.tcc20.BancoDeDados(context);
+        db = new BancoDeDados(context);
 
         gasto_lucros = new Gasto_Lucros(db);
 
