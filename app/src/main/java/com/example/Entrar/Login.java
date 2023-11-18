@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.ObjectClasses.BancoDeDados;
+import com.example.tcc20.HomeActivity;
 import com.example.tcc20.R;
 import com.example.tcc20.esqSenhaActivity;
 import com.koushikdutta.async.future.FutureCallback;
@@ -104,7 +105,7 @@ public class Login extends AppCompatActivity {
                                 loginRemotoSucesso[0] = true;
 
                                 // Navega para a MainActivity após o login remoto
-                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                Intent intent = new Intent(Login.this, HomeActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -136,7 +137,7 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Sucesso no login", Toast.LENGTH_SHORT).show();
 
             // Navega para a MainActivity após o login local
-            Intent intent = new Intent(Login.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, HomeActivity.class);
             startActivity(intent);
             finish();
         } else {

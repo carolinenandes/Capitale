@@ -10,26 +10,19 @@
         android:id="@+id/titleProd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="40dp"
-        style="@style/bold60px"
+        android:layout_marginTop="32dp"
         android:text="@string/titleCliente"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="84dp" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
-        android:layout_width="311dp"
-        android:layout_height="660dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="140dp"
+        android:layout_width="wrap_content"
+        android:layout_height="789dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleProd">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewCliente"
@@ -44,25 +37,22 @@
             app:layout_constraintVertical_bias="0.006" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <ImageButton
+    <Button
         android:id="@+id/btnInsertCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="250dp"
         android:layout_marginTop="770dp"
-        android:background="@drawable/btnadicionar"
         android:text="@string/btnAddCliente"
         app:cornerRadius="100dp"
-        app:layout_constraintStart_toEndOf="@id/btnVerCliente"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:background="@drawable/btnvermais"
+    <Button
         android:id="@+id/btnVerCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="770dp"
         android:text="@string/btnVerCliente"
         app:layout_constraintStart_toStartOf="parent"

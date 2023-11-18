@@ -1,19 +1,16 @@
 package com.example.tcc20;
 
-import android.database.Cursor;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.database.Cursor;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -22,49 +19,27 @@ import com.example.ObjectClasses.BancoDeDados;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ClientesFragment extends Fragment {
-
-    HomeActivity context = (HomeActivity) requireContext();
-
-    private BancoDeDados banco = context.banco;
-
+public class ClienteActivity extends AppCompatActivity {
     private RecyclerView recyclerviewCliente;
     private ArrayList<Cliente> clienteList;
     private adapterCliente adapter;
     public BancoDeDados bancoDeDados;
 //    private ItemTouchHelper itemTouchHelper;
 
-    public ClientesFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static ClientesFragment newInstance(String param1, String param2) {
-        ClientesFragment fragment = new ClientesFragment();
-
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cliente);
 
-    }
+        Button btnVerCliente = findViewById(R.id.btnVerCliente);
+        Button btnAddCliente = findViewById(R.id.btnInsertCliente);
+        recyclerviewCliente = findViewById(R.id.recyclerviewCliente);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_clientes, container, false);
-
-        Button btnVerCliente = view.findViewById(R.id.btnVerCliente);
-        Button btnAddCliente = view.findViewById(R.id.btnInsertCliente);
-        recyclerviewCliente = view.findViewById(R.id.recyclerviewCliente);
-
-        bancoDeDados = new BancoDeDados(context);
+        bancoDeDados = new BancoDeDados(this);
         clienteList = new ArrayList<>();
-        adapter = new adapterCliente(context,clienteList);
+        adapter = new adapterCliente(this, clienteList);
 
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -84,10 +59,10 @@ public class ClientesFragment extends Fragment {
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
                     Cliente clienteSelecionado = clienteList.get(selectedItemPosition);
                     EditDialogFragmentCliente editDialog = new EditDialogFragmentCliente(bancoDeDados, adapter, clienteSelecionado);
-                    editDialog.show(getParentFragmentManager(), "edit_dialog");
+                    editDialog.show(getSupportFragmentManager(), "edit_dialog");
                 } else {
-                    Log.d("HomeActivity", "Nenhum item selecionado para edição");
-                    Toast.makeText(context, "Selecione um cliente para editar", Toast.LENGTH_SHORT).show();
+                    Log.d("ClienteActivity", "Nenhum item selecionado para edição");
+                    Toast.makeText(ClienteActivity.this, "Selecione um cliente para editar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -97,11 +72,11 @@ public class ClientesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 InsertDialogFragmentCliente dialog = new InsertDialogFragmentCliente(bancoDeDados, adapter);
-                dialog.show(getParentFragmentManager(), "insert_dialog");
+                dialog.show(getSupportFragmentManager(), "insert_dialog");
             }
         });
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerviewCliente.setLayoutManager(layoutManager);
         recyclerviewCliente.setHasFixedSize(true);
         recyclerviewCliente.setAdapter(adapter);
@@ -131,9 +106,6 @@ public class ClientesFragment extends Fragment {
             public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
             }
         });
-
-        // Inflate the layout for this fragment
-        return view;
     }
 
     public void carregarDadosDoBanco() {
@@ -166,6 +138,4 @@ public class ClientesFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
-
 }
