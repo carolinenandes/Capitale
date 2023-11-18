@@ -4,45 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8177FE"
     tools:context=".esqSenhaActivity">
 
-    <EditText
-        android:id="@+id/etxtEmail_esq_senha"
+    <!-- todo: criar drawable para "Alterar Senha" -->
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="88dp"
-        android:ems="10"
-        style="@style/hintText"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".25" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/bold60px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/inter_semibold"
+        android:gravity="center"
+        android:text="Problemas para entrar?"
+        android:textColor="@color/white"
+        android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etxtNovaSenha_esq_senha"
-        style="@style/hintText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="49dp"
-        android:ems="10"
-        android:hint="Nova Senha"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
+    <ImageView
+        android:layout_width="162dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/capitale_pngg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtEmail_esq_senha" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <!-- todo: criar drawable para "Alterar Senha" -->
-    <Button
-        android:id="@+id/btnEsq_Senha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="153dp"
-        android:layout_marginTop="92dp"
-        android:text="Alterar senha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtNovaSenha_esq_senha" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="214dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/raleway_medium"
+                android:gravity="center"
+                android:text="Alterar senha"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etxtEmail_esq_senha"
+                style="@style/hintText"
+                android:layout_width="306dp"
+                android:layout_height="73dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="100dp"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btnEsq_Senha"
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/alterar_senha"
+                android:text="Alterar senha"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etxtNovaSenha_esq_senha" />
+
+            <EditText
+                android:id="@+id/etxtNovaSenha_esq_senha"
+                style="@style/hintText"
+                android:layout_width="306dp"
+                android:layout_height="73dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="56dp"
+                android:ems="10"
+                android:hint="Nova Senha"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etxtEmail_esq_senha" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
