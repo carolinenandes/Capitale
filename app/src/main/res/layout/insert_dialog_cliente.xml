@@ -38,7 +38,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="44dp"
         android:ems="10"
-        android:hint="@string/hintStatusCliente"
+        android:hint="Cliente"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
