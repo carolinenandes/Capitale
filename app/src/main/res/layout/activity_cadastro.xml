@@ -19,7 +19,7 @@
     <ImageView
         android:layout_width="157dp"
         android:layout_height="128dp"
-        android:layout_marginStart="132dp"
+        android:layout_marginStart="116dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/capitale_pngg"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +54,48 @@
             android:background="@color/white"
             android:layout_height="match_parent">
 
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginBottom="4dp"
+                android:text="Senha"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/raleway_medium"
+                app:layout_constraintBottom_toTopOf="@+id/lblSenha"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/lblEmail"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Nome"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/lblNome"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <ImageView
                 android:id="@+id/btnCadastrar"
                 android:layout_width="match_parent"
@@ -74,7 +116,7 @@
                 android:layout_width="306dp"
                 android:layout_height="73dp"
                 android:layout_marginStart="44dp"
-                android:layout_marginTop="128dp"
+                android:layout_marginTop="104dp"
                 android:ems="10"
                 android:hint="Nome"
                 android:inputType="textPersonName"
@@ -87,7 +129,7 @@
                 android:layout_width="306dp"
                 android:layout_height="73dp"
                 android:layout_marginStart="44dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="44dp"
                 android:ems="10"
                 android:hint="Senha"
                 android:inputType="textPersonName"
@@ -125,7 +167,7 @@
                 android:layout_width="306dp"
                 android:layout_height="73dp"
                 android:layout_marginStart="44dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="44dp"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textPersonName"
@@ -137,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="128dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center"
                 android:text="Cadastro"
