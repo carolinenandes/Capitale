@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +27,7 @@ import java.util.List;
 public class DialogSelecaoProdutos extends DialogFragment {
     private RecyclerView recyclerView;
     private TextView txtNome;
-    private Button btnConfirmar;
+    private AppCompatImageButton btnConfirmar;
     private adapterProdutosSelecao adapter;
     private BancoDeDados bancoDeDados;
     List<produtoSelecao> listProdutos = new ArrayList<>();

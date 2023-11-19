@@ -130,10 +130,11 @@ public class Gasto_Lucros {
         Log.d("Gasto_Lucros", "Valores antes da atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
 
         String updateQuery = "UPDATE TB_GASTOS_GANHOS SET GASTO = ?, GANHO = ?, LUCRO = ? WHERE ROWID = 1";
-        database.executarQuery(updateQuery, new String[]{String.valueOf(obterSomaGastos()), String.valueOf(obterSomaGanhos()), String.valueOf(obterSomaGanhos() - obterSomaGastos())});
+        database.executarQuery(updateQuery, new String[]{String.valueOf(gasto), String.valueOf(ganho), String.valueOf(ganho - gasto)});
 
         Log.d("Gasto_Lucros", "Valores após a atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
     }
+
 
 
     public void GanhoGastoLucro(){

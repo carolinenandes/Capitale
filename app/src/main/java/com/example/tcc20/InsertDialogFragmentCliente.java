@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ObjectClasses.BancoDeDados;
@@ -22,7 +23,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
 
     private Context context;
     private BancoDeDados banco;
-    private adapterCliente adapter;
+    private com.example.tcc20.adapterCliente adapter;
 
     // Construtor para passar o contexto
     public InsertDialogFragmentCliente(Context context) {
@@ -30,7 +31,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
     }
 
     // Construtor para passar a instância do BancoDeDados e do adaptador
-    public InsertDialogFragmentCliente(BancoDeDados banco, adapterCliente adapter) {
+    public InsertDialogFragmentCliente(BancoDeDados banco, com.example.tcc20.adapterCliente adapter) {
         this.banco = banco;
         this.adapter = adapter;
     }
@@ -66,7 +67,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
         return view;
     }
 
-    public void adicionarClienteNoBanco(Cliente cliente, adapterCliente adapter) {
+    public void adicionarClienteNoBanco(Cliente cliente, com.example.tcc20.adapterCliente adapter) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();

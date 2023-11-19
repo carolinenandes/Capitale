@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ObjectClasses.BancoDeDados;
@@ -39,7 +40,7 @@ public class InsertDialogFragmentMetas extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.insert_dialog_metas, container, false);
 
-        Button btnAddMetas = view.findViewById(R.id.btnAddMetas);
+        AppCompatImageButton btnAddMetas = view.findViewById(R.id.btnAddMetas);
         EditText etxtNomeMeta = view.findViewById(R.id.etxtNomeMeta), etxValorMeta = view.findViewById(R.id.etxValorMeta);
 
 

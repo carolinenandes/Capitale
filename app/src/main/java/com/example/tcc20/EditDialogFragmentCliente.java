@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ObjectClasses.BancoDeDados;
@@ -25,7 +26,7 @@ public class EditDialogFragmentCliente extends DialogFragment {
 
     private Context context;
     private BancoDeDados banco;
-    private adapterCliente adapter;
+    private com.example.tcc20.adapterCliente adapter;
     private Cliente clienteParaEditar;
     private static final String SELECIONAR_PRODUTOS_REQUEST_KEY = "selecionar_produtos_request";
 
@@ -36,7 +37,7 @@ public class EditDialogFragmentCliente extends DialogFragment {
     }
 
     // Construtor para passar a instância do BancoDeDados, do adaptador e o produto a ser editado
-    public EditDialogFragmentCliente(BancoDeDados banco, adapterCliente adapter, Cliente cliente) {
+    public EditDialogFragmentCliente(BancoDeDados banco, com.example.tcc20.adapterCliente adapter, Cliente cliente) {
         this.banco = banco;
         this.adapter = adapter;
         this.clienteParaEditar = cliente;
@@ -49,9 +50,9 @@ public class EditDialogFragmentCliente extends DialogFragment {
 
         context = getContext();
 
-        Button btnEditCliente = view.findViewById(R.id.btnEditCliente);
-        Button btnExcluir = view.findViewById(R.id.btnExcluir);
-        Button btnAdicionarPedido = view.findViewById(R.id.btnAdicionarPedido);
+        AppCompatImageButton btnEditCliente = view.findViewById(R.id.btnEditCliente);
+        AppCompatImageButton btnExcluir = view.findViewById(R.id.btnExcluir);
+        AppCompatImageButton btnAdicionarPedido = view.findViewById(R.id.btnAdicionarPedido);
         EditText etxtNomeCliente = view.findViewById(R.id.etxtNomeCliente);
         EditText etxEmailCliente = view.findViewById(R.id.etxtEmailCliente);
         EditText etxtStatusCliente = view.findViewById(R.id.etxtStatusCliente);
@@ -116,7 +117,7 @@ public class EditDialogFragmentCliente extends DialogFragment {
         dialog.show(getParentFragmentManager(), "selecao_produtos_dialog");
     }
 
-    private void atualizarClienteNoBanco(Cliente cliente, adapterCliente adapter) {
+    private void atualizarClienteNoBanco(Cliente cliente, com.example.tcc20.adapterCliente adapter) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();

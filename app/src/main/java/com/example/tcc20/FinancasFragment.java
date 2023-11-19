@@ -1,8 +1,12 @@
 package com.example.tcc20;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,11 +24,11 @@ import java.util.List;
 
 public class FinancasFragment extends Fragment {
 
-    HomeActivity context = (HomeActivity) requireContext();
+    private HomeActivity context;
+    private BancoDeDados banco;
 
-    private BancoDeDados banco = context.banco;
-
-    Button go_bar_chart, go_pie_chart, btnAdicionaVenda, btnVerPedidos;
+    Button btnAdicionaVenda, btnVerPedidos;
+    AppCompatImageView go_bar_chart, go_pie_chart;
     Gasto_Lucros gasto_lucros;
     BancoDeDados db;
     adapterPedidosSelecao adapter;
@@ -48,10 +52,25 @@ public class FinancasFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        // Atribui o contexto quando o fragment está sendo anexado a atividade
+        this.context = (HomeActivity) context;
+
+        // Inicializa outras variáveis que dependem do contexto
+        banco = new BancoDeDados(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_financas, container, false);
 
+        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
+        if (getActivity() instanceof HomeActivity) {
+            ((HomeActivity) getActivity()).limparElementos();
+        }
 
         go_bar_chart = view.findViewById(R.id.go_bar_chart_button);
         go_pie_chart = view.findViewById(R.id.pie_chart_button);
@@ -94,9 +113,6 @@ public class FinancasFragment extends Fragment {
                 dialog.show(getParentFragmentManager(), "insert_dialog");
             }
         });
-
-
-
 
         gasto_lucros.GanhoGastoLucro();
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ObjectClasses.BancoDeDados;
@@ -40,7 +41,7 @@ public class InsertDialogFragmentProd extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.insert_dialog_prod, container, false);
 
-        Button btnInsertProd = view.findViewById(R.id.btnAddProd);
+        AppCompatImageButton btnInsertProd = view.findViewById(R.id.btnAddProd);
         EditText etxtNomeProd = view.findViewById(R.id.etxtNomeProd), etxQtdProd = view.findViewById(R.id.etxQtdProd),
                 etxtValorVenda = view.findViewById(R.id.etxtValorVenda), etxtValorCusto_prod = view.findViewById(R.id.etxtValorCusto_prod),
                 etxtDescProd = view.findViewById(R.id.etxtDescProd), etxtStatusProd = view.findViewById(R.id.etxtStatusProd),

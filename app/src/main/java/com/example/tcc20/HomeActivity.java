@@ -1,12 +1,18 @@
 package com.example.tcc20;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.Metas.MetasFragment;
@@ -19,71 +25,57 @@ import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
-    ImageView imgHeaderProfilePic, btnNoticias;
-    BottomNavigationView bottomMenuBar;
-    public BancoDeDados banco;
+    private TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
+    private ImageView imgHeaderProfilePic, btnNoticias;
+    private BottomNavigationView bottomMenuBar;
+    BancoDeDados banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ImageView btnNoticias = (ImageView) findViewById(R.id.btnNoticias);
+        // Inicializa as views
+        initViews();
 
+        // Inicializa o banco de dados
         banco = new BancoDeDados(getApplicationContext());
 
-        TextView txtHeaderNome = (TextView) findViewById(R.id.txtHeaderNome);
-        TextView txtHeaderEmpresa = (TextView) findViewById(R.id.txtHeaderEmpresa);
-        TextView txtHeaderSaldoAtual = (TextView) findViewById(R.id.txtHeaderSaldoAtual);
-        ImageView imgHeaderProfilePic = (ImageView) findViewById(R.id.imgHeaderProfilePic);
-
-        BottomNavigationView bottomMenuBar = (BottomNavigationView) findViewById(R.id.bottomMenuBar);
-
-        //adicionando fragments à bottomMneuBar
-
+        // Adiciona listener ao BottomNavigationView
         bottomMenuBar.setOnItemSelectedListener(item -> {
-            Fragment selectedfragment;
-
             switch (item.getItemId()) {
                 case R.id.btnMetasMenu:
-                    selectedfragment = new MetasFragment();
+                    loadFragment(new MetasFragment());
                     break;
                 case R.id.btnFinancasMenu:
-                    selectedfragment = new FinancasFragment();
+                    loadFragment(new FinancasFragment());
                     break;
                 case R.id.btnProdutosMenu:
-                    selectedfragment = new ProdutosFragment();
+                    loadFragment(new ProdutosFragment());
                     break;
                 case R.id.btnClientesMenu:
-                    selectedfragment = new ClientesFragment();
+                    loadFragment(new ClientesFragment());
                     break;
-                default:
-                    return false;
             }
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, selectedfragment)
-                    .commit();
-
-
             return true;
         });
 
-        //abrir tela noticias
-        btnNoticias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment selectedfragment = new NewsFragment();
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentContainer, selectedfragment)
-                        .commit();
-            }
-        });
+        // Adiciona listener ao botão de notícias
+        btnNoticias.setOnClickListener(v -> loadFragment(new NewsFragment()));
     }
 
-    public void carregarDadosDoBanco() {
+    // Inicializa as views
+    private void initViews() {
+        txtHeaderNome = findViewById(R.id.txtHeaderNome);
+        txtHeaderEmpresa = findViewById(R.id.txtHeaderEmpresa);
+        txtHeaderSaldoAtual = findViewById(R.id.txtHeaderSaldoAtual);
+        imgHeaderProfilePic = findViewById(R.id.imgHeaderProfilePic);
+        btnNoticias = findViewById(R.id.btnNoticias);
+        bottomMenuBar = findViewById(R.id.bottomMenuBar);
+    }
+
+    // Método para carregar os dados do banco de dados
+    private void carregarDadosDoBanco() {
         try {
             banco.openDB();
 
@@ -92,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
 
             if (cursor != null && cursor.moveToFirst()) {
                 do {
-                    int id = cursor.getInt(cursor.getColumnIndex("id_empresa"));
+                    @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id_empresa"));
                     String nome = cursor.getString(cursor.getColumnIndex("nome_empresa"));
                     String saldo = cursor.getString(cursor.getColumnIndex("saldo_empresa"));
 
@@ -108,5 +100,24 @@ public class HomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Método para carregar um fragmento no contêiner
+    private void loadFragment(Fragment fragment) {
+        // Obtem o fragment manager
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Substitui o fragment atual pelo fragment clicado
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    public void limparElementos() {
+        LinearLayout homeContainerView = findViewById(R.id.homeContainer);
+
+        // Remove todas as visualizações dentro de homeContainer
+        homeContainerView.removeAllViews();
+
+        // Oculta a LinearLayout homeContainer
+        homeContainerView.setVisibility(View.GONE);
     }
 }

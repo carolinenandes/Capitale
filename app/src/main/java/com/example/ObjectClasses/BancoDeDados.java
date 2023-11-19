@@ -172,7 +172,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "    FONE_CLIENTE VARCHAR(16)\n" +
                 ");";
 
-        // Crie a tabela TB_PRODUTO
+        // Cria a tabela TB_PRODUTO
         String createTableProduto = "CREATE TABLE IF NOT EXISTS TB_PRODUTO (\n" +
                 "    ID_PROD INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    NOME_PROD VARCHAR(60) NOT NULL,\n" +
@@ -184,7 +184,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "    STATUS_PROD VARCHAR\n" +
                 ");";
 
-        // Crie a tabela TB_METAS_FINANCEIRAS
+        // Cria a tabela TB_METAS_FINANCEIRAS
         String createTableMetas = "CREATE TABLE IF NOT EXISTS TB_METAS_FINANCEIRAS (\n" +
                 "    ID_META INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    NOME_META VARCHAR(60) NOT NULL,\n" +
@@ -194,18 +194,19 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 ");";
 
 
-        // Crie a tabela TB_GASTOS_GANHOS
+        // Cria a tabela TB_GASTOS_GANHOS com valores padrão
         String createTableGastosGanhos = "CREATE TABLE IF NOT EXISTS TB_GASTOS_GANHOS (\n" +
-                "    GASTO NUMERIC(4,2),\n" +
-                "    GANHO NUMERIC(4,2),\n" +
-                "    LUCRO NUMERIC(4,2)\n" +
+                "    GASTO NUMERIC(4,2) DEFAULT 0.00,\n" +
+                "    GANHO NUMERIC(4,2) DEFAULT 0.00,\n" +
+                "    LUCRO NUMERIC(4,2) DEFAULT 0.00\n" +
                 ");";
 
-        // Crie a tabela TB_PEDIDO_COMPRA
+        // Cria a tabela TB_PEDIDO_COMPRA
         String createTablePedidoCompra = "CREATE TABLE IF NOT EXISTS TB_PEDIDO_COMPRA (\n" +
                 "    ID_PED_COMPRA INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    DTA_PED_COMPRA DATE,\n" +
                 "    VALOR_PED_COMPRA DECIMAL(6,2),\n" +
+                "    VALOR_CUSTO_PED_COMPRA DECIMAL(6,2),\n" +
                 "    ID_CLIENTE INTEGER DEFAULT 0,\n" +
                 "    STATUS_PED_COMPRA VARCHAR(60)\n" +
                 ");";
@@ -216,8 +217,16 @@ public class BancoDeDados extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createTableEmpresa);
         sqLiteDatabase.execSQL(createTableCliente);
         sqLiteDatabase.execSQL(createTableProduto);
-        sqLiteDatabase.execSQL(createTableMetas);  // Inclui a nova tabela TB_METAS_FINANCEIRAS
+        sqLiteDatabase.execSQL(createTableMetas);
         sqLiteDatabase.execSQL(createTableGastosGanhos);
+
+        // Insere valores padrão
+        ContentValues values = new ContentValues();
+        values.put("GASTO", 0.00);
+        values.put("GANHO", 0.00);
+        values.put("LUCRO", 0.00);
+        sqLiteDatabase.insert("TB_GASTOS_GANHOS", null, values);
+
         sqLiteDatabase.execSQL(createTablePedidoCompra);
     }
 
