@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/custom_card_view"
+    style="@style/custom_card_view_style"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8177FE"
@@ -24,6 +24,7 @@
         android:layout_width="162dp"
         android:layout_height="140dp"
         android:layout_marginStart="124dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/capitale_pngg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -33,8 +34,8 @@
         style="@style/bold60px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Bem vindo!"
         android:textColor="@color/white"
@@ -43,6 +44,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        android:backgroundTint="@color/white"
         style="@style/custom_card_view_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -52,14 +54,42 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/custom_card_view_style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Senha"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Email" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/Email"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="144dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/raleway_medium"
                 android:text="LOGIN"
                 android:textColor="@color/black"
@@ -68,28 +98,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="73dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="112dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/logar_btnn"
-                android:text="Logar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Senha"
+                app:layout_constraintVertical_bias="0.655"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-            <ImageButton
+            <TextView
                 android:id="@+id/btnEsqSenha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="44dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="40dp"
                 android:text="Esqueceu a Senha?"
                 android:textColor="#63DADE"
                 android:textSize="18dp"
@@ -103,13 +132,14 @@
                 style="@style/hintText"
                 android:layout_width="306dp"
                 android:layout_height="73dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="60dp"
                 android:ems="10"
+                android:hint="Senha"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:hint="Senha"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Email" />
 
@@ -118,12 +148,13 @@
                 style="@style/hintText"
                 android:layout_width="300dp"
                 android:layout_height="73dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="92dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="120dp"
                 android:ems="10"
+                android:hint="Email"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:hint="Email"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

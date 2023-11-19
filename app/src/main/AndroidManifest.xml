@@ -15,7 +15,7 @@
         android:theme="@style/Theme.TCC20"
         tools:targetApi="33">
         <activity
-            android:name=".SplashScreen"
+            android:name="com.example.Entrar.CadastroActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -36,6 +36,15 @@
         </activity>
 
         <activity
+            android:name="com.example.Entrar.Login"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+
+        <activity
             android:name=".HomeActivity"
             android:exported="false">
             <meta-data
@@ -52,14 +61,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.tcc20.com.example.Grafico.PieChartActivity"
+            android:name="com.example.Grafico.PieChartActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.example.tcc20.com.example.Grafico.BarChartActivity"
+            android:name="com.example.Grafico.BarChartActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/image_title"
         android:layout_width="match_parent"
-        android:layout_height="372dp"
+        android:layout_height="310dp"
         android:src="@drawable/carteirapog" />
 
     <TextView
@@ -35,5 +35,5 @@
         android:layout_height="wrap_content"
         android:text="@string/desc_one"
         android:textStyle="italic"
-        android:textSize="15dp"/>
+        android:textSize="18dp"/>
 </LinearLayout>

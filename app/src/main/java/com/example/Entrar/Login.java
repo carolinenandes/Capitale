@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ObjectClasses.BancoDeDados;
@@ -24,7 +26,8 @@ public class Login extends AppCompatActivity {
 
     public BancoDeDados banco;
     EditText emailUsuario, senhaUsuario;
-    ImageButton btnLogin, btnEsqSenha;
+    ImageView btnLogin;
+    TextView  btnEsqSenha;
 
     public String host = "https://capit4le.000webhostapp.com/projeto/";
 
@@ -39,6 +42,7 @@ public class Login extends AppCompatActivity {
         senhaUsuario = findViewById(R.id.Senha);
 
         banco = new BancoDeDados(this);
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
