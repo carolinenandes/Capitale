@@ -23,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/inter_semibold"
         android:gravity="center"
         android:text="Problemas para entrar?"
@@ -42,7 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        style="@style/custom_card_view_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,10 +54,35 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Nova senha"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/etxtNovaSenha_esq_senha"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/etxtEmail_esq_senha"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
                 android:layout_width="214dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="96dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginStart="84dp"
+                android:layout_marginTop="72dp"
                 android:fontFamily="@font/raleway_medium"
                 android:gravity="center"
                 android:text="Alterar senha"
@@ -71,8 +97,8 @@
                 style="@style/hintText"
                 android:layout_width="306dp"
                 android:layout_height="73dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="192dp"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textPersonName"
@@ -85,12 +111,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="78dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="56dp"
                 android:layout_marginEnd="16dp"
                 android:src="@drawable/alterar_senha"
                 android:text="Alterar senha"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etxtNovaSenha_esq_senha" />
 
@@ -99,8 +125,8 @@
                 style="@style/hintText"
                 android:layout_width="306dp"
                 android:layout_height="73dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
                 android:ems="10"
                 android:hint="Nova Senha"
                 android:inputType="textPersonName"
@@ -109,7 +135,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/etxtEmail_esq_senha" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 
