@@ -1,12 +1,13 @@
 package com.example.Entrar;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Handler;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +49,7 @@ public class CadastroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CadastroActivity.this, Login.class);
                 startActivity(intent);
+
             }
         });
 
@@ -56,10 +58,20 @@ public class CadastroActivity extends AppCompatActivity {
         email = findViewById(R.id.lblEmail);
 
         // Método para cadastrar conta
+
+
         findViewById(R.id.btnCadastrar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adicionarUsuarioNoBanco();
+                cadastrar.setImageResource(R.drawable.cadastrar_press_pngg);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        cadastrar.setImageResource(R.drawable.cadastrar_pngg);
+                    }
+                }, 150);
             }
         });
 

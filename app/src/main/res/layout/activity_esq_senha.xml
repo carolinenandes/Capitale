@@ -44,12 +44,14 @@
 
     <com.google.android.material.card.MaterialCardView
         style="@style/custom_card_view_style"
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
