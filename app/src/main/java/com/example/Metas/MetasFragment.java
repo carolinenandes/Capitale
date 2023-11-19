@@ -1,10 +1,13 @@
 package com.example.Metas;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,9 +31,9 @@ import java.util.ArrayList;
 
 public class MetasFragment extends Fragment {
 
-    HomeActivity context = (HomeActivity) requireContext();
+    private HomeActivity context;
 
-    private BancoDeDados banco = context.banco;
+    private BancoDeDados banco;
 
     private RecyclerView recyclerviewMetas;
     private ArrayList<Metas> metasList;
@@ -38,7 +41,7 @@ public class MetasFragment extends Fragment {
     private ItemTouchHelper itemTouchHelper;
 
     public MetasFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -48,17 +51,33 @@ public class MetasFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        // Atribui o contexto quando o fragment está sendo anexado a atividade
+        this.context = (HomeActivity) context;
+
+        // Inicializa outras variáveis que dependem do contexto
+        banco = new BancoDeDados(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_metas, container, false);
 
-        Button btnEditMetas = view.findViewById(R.id.btnEditMetas);
-        Button btnAddMetas = view.findViewById(R.id.btnAddMetas);
+        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
+        if (getActivity() instanceof HomeActivity) {
+            ((HomeActivity) getActivity()).limparElementos();
+        }
+
+        AppCompatImageButton btnEditMetas = view.findViewById(R.id.btnEditMetas);
+        AppCompatImageButton btnAddMetas = view.findViewById(R.id.btnAddMetas);
         recyclerviewMetas = view.findViewById(R.id.recyclerviewProd);
 
         banco = new BancoDeDados(context);
 
-        metasList = new ArrayList<>(); // Inicialize a lista primeiro
+        metasList = new ArrayList<>(); // Inicializa a lista primeiro
         adapter = new adapterMetas(context, metasList, banco, this);
 
 
@@ -75,6 +94,8 @@ public class MetasFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
 
 
         btnEditMetas.setOnClickListener(new View.OnClickListener() {
@@ -120,9 +141,9 @@ public class MetasFragment extends Fragment {
                     View childView = rv.findChildViewUnder(e.getX(), e.getY());
                     int position = rv.getChildAdapterPosition(childView);
 
-                    // Verifique se o item existe e não está selecionado
+                    // Verifica se o item existe e não está selecionado
                     if (position != RecyclerView.NO_POSITION && !adapter.isSelected(position)) {
-                        // Selecione o item
+                        // Seleciona o item
                         adapter.toggleItemSelection(position);
                     }
                 }
@@ -146,6 +167,8 @@ public class MetasFragment extends Fragment {
         return view;
     }
 
+
+
     // Método para carregar os dados do banco de dados e preencher a lista
     public void carregarDadosDoBanco() {
         try {
@@ -162,7 +185,7 @@ public class MetasFragment extends Fragment {
                     String valorMeta = cursor.getString(cursor.getColumnIndex("VALOR_META"));
                     String valorAtualMeta = cursor.getString(cursor.getColumnIndex("VALOR_META_ATUAL"));
 
-                    // Crie um objeto Metas com os dados do cursor
+                    // Cria um objeto Metas com os dados do cursor
                     Metas meta = new Metas(id, nome, saldoEmpresaUsuario, valorMeta, valorAtualMeta);
                     metasList.add(meta);
                 } while (cursor.moveToNext());

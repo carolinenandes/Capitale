@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class DialogVerPedidos extends DialogFragment {
     private RecyclerView recyclerView;
-    private Button btnConfirmaPgto, btnExcluirPedido;
+    private AppCompatImageButton btnConfirmaPgto, btnExcluirPedido;
     private adapterPedidosSelecao adapter;
     private BancoDeDados bancoDeDados;
     List<pedidoSelecao> listPedidos = new ArrayList<pedidoSelecao>();

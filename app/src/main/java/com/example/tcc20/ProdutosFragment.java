@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,12 +30,11 @@ import java.util.ArrayList;
 
 public class ProdutosFragment extends Fragment {
 
-    HomeActivity context = (HomeActivity) requireContext();
-
+    private HomeActivity context;
     private RecyclerView recyclerviewProd;
     private ArrayList<Produto> productList;
     private adapterProd adapter;
-    private BancoDeDados banco = context.banco;
+    private BancoDeDados banco;
 
     public ProdutosFragment() {
         // Required empty public constructor
@@ -53,13 +53,28 @@ public class ProdutosFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        // Atribui o contexto quando o fragment está sendo anexado a atividade
+        this.context = (HomeActivity) context;
+
+        // Inicializa outras variáveis que dependem do contexto
+        banco = new BancoDeDados(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_produtos, container, false);
 
+        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
+        if (getActivity() instanceof HomeActivity) {
+            ((HomeActivity) getActivity()).limparElementos();
+        }
 
-        Button btnEditarProd = view.findViewById(R.id.btnEditarProd);
-        Button btnAddProd = view.findViewById(R.id.btnAddProd);
+        AppCompatImageButton btnEditarProd = view.findViewById(R.id.btnEditarProd);
+        AppCompatImageButton btnAddProd = view.findViewById(R.id.btnAddProd);
         recyclerviewProd = view.findViewById(R.id.recyclerviewProdutos);
 
         banco = new BancoDeDados(context);

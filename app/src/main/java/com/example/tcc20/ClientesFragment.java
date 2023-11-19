@@ -1,9 +1,11 @@
 package com.example.tcc20;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,13 +26,13 @@ import java.util.ArrayList;
 
 public class ClientesFragment extends Fragment {
 
-    HomeActivity context = (HomeActivity) requireContext();
+    private HomeActivity context;
 
-    private BancoDeDados banco = context.banco;
+    private BancoDeDados banco;
 
     private RecyclerView recyclerviewCliente;
     private ArrayList<Cliente> clienteList;
-    private adapterCliente adapter;
+    private com.example.tcc20.adapterCliente adapter;
     public BancoDeDados bancoDeDados;
 //    private ItemTouchHelper itemTouchHelper;
 
@@ -52,17 +54,33 @@ public class ClientesFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        // Atribui o contexto quando o fragment está sendo anexado a atividade
+        this.context = (HomeActivity) context;
+
+        // Inicializa outras variáveis que dependem do contexto
+        banco = new BancoDeDados(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clientes, container, false);
 
-        Button btnVerCliente = view.findViewById(R.id.btnVerCliente);
-        Button btnAddCliente = view.findViewById(R.id.btnInsertCliente);
+        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
+        if (getActivity() instanceof HomeActivity) {
+            ((HomeActivity) getActivity()).limparElementos();
+        }
+
+        AppCompatImageButton btnVerCliente = view.findViewById(R.id.btnVerCliente);
+        AppCompatImageButton btnAddCliente = view.findViewById(R.id.btnInsertCliente);
         recyclerviewCliente = view.findViewById(R.id.recyclerviewCliente);
 
         bancoDeDados = new BancoDeDados(context);
         clienteList = new ArrayList<>();
-        adapter = new adapterCliente(context,clienteList);
+        adapter = new com.example.tcc20.adapterCliente(context,clienteList);
 
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

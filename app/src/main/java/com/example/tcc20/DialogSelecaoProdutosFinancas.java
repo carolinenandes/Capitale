@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +29,7 @@ import java.util.Locale;
 
 public class DialogSelecaoProdutosFinancas extends DialogFragment {
     private RecyclerView recyclerView;
-    private Button btnConfirmar;
+    private AppCompatImageButton btnConfirmar;
     private adapterProdutosSelecao adapter;
     private BancoDeDados bancoDeDados;
     List<produtoSelecao> listProdutos = new ArrayList<>();

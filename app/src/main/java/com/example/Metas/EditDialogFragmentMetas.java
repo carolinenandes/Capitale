@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ObjectClasses.BancoDeDados;
@@ -45,8 +46,8 @@ public class EditDialogFragmentMetas extends DialogFragment {
 
         context = getContext();
 
-        Button btnEditMeta = view.findViewById(R.id.btnEditMeta);
-        Button btnExcluirMeta = view.findViewById(R.id.btnExcluirMeta);
+        AppCompatImageButton btnEditMeta = view.findViewById(R.id.btnEditMeta);
+        AppCompatImageButton btnExcluirMeta = view.findViewById(R.id.btnExcluirMeta);
         EditText etxtNomeMeta = view.findViewById(R.id.etxtNomeMeta);
         EditText etxValorMeta = view.findViewById(R.id.etxValorMeta);
 
