@@ -1,9 +1,13 @@
-package com.example.tcc20
+package com.example.Grafico
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ObjectClasses.BancoDeDados
+
+import com.example.tcc20.Gasto_Lucros
+import com.example.tcc20.R
+
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet

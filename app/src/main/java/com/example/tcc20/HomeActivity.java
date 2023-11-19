@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     int id = cursor.getInt(cursor.getColumnIndex("id_empresa"));
-                    String nome = cursor.getString(cursor.getColumnIndex("nome_empresa")1);
+                    String nome = cursor.getString(cursor.getColumnIndex("nome_empresa"));
                     String saldo = cursor.getString(cursor.getColumnIndex("saldo_empresa"));
 
                     Empresa empresa = new Empresa(id, nome, saldo);

@@ -17,6 +17,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ObjectClasses.BancoDeDados;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

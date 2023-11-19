@@ -19,6 +19,19 @@ public class produtoSelecao implements Parcelable {
 
 
     public produtoSelecao(int id, String nome, int qtd, String valor_venda, String valor_custo, String desc, int numberPicker,  int vendas, String status) {
+    this.id = id;
+        this.nome = nome;
+        this.qtd = qtd;
+        this.valor_venda = valor_venda;
+        this.valor_custo = valor_custo;
+        this.desc = desc;
+        this.numberPicker = numberPicker;
+        this.vendas = vendas;
+        this.status = status;
+        this.selected = false; // Por padrão, o produto não está selecionado
+}
+
+    public produtoSelecao(int id, String nome, int qtd, String valor_venda, String valor_custo, String desc,  int vendas, String status) {
         this.id = id;
         this.nome = nome;
         this.qtd = qtd;
