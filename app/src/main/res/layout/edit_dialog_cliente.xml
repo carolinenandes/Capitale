@@ -68,10 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="44dp"
-        android:text="@string/btnEditCliente"
         android:background="@drawable/btneditar"
+        android:text="@string/btnEditCliente"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btnExcluir"
@@ -82,7 +83,8 @@
         android:background="@drawable/btnexcluir"
         android:text="@string/btnExcluir"
         app:layout_constraintStart_toEndOf="@+id/btnEditCliente"
-        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btnAdicionarPedido"
@@ -90,9 +92,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginTop="15dp"
-        android:text="@string/btnAdicionarPedido"
         android:background="@drawable/btnadicionar_prod"
+        android:text="@string/btnAdicionarPedido"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEditCliente"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
