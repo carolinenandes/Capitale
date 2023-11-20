@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
 
-        app:layout_constraintGuide_percent=".25" />
+        app:layout_constraintGuide_begin="223dp" />
 
     <ImageView
         android:layout_width="157dp"

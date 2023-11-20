@@ -259,6 +259,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:background="@color/navBar"
+        app:itemTextColor="@color/white"
         android:paddingBottom="10dp"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
