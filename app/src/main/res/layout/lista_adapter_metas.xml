@@ -37,10 +37,9 @@
         android:id="@+id/txtValorInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="100dp"
         android:text="@string/txtValorInicial"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +48,7 @@
         android:layout_width="86dp"
         android:layout_height="20dp"
         android:layout_marginStart="340dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         android:text="Valor Meta"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,17 +56,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="214dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="92dp"
+        android:progressDrawable="@drawable/custom_progress"
+        app:layout_constraintEnd_toStartOf="@+id/txtValorMeta"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toEndOf="@+id/txtValorInicial"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtNomeMeta"
-        android:layout_width="361dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:layout_width="320dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
         android:layout_weight="1"
-        android:fontFamily="@font/inter_semibold"
         android:text="@string/txtNome"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

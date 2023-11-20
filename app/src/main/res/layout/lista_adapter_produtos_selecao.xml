@@ -51,5 +51,4 @@
         app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toEndOf="@+id/txtNome"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

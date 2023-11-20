@@ -14,8 +14,59 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TCC20"
         tools:targetApi="33">
+
+
         <activity
-            android:name="com.example.Entrar.CadastroActivity"
+            android:name="com.example.NoticiasViews.WebViewActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name="adapterPedidosSelecao"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".adapterProdutosSelecao"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".DialogSelecaoProdutos"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".DialogSelecaoProdutosFinancas"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".DialogVerPedidos"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+
+        <activity
+            android:name=".SplashScreen"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
@@ -27,16 +78,6 @@
             </intent-filter>
         </activity>
 
-
-        <activity
-            android:name=".esqSenhaActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-
         <activity
             android:name=".SlideScreen"
             android:exported="false">
@@ -44,6 +85,18 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+        <activity
+            android:name="com.example.Entrar.CadastroActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+
+
 
         <activity
             android:name="com.example.Entrar.Login"
@@ -88,6 +141,18 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+        <activity
+            android:name=".esqSenhaActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
     </application>
+
+
 
 </manifest>
