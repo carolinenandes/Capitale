@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
@@ -41,7 +42,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.insert_dialog_cliente, container, false);
 
-        Button btnInsertCliente = view.findViewById(R.id.btnInsertCliente);
+        ImageButton btnInsertCliente = view.findViewById(R.id.btnInsertCliente);
         EditText etxtNomeCliente = view.findViewById(R.id.etxtNomeCliente), etxtEmailCliente = view.findViewById(R.id.etxtEmailCliente),
                 etxtStatusCliente = view.findViewById(R.id.etxtStatusCliente), extFoneCliente = view.findViewById(R.id.etxtFoneCliente);
 
