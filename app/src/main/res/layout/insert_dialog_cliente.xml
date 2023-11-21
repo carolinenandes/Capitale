@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"  xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/etxtNomeCliente"
+        style="@style/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="104dp"
         android:ems="10"
         android:hint="@string/hintNomeCliente"
         android:inputType="textPersonName"
@@ -20,10 +26,11 @@
 
     <EditText
         android:id="@+id/etxtFoneCliente"
+        style="@style/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="@string/hintFoneCliente"
         android:inputType="textPersonName"
@@ -33,10 +40,11 @@
 
     <EditText
         android:id="@+id/etxtStatusCliente"
+        style="@style/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Cliente"
         android:inputType="textPersonName"
@@ -44,22 +52,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etxtFoneCliente" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnInsertCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/btnInsertCliente"
+        android:layout_width="244dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/add_cliente"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente" />
+        app:layout_constraintTop_toBottomOf="@+id/etxtEmailCliente"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/etxtEmailCliente"
+        style="@style/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="@string/hintEmailCliente"
         android:inputType="textPersonName"
@@ -68,3 +78,5 @@
         app:layout_constraintTop_toBottomOf="@+id/etxtStatusCliente" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
