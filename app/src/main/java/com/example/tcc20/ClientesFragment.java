@@ -32,7 +32,7 @@ public class ClientesFragment extends Fragment {
 
     private RecyclerView recyclerviewCliente;
     private ArrayList<Cliente> clienteList;
-    private com.example.tcc20.adapterCliente adapter;
+    private com.example.ObjectClasses.adapterCliente adapter;
     public BancoDeDados bancoDeDados;
 //    private ItemTouchHelper itemTouchHelper;
 
@@ -80,7 +80,7 @@ public class ClientesFragment extends Fragment {
 
         bancoDeDados = new BancoDeDados(context);
         clienteList = new ArrayList<>();
-        adapter = new com.example.tcc20.adapterCliente(context,clienteList);
+        adapter = new com.example.ObjectClasses.adapterCliente(context,clienteList);
 
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

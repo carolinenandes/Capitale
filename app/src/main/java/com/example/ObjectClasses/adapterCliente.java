@@ -1,4 +1,4 @@
-package com.example.tcc20;
+package com.example.ObjectClasses;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tcc20.Cliente;
+import com.example.tcc20.R;
 
 import java.util.List;
 
