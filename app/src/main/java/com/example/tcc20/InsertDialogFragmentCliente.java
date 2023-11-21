@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.ObjectClasses.BancoDeDados;
+import com.example.ObjectClasses.adapterCliente;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,7 +25,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
 
     private Context context;
     private BancoDeDados banco;
-    private com.example.tcc20.adapterCliente adapter;
+    private adapterCliente adapter;
 
     // Construtor para passar o contexto
     public InsertDialogFragmentCliente(Context context) {
@@ -32,7 +33,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
     }
 
     // Construtor para passar a instância do BancoDeDados e do adaptador
-    public InsertDialogFragmentCliente(BancoDeDados banco, com.example.tcc20.adapterCliente adapter) {
+    public InsertDialogFragmentCliente(BancoDeDados banco, adapterCliente adapter) {
         this.banco = banco;
         this.adapter = adapter;
     }
@@ -68,7 +69,7 @@ public class InsertDialogFragmentCliente extends DialogFragment {
         return view;
     }
 
-    public void adicionarClienteNoBanco(Cliente cliente, com.example.tcc20.adapterCliente adapter) {
+    public void adicionarClienteNoBanco(Cliente cliente, adapterCliente adapter) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();
