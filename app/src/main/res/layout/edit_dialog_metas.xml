@@ -6,7 +6,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
     <EditText
@@ -42,7 +41,7 @@
         android:id="@+id/btnExcluirMeta"
         android:layout_width="173dp"
         android:layout_height="56dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/btnexcluir"
         android:text="@string/btnExcluirMeta"
@@ -54,7 +53,7 @@
         android:id="@+id/btnEditMeta"
         android:layout_width="157dp"
         android:layout_height="56dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/btneditar"
         android:text="@string/btnEditMeta"

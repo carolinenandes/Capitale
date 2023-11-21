@@ -16,8 +16,8 @@
             style="@style/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="@string/hintNomeProd"
             android:inputType="textPersonName"
@@ -26,25 +26,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/etxQtdProd"
-            style="@style/hintText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:ems="10"
-            android:hint="@string/hintQtd"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etxtNomeProd" />
-
-        <EditText
             android:id="@+id/etxtValorVenda"
             style="@style/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="88dp"
             android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="@string/hintValorVenda"
@@ -58,7 +44,7 @@
             style="@style/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="88dp"
             android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="@string/hintValorCusto"
@@ -72,7 +58,7 @@
             style="@style/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="88dp"
             android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="@string/hintDesc"
@@ -86,7 +72,7 @@
             style="@style/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="88dp"
             android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="@string/hintStatus"
@@ -95,24 +81,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etxtDescProd" />
 
-        <ImageButton
-            android:id="@+id/btnAddProd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/btnadicionar"
-            android:text="@string/btnAddProd"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas"
-            tools:ignore="SpeakableTextPresentCheck" />
-
         <EditText
             android:id="@+id/etxtQtdVendas"
             style="@style/hintText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="88dp"
             android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="@string/hintQtdVenda"
@@ -120,6 +94,32 @@
             android:minHeight="48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etxtStatusProd" />
+
+        <EditText
+            android:id="@+id/etxQtdProd"
+            style="@style/hintText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:hint="@string/hintQtd"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etxtNomeProd" />
+
+        <ImageButton
+            android:id="@+id/btnAddProd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/btnadicionar"
+            android:text="@string/btnAddProd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etxtQtdVendas"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
