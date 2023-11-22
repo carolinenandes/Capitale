@@ -2,15 +2,16 @@ package com.example.tcc20;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -20,23 +21,40 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ObjectClasses.BancoDeDados;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class DialogSelecaoProdutos extends DialogFragment {
+    private final Context context;
     private RecyclerView recyclerView;
     private TextView txtNome;
     private AppCompatImageButton btnConfirmar;
     private adapterProdutosSelecao adapter;
     private BancoDeDados bancoDeDados;
+    private int clienteSelecionado;
     List<produtoSelecao> listProdutos = new ArrayList<>();
     private ArrayList<produtoSelecao> produtosSelecionados = new ArrayList<>();
     private static final String SELECIONAR_PRODUTOS_REQUEST_KEY = "selecionar_produtos_request";
 
+    public DialogSelecaoProdutos(Context context) {
+        this.context = context;
+    }
+
+    public DialogSelecaoProdutos(Context context, BancoDeDados bancoDeDados, int clienteSelecionado) {
+        this.context = context;
+        this.bancoDeDados = bancoDeDados;
+        this.clienteSelecionado = clienteSelecionado;
+    }
+
+
+
+
     // Interface para lidar com a seleção de produtos
     public interface OnProdutosSelecionadosListener {
-        void onProdutosSelecionados(ArrayList<produtoSelecao> produtos);
+        void onProdutosSelecionados(ArrayList<produtoSelecao> produtos, String clienteSelecionado);
     }
 
     private OnProdutosSelecionadosListener listener;
@@ -52,8 +70,9 @@ public class DialogSelecaoProdutos extends DialogFragment {
 
         bancoDeDados = new BancoDeDados(getContext());
         SQLiteDatabase database = bancoDeDados.getReadableDatabase();
-
+        Gasto_Lucros gasto_lucros = new Gasto_Lucros(bancoDeDados);
         pegarProdutos(database);
+        showDialogSelecaoProdutos();
 
         // Configure o RecyclerView e o Adapter
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -67,9 +86,20 @@ public class DialogSelecaoProdutos extends DialogFragment {
             public void onClick(View v) {
                 // Obtenha os produtos selecionados do adapter
                 produtosSelecionados = adapter.getProdutosSelecionados();
+                if (!produtosSelecionados.isEmpty()) {
+                    for (produtoSelecao produto : produtosSelecionados) {
+                        int novaQuantidade = produto.getNumberPicker();
+                        double qtdVendaAtualizada = produto.getVendas() + novaQuantidade;
+                        double qtdProdutoAtualizada = produto.getQtd() - novaQuantidade;
 
-                // Chame o método de confirmação de seleção
+                        // Atualiza as quantidades no banco de dados
+                        atualizarQuantidadesNoBancoDeDados(produto.getId(), qtdProdutoAtualizada, qtdVendaAtualizada);
+                    }
+                }
+
+                // Chama o método de confirmação de seleção
                 confirmarSelecao();
+                gasto_lucros.GanhoGastoLucro();
             }
         });
 
@@ -90,9 +120,10 @@ public class DialogSelecaoProdutos extends DialogFragment {
         bundle.putParcelableArrayList("produtos_selecionados", produtosSelecionados);
 
         getParentFragmentManager().setFragmentResult(SELECIONAR_PRODUTOS_REQUEST_KEY, bundle);
+
+
         dismiss();
     }
-
 
     public void pegarProdutos(SQLiteDatabase database) {
         try {
@@ -126,5 +157,100 @@ public class DialogSelecaoProdutos extends DialogFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Método para mostrar o Dialog de seleção de produtos
+    private void showDialogSelecaoProdutos() {
+        getParentFragmentManager().setFragmentResultListener(SELECIONAR_PRODUTOS_REQUEST_KEY, this, (requestKey, result) -> {
+            ArrayList<produtoSelecao> produtosSelecionados = result.getParcelableArrayList("produtos_selecionados");
+            adicionarPedidosAoBanco(produtosSelecionados, clienteSelecionado);
+        });
+    }
+
+    public void adicionarPedidosAoBanco(ArrayList<produtoSelecao> produtosSelecionados, int clienteSelecionado) {
+        SQLiteDatabase db = bancoDeDados.getWritableDatabase();
+        double totalPedido = 0.0;
+        double totalCustoPedido = 0.0;
+
+        Log.d("TAG", "Tentando adicionar pedidos. Número de produtos selecionados: " + produtosSelecionados.size());
+
+        if (produtosSelecionados == null) {
+            Log.e("TAG", "A lista de produtos selecionados está nula");
+            return;
+        }
+
+        for (produtoSelecao produto : produtosSelecionados) {
+            try {
+                String valorProdutoString = produto.getValor_venda().replace(",", ".");
+                String valorCustoProdutoString = produto.getValor_custo().replace(",",".");
+
+                double valorCustoProduto = Double.parseDouble(valorCustoProdutoString);
+                double valorProduto = Double.parseDouble(valorProdutoString);
+
+                totalPedido += (valorProduto * produto.getNumberPicker());
+
+                // Calcula o custo total do produto multiplicando pelo número selecionado
+                double custoTotalProduto = valorCustoProduto * produto.getNumberPicker();
+
+                // Atualiza o valor do custo total do pedido
+                totalCustoPedido += custoTotalProduto;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Arredonda o valor para duas casas decimais
+        totalCustoPedido = Math.round(totalCustoPedido * 100.0) / 100.0;
+
+        // Formata o valor para o formato desejado
+        String valorCustoFormatado = String.format(Locale.getDefault(), "%.2f", totalCustoPedido).replace(".", ",");
+
+
+        // Arredonda o valor para duas casas decimais
+        totalPedido = Math.round(totalPedido * 100.0) / 100.0;
+
+        // Formata o valor para o formato desejado
+        String valorCompraFormatado = String.format(Locale.getDefault(), "%.2f", totalPedido).replace(".", ",");
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String dta_ped_compra = dateFormat.format(calendar.getTime());
+
+        ContentValues values = new ContentValues();
+        values.put("STATUS_PED_COMPRA", "Pendente");
+        values.put("DTA_PED_COMPRA", dta_ped_compra);
+        values.put("VALOR_PED_COMPRA", valorCompraFormatado);
+        values.put("VALOR_CUSTO_PED_COMPRA", valorCustoFormatado);
+        values.put("ID_CLIENTE", clienteSelecionado);
+
+        long idPedido = db.insertWithOnConflict("TB_PEDIDO_COMPRA", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+
+        if (idPedido != -1) {
+            Toast.makeText(context, "Pedido adicionado com sucesso.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Falha ao adicionar pedido", Toast.LENGTH_SHORT).show();
+        }
+        db.close();
+    }
+
+    private void atualizarQuantidadesNoBancoDeDados(int idProduto, double novaQuantidadeProduto, double novaQuantidadeVenda) {
+        SQLiteDatabase db = bancoDeDados.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("QTD_PROD", novaQuantidadeProduto);
+        values.put("QTD_VENDA", novaQuantidadeVenda);
+
+        String whereClause = "ID_PROD = ?";
+        String[] whereArgs = { String.valueOf(idProduto) };
+
+        int rowsUpdated = db.update("TB_PRODUTO", values, whereClause, whereArgs);
+
+        if (rowsUpdated > 0) {
+            Log.d("TAG", "Quantidades atualizadas com sucesso");
+        } else {
+            Log.e("TAG", "Falha ao atualizar quantidades");
+        }
+
+        db.close();
     }
 }

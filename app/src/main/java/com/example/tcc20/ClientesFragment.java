@@ -34,6 +34,7 @@ public class ClientesFragment extends Fragment {
     private ArrayList<Cliente> clienteList;
     private com.example.ObjectClasses.adapterCliente adapter;
     public BancoDeDados bancoDeDados;
+
 //    private ItemTouchHelper itemTouchHelper;
 
     public ClientesFragment() {
@@ -101,8 +102,9 @@ public class ClientesFragment extends Fragment {
                 int selectedItemPosition = adapter.getSelectedPosition();
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
                     Cliente clienteSelecionado = clienteList.get(selectedItemPosition);
-                    EditDialogFragmentCliente editDialog = new EditDialogFragmentCliente(bancoDeDados, adapter, clienteSelecionado);
-                    editDialog.show(getParentFragmentManager(), "edit_dialog");
+                    int clienteId = clienteSelecionado.getId();
+                    DialogSelecaoProdutos dialog = new DialogSelecaoProdutos(getContext(), bancoDeDados, clienteId);
+                    dialog.show(getParentFragmentManager(), "dialog_selecao_produtos");
                 } else {
                     Log.d("HomeActivity", "Nenhum item selecionado para edição");
                     Toast.makeText(context, "Selecione um cliente para editar", Toast.LENGTH_SHORT).show();

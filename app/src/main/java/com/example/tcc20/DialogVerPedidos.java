@@ -1,5 +1,6 @@
 package com.example.tcc20;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -152,9 +153,9 @@ public class DialogVerPedidos extends DialogFragment {
                     int id = cursor.getInt(0);
                     String dta_ped_compra = cursor.getString(1);
                     String valor_ped_compra = cursor.getString(2);
-                    int id_cliente = cursor.getInt(3);
-                    Log.d("DEBUG", "ID Cliente: " + id_cliente);
-                    String status = cursor.getString(4);
+                    String valor_custo_ped_compra = cursor.getString(4);
+                    int id_cliente = cursor.getInt(4);
+                    String status = cursor.getString(5);
 
                     //buscar o nome do cliente na TB_CLIENTE
                     String nome_cliente = buscarNomeClientePorId(database, id_cliente);
@@ -167,10 +168,10 @@ public class DialogVerPedidos extends DialogFragment {
                 cursor.close();
             }
 
-            // Atualize o adapter sobre as mudanças
+            // Atualiza o adapter sobre as mudanças
             adapter.notifyDataSetChanged();
 
-            // Obtenha os pedidos selecionados do adapter
+            // Obtém os pedidos selecionados do adapter
             pedidosSelecionados = adapter.getPedidosSelecionados();
 
         } catch (Exception e) {
@@ -179,20 +180,31 @@ public class DialogVerPedidos extends DialogFragment {
         return null;
     }
 
+    @SuppressLint("Range")
     private String buscarNomeClientePorId(SQLiteDatabase database, int id_cliente) {
         String nome_cliente = "";
-        String sql = "SELECT NOME_CLIENTE FROM TB_CLIENTE WHERE ID_CLIENTE = ?";
-        Cursor cursor = database.rawQuery(sql, new String[]{String.valueOf(id_cliente)});
 
-        if (cursor != null && cursor.moveToFirst()) {
-            nome_cliente = cursor.getString(0);
-            cursor.close();
-        } else {
-            nome_cliente = "Padrão"; // Defina o valor padrão aqui
+        try {
+            // Usa subconsulta na SQL para buscar o cliente pelo ID
+            String sql = "SELECT NOME_CLIENTE FROM TB_CLIENTE WHERE ID_CLIENTE = ?";
+
+            Cursor cursor = database.rawQuery(sql, new String[]{String.valueOf(id_cliente)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                nome_cliente = cursor.getString(cursor.getColumnIndex("NOME_CLIENTE"));
+                cursor.close();
+            } else {
+                nome_cliente = "Padrão"; // Defina o valor padrão aqui
+            }
+
+        } catch (Exception e) {
+            Log.e("DEBUG", "Erro ao buscar nome do cliente por ID: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return nome_cliente;
     }
+
 
     // Método para atualizar o status do pedido e informações da tb_pedido no banco de dados
     private void atualizarStatusPedido(int idPedido, String novoStatus) {
