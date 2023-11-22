@@ -1,41 +1,50 @@
 package com.example.tcc20;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.Metas.MetasFragment;
 import com.example.NoticiasViews.NewsFragment;
-import com.example.NoticiasViews.WebViewActivity;
 import com.example.ObjectClasses.BancoDeDados;
 import com.example.ObjectClasses.Empresa;
+import com.example.tcc20.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 
-public class HomeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
     private ImageView imgHeaderProfilePic, btnNoticias;
     private BottomNavigationView bottomMenuBar;
     BancoDeDados banco;
 
+    ActivityMainBinding binding;
+
+    private NavHostFragment navHostFragment;
+    private NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initNavigation();
 
         // Inicializa as views
         initViews();
@@ -44,34 +53,57 @@ public class HomeActivity extends AppCompatActivity {
         banco = new BancoDeDados(getApplicationContext());
 
         // Adiciona listener ao BottomNavigationView
-        bottomMenuBar.setOnItemSelectedListener(item -> {
+        /*bottomMenuBar.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+
             switch (item.getItemId()) {
                 case R.id.btnMetasMenu:
-                    loadFragment(new MetasFragment());
+                    selectedFragment = new MetasFragment();
                     break;
                 case R.id.btnFinancasMenu:
-                    loadFragment(new FinancasFragment());
+                    selectedFragment = new FinancasFragment();
                     break;
                 case R.id.btnProdutosMenu:
-                    loadFragment(new ProdutosFragment());
+                    selectedFragment = new ProdutosFragment();
                     break;
                 case R.id.btnClientesMenu:
-                    loadFragment(new ClientesFragment());
+                    selectedFragment = new ClientesFragment();
                     break;
                 case R.id.btnHomeMenu:
                     // Remove todos os fragments da pilha antes de voltar à HomeActivity
                     getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     // Inicie a HomeActivity com uma transição personalizada
-                    Intent intent = new Intent(this, HomeActivity.class);
+                    Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish(); // Finalize a atividade atual para evitar acumular várias instâncias
                     break;
             }
-            return true;
-        });
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, selectedFragment)
+                    .commit();
 
-        // Adiciona listener ao botão de notícias
-        btnNoticias.setOnClickListener(v -> loadFragment(new NewsFragment()));
+            return true;
+        });*/
+
+
+    }
+
+    // Método para carregar um fragmento no contêiner
+    private void loadFragment(Fragment fragment) {
+        // Obtem o fragment manager
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Substitui o fragment atual pelo fragment clicado
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
+    }
+
+    private void initNavigation(){
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+
+        navController = navHostFragment.getNavController();
+
+        NavigationUI.setupWithNavController(binding.bottomMenuBar, navController);
+
     }
 
     // Inicializa as views
@@ -112,17 +144,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    // Método para carregar um fragmento no contêiner
-    private void loadFragment(Fragment fragment) {
-        // Obtem o fragment manager
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Substitui o fragment atual pelo fragment clicado
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
-    }
-
     public void limparElementos() {
-        LinearLayout homeContainerView = findViewById(R.id.homeContainer);
+        FragmentContainerView homeContainerView = findViewById(R.id.fragmentContainer);
 
         // Remove todas as visualizações dentro de homeContainer
         homeContainerView.removeAllViews();
@@ -130,4 +153,5 @@ public class HomeActivity extends AppCompatActivity {
         // Oculta a LinearLayout homeContainer
         homeContainerView.setVisibility(View.GONE);
     }
+
 }

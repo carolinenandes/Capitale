@@ -24,7 +24,7 @@ import java.util.List;
 
 public class FinancasFragment extends Fragment {
 
-    private HomeActivity context;
+    private MainActivity context;
     private BancoDeDados banco;
 
     Button btnAdicionaVenda, btnVerPedidos;
@@ -56,7 +56,7 @@ public class FinancasFragment extends Fragment {
         super.onAttach(context);
 
         // Atribui o contexto quando o fragment está sendo anexado a atividade
-        this.context = (HomeActivity) context;
+        this.context = (MainActivity) context;
 
         // Inicializa outras variáveis que dependem do contexto
         banco = new BancoDeDados(context);
@@ -68,8 +68,8 @@ public class FinancasFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_financas, container, false);
 
         // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof HomeActivity) {
-            ((HomeActivity) getActivity()).limparElementos();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).limparElementos();
         }
 
         go_bar_chart = view.findViewById(R.id.go_bar_chart_button);

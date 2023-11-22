@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +17,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.Metas.adapterMetas;
 import com.example.ObjectClasses.BancoDeDados;
 import com.example.ObjectClasses.Metas;
-import com.example.tcc20.HomeActivity;
+import com.example.tcc20.MainActivity;
 import com.example.tcc20.R;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 
 public class MetasFragment extends Fragment {
 
-    private HomeActivity context;
+    private MainActivity context;
 
     private BancoDeDados banco;
 
@@ -55,7 +54,7 @@ public class MetasFragment extends Fragment {
         super.onAttach(context);
 
         // Atribui o contexto quando o fragment está sendo anexado a atividade
-        this.context = (HomeActivity) context;
+        this.context = (MainActivity) context;
 
         // Inicializa outras variáveis que dependem do contexto
         banco = new BancoDeDados(context);
@@ -67,8 +66,8 @@ public class MetasFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_metas, container, false);
 
         // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof HomeActivity) {
-            ((HomeActivity) getActivity()).limparElementos();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).limparElementos();
         }
 
         AppCompatImageButton btnEditMetas = view.findViewById(R.id.btnEditMetas);

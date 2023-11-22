@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/clientesFragment"
+        android:name="com.example.tcc20.ClientesFragment"
+        android:label="ClientesFragment"
+        tools:layout="@layout/fragment_clientes"/>
+    <fragment
+        android:id="@+id/financasFragment"
+        android:name="com.example.tcc20.FinancasFragment"
+        android:label="FinancasFragment"
+        tools:layout="@layout/fragment_financas"/>
+    <fragment
+        android:id="@+id/metasFragment"
+        android:name="com.example.Metas.MetasFragment"
+        android:label="fragment_metas"
+        tools:layout="@layout/fragment_metas" />
+    <fragment
+        android:id="@+id/produtosFragment"
+        android:name="com.example.tcc20.ProdutosFragment"
+        android:label="fragment_produtos"
+        tools:layout="@layout/fragment_produtos" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.tcc20.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+</navigation>

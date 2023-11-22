@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class ClientesFragment extends Fragment {
 
-    private HomeActivity context;
+    private MainActivity context;
 
     private BancoDeDados banco;
 
@@ -58,7 +58,7 @@ public class ClientesFragment extends Fragment {
         super.onAttach(context);
 
         // Atribui o contexto quando o fragment está sendo anexado a atividade
-        this.context = (HomeActivity) context;
+        this.context = (MainActivity) context;
 
         // Inicializa outras variáveis que dependem do contexto
         banco = new BancoDeDados(context);
@@ -70,8 +70,8 @@ public class ClientesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_clientes, container, false);
 
         // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof HomeActivity) {
-            ((HomeActivity) getActivity()).limparElementos();
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).limparElementos();
         }
 
         AppCompatImageButton btnVerCliente = view.findViewById(R.id.btnVerCliente);

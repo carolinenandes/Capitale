@@ -15,25 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TCC20"
         tools:targetApi="33">
-
-
         <activity
-            android:name="com.example.NoticiasViews.MostrarNoticia"
-            android:parentActivityName=".HomeActivity">
-
+            android:name="com.example.NoticiasViews.WebViewActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
+                android:value=".MainActivity" />
         </activity>
-
-
-        <activity
+        <!--<activity
             android:name="com.example.NoticiasViews.WebViewActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+        </activity>-->
         <activity
             android:name=".adapterPedidosSelecao"
             android:exported="true">
@@ -98,7 +93,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.TCC20">
             <meta-data
