@@ -6,9 +6,6 @@ import android.database.Cursor;
 
 import com.example.ObjectClasses.BancoDeDados;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Gasto_Lucros {
 
     BancoDeDados database;
@@ -135,7 +132,36 @@ public class Gasto_Lucros {
         Log.d("Gasto_Lucros", "Valores após a atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
     }
 
+    public void cadastrarLucroNaMeta() {
+        Log.d("Gasto_Lucros", "Saldo antes do cadastro na meta: " + obterSaldoMeta());
 
+        // Atualiza o saldo na tabela TB_METAS_FINANCEIRAS
+        String updateQuery = "UPDATE TB_METAS_FINANCEIRAS SET SALDO_EMPRESA_USUARIO = ? WHERE ROWID = 1";
+        float lucro = 0;
+        float saldoAtualizado = obterSaldoMeta() + lucro;
+        database.executarQuery(updateQuery, new String[]{String.valueOf(saldoAtualizado)});
+
+        Log.d("Gasto_Lucros", "Saldo após o cadastro na meta: " + obterSaldoMeta());
+    }
+
+    @SuppressLint("Range")
+    private float obterSaldoMeta() {
+        String query = "SELECT SALDO_EMPRESA_USUARIO FROM TB_METAS_FINANCEIRAS WHERE ROWID = 1";
+        Cursor cursor = database.rawQuery(query, null);
+
+        float saldo = 0.0f;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            saldo = cursor.getFloat(cursor.getColumnIndex("SALDO_EMPRESA_USUARIO"));
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        Log.d("Gasto_Lucros", "Valor do Saldo na Meta: " + saldo);
+        return saldo;
+    }
 
     public void GanhoGastoLucro(){
         float gasto, ganho;
