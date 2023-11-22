@@ -92,6 +92,7 @@ public class DialogVerPedidos extends DialogFragment {
                     // Chame o método de confirmação de seleção
                     confirmarSelecao();
                     gasto_lucros.GanhoGastoLucro();
+                    gasto_lucros.cadastrarLucroNaMeta();
                 }
             }
         });
