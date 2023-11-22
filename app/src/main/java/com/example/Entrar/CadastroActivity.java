@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ObjectClasses.BancoDeDados;
+import com.example.tcc20.HomeActivity;
 import com.example.tcc20.R;
+import com.example.tcc20.esqSenhaActivity;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -112,14 +114,18 @@ public class CadastroActivity extends AppCompatActivity {
                                     Toast.makeText(CadastroActivity.this, result, Toast.LENGTH_SHORT).show();
                                 }
                             });
-
-                            // Atualiza a flag com base no resultado do cadastro remoto
                             cadastroRemotoSucesso[0] = true;
+                            if (result.equals("Dados inseridos com sucesso")) {
+                            // Atualiza a flag com base no resultado do cadastro remoto
+
+
+                            Intent intent = new Intent(CadastroActivity.this, Login.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                         // Verifica se o cadastro local é necessário
-                        if (!cadastroRemotoSucesso[0]) {
-                            cadastrarLocalmente();
+                        if (!cadastroRemotoSucesso[0]) {cadastrarLocalmente();}
                         }
                     }
                 });
@@ -142,6 +148,8 @@ public class CadastroActivity extends AppCompatActivity {
             long newRowId = db.insertOrThrow("TB_USUARIO", null, values);
 
             if (newRowId != -1) {
+                Intent intent = new Intent(CadastroActivity.this, Login.class);
+                startActivity(intent);
                 Toast.makeText(this, "Cadastrado localmente com sucesso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Erro ao cadastrar localmente", Toast.LENGTH_SHORT).show();

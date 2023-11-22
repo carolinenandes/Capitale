@@ -9,22 +9,22 @@
 	<style name="semibold60px" parent="TextAppearance.AppCompat">
 		<item name="android:fontFamily">@font/inter_semibold</item>
 		<item name="android:textColor">@color/text_semiblack</item>
-		<item name="android:textSize">60px</item>
+		<item name="android:textSize">60dp</item>
 	</style>
 	<style name="bold60px" parent="TextAppearance.AppCompat">
 		<item name="android:fontFamily">@font/inter_bold</item>
 		<item name="android:textColor">@color/text_semiblack</item>
-		<item name="android:textSize">45dp</item>
+		<item name="android:textSize">30dp</item>
 	</style>
 	<style name="bold45px" parent="TextAppearance.AppCompat">
 		<item name="android:fontFamily">@font/inter_bold</item>
 		<item name="android:textColor">@color/text_semiblack</item>
-		<item name="android:textSize">45px</item>
+		<item name="android:textSize">30dp</item>
 	</style>
 	<style name="semibold45px" parent="TextAppearance.AppCompat">
 		<item name="android:fontFamily">@font/inter_semibold</item>
 		<item name="android:textColor">@color/noticias_color</item>
-		<item name="android:textSize">45px</item>
+		<item name="android:textSize">20dp</item>
 	</style>
 
 	<style name="hintText">

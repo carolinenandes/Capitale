@@ -127,10 +127,10 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, result, Toast.LENGTH_SHORT).show();
                                 }
                             });
-
+                            loginRemotoSucesso[0] = true;
                             // Verifica se o login remoto foi bem-sucedido
                             if (result.equals("Login bem-sucedido")) {
-                                loginRemotoSucesso[0] = true;
+
 
                                 // Navega para a MainActivity após o login remoto
                                 Intent intent = new Intent(Login.this, HomeActivity.class);
