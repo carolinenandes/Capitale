@@ -119,6 +119,14 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         dismiss();
     }
 
+    // Método para mostrar o Dialog de seleção de produtos
+    private void showDialogSelecaoProdutos() {
+        getParentFragmentManager().setFragmentResultListener(SELECIONAR_PRODUTOS_REQUEST_KEY, this, (requestKey, result) -> {
+            ArrayList<produtoSelecao> produtosSelecionados = result.getParcelableArrayList("produtos_selecionados");
+            adicionarPedidosAoBanco(produtosSelecionados);
+        });
+    }
+
 
     public void pegarProdutos(SQLiteDatabase database) {
         try {
@@ -156,13 +164,7 @@ public class DialogSelecaoProdutosFinancas extends DialogFragment {
         }
     }
 
-    // Método para mostrar o Dialog de seleção de produtos
-    private void showDialogSelecaoProdutos() {
-        getParentFragmentManager().setFragmentResultListener(SELECIONAR_PRODUTOS_REQUEST_KEY, this, (requestKey, result) -> {
-            ArrayList<produtoSelecao> produtosSelecionados = result.getParcelableArrayList("produtos_selecionados");
-            adicionarPedidosAoBanco(produtosSelecionados);
-        });
-    }
+
 
     public void adicionarPedidosAoBanco(ArrayList<produtoSelecao> produtosSelecionados) {
         SQLiteDatabase db = bancoDeDados.getWritableDatabase();
