@@ -10,23 +10,23 @@
         style="@style/bold60px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
         android:text="@string/titleCliente"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
-        android:layout_width="308dp"
-        android:layout_height="608dp"
+        android:layout_width="364dp"
+        android:layout_height="493dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleProd"
-        app:layout_constraintVertical_bias="0.636">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewCliente"
@@ -43,10 +43,10 @@
 
     <ImageButton
         android:id="@+id/btnInsertCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="732dp"
+        android:layout_width="198dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="668dp"
         android:background="@drawable/btnadicionar"
         android:text="@string/btnAddCliente"
         app:cornerRadius="100dp"
@@ -58,8 +58,8 @@
         android:id="@+id/btnVerCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="732dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="668dp"
         android:background="@drawable/btnvermais"
         android:text="@string/btnVerCliente"
         app:layout_constraintStart_toStartOf="parent"

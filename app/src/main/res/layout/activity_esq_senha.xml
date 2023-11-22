@@ -131,7 +131,7 @@
                 android:layout_marginTop="60dp"
                 android:ems="10"
                 android:hint="Nova Senha"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etxtEmail_esq_senha" />

@@ -4,25 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:fillViewport="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <TextView
-
+        android:id="@+id/textView3"
         style="@style/bold60px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/inter_bold"
         android:text="Finanças"
         android:textColor="@color/black"
-        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +27,8 @@
         android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="136dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="Lucros e Gastos"
@@ -44,77 +41,55 @@
     <ImageView
         android:id="@+id/go_bar_chart_button"
         style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="194dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="76dp"
+        android:layout_width="195dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="380dp"
         android:gravity="center"
         android:src="@drawable/grafcolun"
         android:text="@string/grafico_colunas"
         android:textColor="@color/black"
         android:textSize="10sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/pie_chart_button"
         style="?android:attr/buttonBarButtonStyle"
-        android:layout_width="187dp"
+        android:layout_width="194dp"
         android:layout_height="52dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:src="@drawable/graf_pizza"
         android:textColor="@color/white"
         android:textSize="10sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="444dp"
-        android:src="@drawable/ccenterline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnAdicionaVenda"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="256dp"
-        android:layout_marginTop="716dp"
+        android:layout_marginTop="708dp"
         android:background="@color/black"
         android:text="@string/btnAdicionaVenda"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="392dp"
-        android:text="Tendencia de vendas"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/btnVerPedidos"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="676dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="644dp"
         android:background="@color/black"
         android:text="Button"
         android:textColor="#757575"
