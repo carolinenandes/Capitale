@@ -133,7 +133,6 @@ public class Login extends AppCompatActivity {
                                 // Navega para a MainActivity após o login remoto
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
-                                finish();
                             }
                         }
 

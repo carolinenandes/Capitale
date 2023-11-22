@@ -1,10 +1,14 @@
 package com.example.tcc20;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -12,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         // Inicializa o banco de dados
         banco = new BancoDeDados(getApplicationContext());
 
+
+
         // Adiciona listener ao BottomNavigationView
         /*bottomMenuBar.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
@@ -85,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });*/
 
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                Log.d("Navigation", "Navigated to " + destination.getLabel());
+            }
+        });
+
 
     }
 
@@ -101,19 +115,21 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 
         navController = navHostFragment.getNavController();
+        //navController = Navigation.findNavController(this, R.id.fragmentContainer);
 
-        NavigationUI.setupWithNavController(binding.bottomMenuBar, navController);
-
+        NavigationUI.setupWithNavController(bottomMenuBar, navController);
     }
+
+
 
     // Inicializa as views
     private void initViews() {
+        bottomMenuBar = (BottomNavigationView) findViewById(R.id.bottomMenuBar);
         txtHeaderNome = findViewById(R.id.txtHeaderNome);
         txtHeaderEmpresa = findViewById(R.id.txtHeaderEmpresa);
         txtHeaderSaldoAtual = findViewById(R.id.txtHeaderSaldoAtual);
         imgHeaderProfilePic = findViewById(R.id.imgHeaderProfilePic);
         btnNoticias = findViewById(R.id.btnNoticias);
-        bottomMenuBar = findViewById(R.id.bottomMenuBar);
     }
 
     // Método para carregar os dados do banco de dados

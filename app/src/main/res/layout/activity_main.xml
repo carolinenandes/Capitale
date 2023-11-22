@@ -28,7 +28,6 @@
         android:paddingTop="10dp"
         android:background="@color/noticias_color"
         app:itemTextColor="@color/white"
-
         app:labelVisibilityMode="labeled"
         style="@style/Widget.App.BottomNavigationView"
         android:paddingBottom="10dp"
