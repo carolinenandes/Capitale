@@ -298,12 +298,12 @@
         android:id="@+id/bottomMenuBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        style="@style/Widget.App.BottomNavigationView"
         android:background="@color/navBar"
-        app:itemTextColor="@color/white"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

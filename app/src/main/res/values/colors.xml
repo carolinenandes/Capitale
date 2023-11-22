@@ -20,5 +20,10 @@
     <color name="noticias_color">#363636</color>
     <color name="adapter_bg">#EEEEEE</color>
 
+    <color name="inative_color">#8177FE</color>
+    <color name="active_color">#63DADE</color>
+    <color name="navBar">#3A3A3A</color>
     <color name="selecionado">#FF0000</color>
+
+
 </resources>

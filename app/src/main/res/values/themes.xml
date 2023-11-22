@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TCC20" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.TCC20" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">#C5C0FF</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -26,7 +26,25 @@
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeTopRight">48dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
+
+
+
     </style>
+
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemIconTint">@drawable/bottom_nav_icon_selector</item>
+
+
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/active_color</item>
+        <item name="colorOnPrimary">@color/active_color</item>
+    </style>
+
 
 
 </resources>

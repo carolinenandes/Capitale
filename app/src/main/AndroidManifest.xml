@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -17,21 +18,29 @@
 
 
         <activity
+            android:name="com.example.NoticiasViews.MostrarNoticia"
+            android:parentActivityName=".HomeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+
+
+        <activity
             android:name="com.example.NoticiasViews.WebViewActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
-            android:name="adapterPedidosSelecao"
+            android:name=".adapterPedidosSelecao"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".adapterProdutosSelecao"
             android:exported="true">
@@ -39,7 +48,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".DialogSelecaoProdutos"
             android:exported="true">
@@ -47,7 +55,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".DialogSelecaoProdutosFinancas"
             android:exported="true">
@@ -55,7 +62,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".DialogVerPedidos"
             android:exported="true">
@@ -63,17 +69,13 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
         <activity
             android:name=".SplashScreen"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
-
         <activity
             android:name=".SlideScreen"
             android:exported="false">
@@ -81,8 +83,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
         <activity
             android:name="com.example.Entrar.CadastroActivity"
             android:exported="true">
@@ -90,34 +90,27 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
-
-
         <activity
             android:name="com.example.Entrar.Login"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
-
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/Theme.TCC20">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name="com.example.Grafico.RadarChartActivity"
             android:exported="false">
@@ -144,7 +137,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-
         <activity
             android:name=".esqSenhaActivity"
             android:exported="false">
@@ -152,9 +144,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
     </application>
-
-
 
 </manifest>
