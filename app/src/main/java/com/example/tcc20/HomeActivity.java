@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.Metas.MetasFragment;
 import com.example.NoticiasViews.NewsFragment;
+import com.example.NoticiasViews.WebViewActivity;
 import com.example.ObjectClasses.BancoDeDados;
 import com.example.ObjectClasses.Empresa;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -55,6 +57,14 @@ public class HomeActivity extends AppCompatActivity {
                     break;
                 case R.id.btnClientesMenu:
                     loadFragment(new ClientesFragment());
+                    break;
+                case R.id.btnHomeMenu:
+                    // Remove todos os fragments da pilha antes de voltar à HomeActivity
+                    getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    // Inicie a HomeActivity com uma transição personalizada
+                    Intent intent = new Intent(this, HomeActivity.class);
+                    startActivity(intent);
+                    finish(); // Finalize a atividade atual para evitar acumular várias instâncias
                     break;
             }
             return true;
