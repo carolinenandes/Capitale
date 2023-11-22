@@ -24,7 +24,7 @@
 	<style name="semibold45px" parent="TextAppearance.AppCompat">
 		<item name="android:fontFamily">@font/inter_semibold</item>
 		<item name="android:textColor">@color/noticias_color</item>
-		<item name="android:textSize">20dp</item>
+		<item name="android:textSize">16dp</item>
 	</style>
 
 	<style name="hintText">

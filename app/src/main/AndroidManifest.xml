@@ -18,16 +18,6 @@
 
 
         <activity
-            android:name="com.example.NoticiasViews.MostrarNoticia"
-            android:parentActivityName=".HomeActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" />
-        </activity>
-
-
-        <activity
             android:name="com.example.NoticiasViews.WebViewActivity"
             android:exported="true">
             <meta-data
