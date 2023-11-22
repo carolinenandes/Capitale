@@ -188,7 +188,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
         String createTableMetas = "CREATE TABLE IF NOT EXISTS TB_METAS_FINANCEIRAS (\n" +
                 "    ID_META INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    NOME_META VARCHAR(60) NOT NULL,\n" +
-                "    SALDO_EMPRESA_USUARIO NUMERIC DEFAULT 0,\n" +
+                "    SALDO_EMPRESA NUMERIC DEFAULT 0,\n" +
                 "    VALOR_META DECIMAL(6,2),\n" +
                 "    VALOR_META_ATUAL DECIMAL(6,2)\n" +  // Adiciona a nova coluna
                 ");";
@@ -211,16 +211,16 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "    STATUS_PED_COMPRA VARCHAR(60)\n" +
                 ");";
 
-
         // Execute as queries para criar as tabelas
         sqLiteDatabase.execSQL(createTableUsuario);
         sqLiteDatabase.execSQL(createTableEmpresa);
         sqLiteDatabase.execSQL(createTableCliente);
         sqLiteDatabase.execSQL(createTableProduto);
         sqLiteDatabase.execSQL(createTableMetas);
+
         sqLiteDatabase.execSQL(createTableGastosGanhos);
 
-        // Insere valores padrão
+        // Insere valores padrão na TB_GASTOS_GANHOS
         ContentValues values = new ContentValues();
         values.put("GASTO", 0.00);
         values.put("GANHO", 0.00);

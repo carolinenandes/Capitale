@@ -129,6 +129,18 @@ public class Login extends AppCompatActivity {
                             // Verifica se o login remoto foi bem-sucedido
                             if (result.equals("Login bem-sucedido")) {
 
+                                // Insere valores padrão na tabela TB_EMPRESA apenas se o login remoto foi bem-sucedido
+                                SQLiteDatabase db = banco.getWritableDatabase();
+                                ContentValues valuesEmpresa = new ContentValues();
+                                valuesEmpresa.put("NOME_EMPRESA", "Insira o nome da empresa aqui");
+                                valuesEmpresa.put("EMAIL_EMPRESA", email);
+                                valuesEmpresa.put("STATUS_USUARIO", "Ativo");
+                                valuesEmpresa.put("DTA_CADASTRO_USUARIO", (String) null);
+                                valuesEmpresa.put("SALDO_EMPRESA", 0);
+                                valuesEmpresa.put("CNPJ_EMPRESA", "0000000");
+                                valuesEmpresa.put("TELEFONE_EMPRESA", (String) null);
+                                db.insert("TB_EMPRESA", null, valuesEmpresa);
+                                db.close();
 
                                 // Navega para a MainActivity após o login remoto
                                 Intent intent = new Intent(Login.this, MainActivity.class);
