@@ -40,13 +40,6 @@ public class MetasFragment extends Fragment {
     private ItemTouchHelper itemTouchHelper;
 
     public MetasFragment() {
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override

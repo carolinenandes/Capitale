@@ -1,5 +1,6 @@
 package com.example.tcc20;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,34 +34,29 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
-    private ImageView imgHeaderProfilePic, btnNoticias;
+
     private BottomNavigationView bottomMenuBar;
     BancoDeDados banco;
 
     ActivityMainBinding binding;
 
-    private NavHostFragment navHostFragment;
-    private NavController navController;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        initNavigation();
+        bottomMenuBar = (BottomNavigationView) findViewById(R.id.bottomMenuBar);
 
-        // Inicializa as views
-        initViews();
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        NavigationUI.setupWithNavController(bottomMenuBar, navController);
 
         // Inicializa o banco de dados
         banco = new BancoDeDados(getApplicationContext());
 
-
-
         // Adiciona listener ao BottomNavigationView
-        /*bottomMenuBar.setOnItemSelectedListener(item -> {
+     /*   bottomMenuBar.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
             switch (item.getItemId()) {
@@ -77,12 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment = new ClientesFragment();
                     break;
                 case R.id.btnHomeMenu:
-                    // Remove todos os fragments da pilha antes de voltar à HomeActivity
-                    getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    // Inicie a HomeActivity com uma transição personalizada
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish(); // Finalize a atividade atual para evitar acumular várias instâncias
+                    selectedFragment = new HomeFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction()
@@ -91,15 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });*/
-
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                Log.d("Navigation", "Navigated to " + destination.getLabel());
-            }
-        });
-
-
     }
 
     // Método para carregar um fragmento no contêiner
@@ -108,60 +90,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         // Substitui o fragment atual pelo fragment clicado
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
-    }
-
-    private void initNavigation(){
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
-
-        navController = navHostFragment.getNavController();
-        //navController = Navigation.findNavController(this, R.id.fragmentContainer);
-
-        NavigationUI.setupWithNavController(bottomMenuBar, navController);
+        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
     }
 
 
 
-    // Inicializa as views
-    private void initViews() {
-        bottomMenuBar = (BottomNavigationView) findViewById(R.id.bottomMenuBar);
-        txtHeaderNome = findViewById(R.id.txtHeaderNome);
-        txtHeaderEmpresa = findViewById(R.id.txtHeaderEmpresa);
-        txtHeaderSaldoAtual = findViewById(R.id.txtHeaderSaldoAtual);
-        imgHeaderProfilePic = findViewById(R.id.imgHeaderProfilePic);
-        btnNoticias = findViewById(R.id.btnNoticias);
-    }
-
-    // Método para carregar os dados do banco de dados
-    private void carregarDadosDoBanco() {
-        try {
-            banco.openDB();
-
-            String sql = "SELECT * FROM TB_EMPRESA";
-            Cursor cursor = banco.db.rawQuery(sql, null);
-
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id_empresa"));
-                    String nome = cursor.getString(cursor.getColumnIndex("nome_empresa"));
-                    String saldo = cursor.getString(cursor.getColumnIndex("saldo_empresa"));
-
-                    Empresa empresa = new Empresa(id, nome, saldo);
-                    txtHeaderEmpresa.setText(nome);
-                } while (cursor.moveToNext());
-
-                cursor.close();
-            }
-
-            banco.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void limparElementos() {
-        FragmentContainerView homeContainerView = findViewById(R.id.fragmentContainer);
+        FragmentContainerView homeContainerView = findViewById(R.id.nav_host_fragment);
 
         // Remove todas as visualizações dentro de homeContainer
         homeContainerView.removeAllViews();
