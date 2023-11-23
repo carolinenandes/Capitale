@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
 
+        String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
+
+        // Carrega a home fragment e passa o nomeUsuario como argumento
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment, HomeFragment.newInstance(nomeUsuario))
+                    .commit();
+        }
+
         binding.bottomMenuBar.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.btnHomeMenu:

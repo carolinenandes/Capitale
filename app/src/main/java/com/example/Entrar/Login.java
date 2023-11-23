@@ -1,6 +1,7 @@
 package com.example.Entrar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ObjectClasses.BancoDeDados;
+import com.example.tcc20.HomeFragment;
 import com.example.tcc20.MainActivity;
 import com.example.tcc20.R;
 import com.example.tcc20.esqSenhaActivity;
