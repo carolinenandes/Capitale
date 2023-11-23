@@ -49,7 +49,7 @@ public class InsertDialogFragmentMetas extends DialogFragment {
             public void onClick(View v) {
                 String nomeMeta = etxtNomeMeta.getText().toString();
                 String valorMeta = String.valueOf(Integer.parseInt(etxValorMeta.getText().toString()));
-                int saldoEmpresa = 1000;
+                int saldoEmpresa = 0;
                 String valorAtualMeta = "0";
 
                 Metas novoMetas = new Metas(-1, nomeMeta, saldoEmpresa , valorMeta, valorAtualMeta);

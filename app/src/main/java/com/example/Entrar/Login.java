@@ -146,7 +146,7 @@ public class Login extends AppCompatActivity {
                                         Log.d("Login", "Nome do Usuário: " + result);
 
                                         // Insere valores padrão na tabela TB_EMPRESA se a primeira linha não existe
-                                        if (!primeiraLinhaExiste()) {
+                                        if (!primeiraLinhaExisteEmpresa()) {
                                             SQLiteDatabase db = banco.getWritableDatabase();
                                             ContentValues valuesEmpresa = new ContentValues();
                                             valuesEmpresa.put("NOME_EMPRESA", "Nome da empresa aqui");
@@ -160,8 +160,10 @@ public class Login extends AppCompatActivity {
                                             db.close();
 
                                         }
+
                                         // Insere ou atualiza a linha na tabela TB_USUARIO
-                                        inserirOuAtualizarUsuario(nomeUsuario = result);
+                                        inserirOuAtualizarUsuario(nomeUsuario = result, email, senha);
+
 
                                         // Navega para a MainActivity após o login local
                                         Intent intent = new Intent(Login.this, MainActivity.class);
@@ -185,16 +187,18 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-    private void inserirOuAtualizarUsuario(String nomeUsuario) {
+    private void inserirOuAtualizarUsuario(String nomeUsuario, String email, String senha) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         Log.d("Login", "Nome do Usuário banco: " + nomeUsuario);
 
         // Verifica se a primeira linha da tabela TB_USUARIO já existe
-        boolean primeiraLinhaExiste = primeiraLinhaExiste();
+        boolean primeiraLinhaExiste = primeiraLinhaExisteUsuario();
 
         ContentValues values = new ContentValues();
         values.put("NOME_USUARIO", nomeUsuario);
+        values.put("EMAIL_USUARIO", email);
+        values.put("SENHA_USUARIO", senha);
 
         // Se a primeira linha existir, atualiza os valores
         if (primeiraLinhaExiste) {
@@ -245,12 +249,38 @@ public class Login extends AppCompatActivity {
     }
 
     // Método para verificar se a primeira linha da tabela TB_EMPRESA já existe
-    private boolean primeiraLinhaExiste() {
+    private boolean primeiraLinhaExisteEmpresa() {
         try {
             BancoDeDados banco = new BancoDeDados(this);
             banco.openDB();
 
             String sql = "SELECT * FROM TB_EMPRESA LIMIT 1";
+            Cursor cursor = banco.db.rawQuery(sql, null);
+
+            boolean existe = cursor != null && cursor.moveToFirst();
+
+            if (cursor != null) {
+                cursor.close();
+            }
+
+            banco.close();
+
+            return existe;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Método para verificar se a primeira linha da tabela TB_EMPRESA já existe
+    private boolean primeiraLinhaExisteUsuario() {
+        try {
+            BancoDeDados banco = new BancoDeDados(this);
+            banco.openDB();
+
+            String sql = "SELECT * FROM TB_USUARIO LIMIT 1";
             Cursor cursor = banco.db.rawQuery(sql, null);
 
             boolean existe = cursor != null && cursor.moveToFirst();

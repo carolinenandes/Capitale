@@ -190,7 +190,7 @@ public class BancoDeDados extends SQLiteOpenHelper {
                 "    NOME_META VARCHAR(60) NOT NULL,\n" +
                 "    SALDO_EMPRESA NUMERIC DEFAULT 0,\n" +
                 "    VALOR_META DECIMAL(6,2),\n" +
-                "    VALOR_META_ATUAL DECIMAL(6,2)\n" +  // Adiciona a nova coluna
+                "    VALOR_META_ATUAL DECIMAL(6,2)\n" +
                 ");";
 
 
