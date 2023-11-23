@@ -76,10 +76,10 @@ public class DialogVerPedidos extends DialogFragment {
         btnConfirmaPgto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtenha os pedidos selecionados do adapter
+                // Obtem os pedidos selecionados do adapter
                 ArrayList<pedidoSelecao> pedidosSelecionados = adapter.getPedidosSelecionados();
 
-                // Verifique se há pedidos selecionados
+                // Verifica se há pedidos selecionados
                 if (!pedidosSelecionados.isEmpty()) {
                     // Lista para armazenar os IDs dos pedidos selecionados
                     ArrayList<Integer> idsPedidosSelecionados = new ArrayList<>();
@@ -88,17 +88,18 @@ public class DialogVerPedidos extends DialogFragment {
                     for (pedidoSelecao pedido : pedidosSelecionados) {
                         atualizarStatusPedido(pedido.getId(), "Pago");
 
-                        // Adicione o ID do pedido à lista
+                        // Adiciona o ID do pedido à lista
                         idsPedidosSelecionados.add(pedido.getId());
                     }
 
-                    // Atualize a interface do usuário (se necessário)
+                    // Atualiza a interface do usuário (se necessário)
                     adapter.notifyDataSetChanged();
 
-                    // Chame o método de confirmação de seleção
+                    // Chama o método de confirmação de seleção
                     confirmarSelecao();
+                    gasto_lucros.GanhoGastoLucro();
 
-                    // Chame o método para cadastrar lucro na meta, passando os IDs dos pedidos selecionados
+                    // Chama o método para cadastrar lucro na meta, passando os IDs dos pedidos selecionados
                     gasto_lucros.cadastrarLucroNaMeta(idsPedidosSelecionados);
                 }
             }
