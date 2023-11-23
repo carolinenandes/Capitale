@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.Grafico.BarChartActivity;
 import com.example.Grafico.PieChartActivity;
@@ -27,7 +28,7 @@ public class FinancasFragment extends Fragment {
     private MainActivity context;
     private BancoDeDados banco;
 
-    Button btnAdicionaVenda, btnVerPedidos;
+    ImageButton btnAdicionaVenda, btnVerPedidos;
     AppCompatImageView go_bar_chart, go_pie_chart;
     Gasto_Lucros gasto_lucros;
     BancoDeDados db;

@@ -9,6 +9,8 @@ public class Empresa {
     private String saldo;
     private String telefone;
 
+    public Empresa(){};
+
     public Empresa(int id, String nome, String saldo) {
         this.id = id;
         this.nome = nome;

@@ -26,6 +26,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_NOME_USUARIO = "ARG_NOME_USUARIO";
     private TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
     private ImageView btnNoticias;
+    private String nomeEmpresa, saldoEmpresa;
 
     public static HomeFragment newInstance(String nomeUsuario) {
         HomeFragment fragment = new HomeFragment();
@@ -44,6 +45,14 @@ public class HomeFragment extends Fragment {
         txtHeaderEmpresa = view.findViewById(R.id.txtHeaderEmpresa);
         txtHeaderSaldoAtual = view.findViewById(R.id.txtHeaderSaldoAtual);
         btnNoticias = view.findViewById(R.id.btnNoticias);
+
+        txtHeaderEmpresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditDialogInfo dialog = new EditDialogInfo((MainActivity)getContext());
+                dialog.show(getChildFragmentManager(), "fragment_edit_dialog_info");
+            }
+        });
 
         // Retrieve the string from the arguments
         String nomeUsuario = getArguments() != null ? getArguments().getString(ARG_NOME_USUARIO) : null;
