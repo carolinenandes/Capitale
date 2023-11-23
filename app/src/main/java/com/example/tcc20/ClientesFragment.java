@@ -100,9 +100,9 @@ public class ClientesFragment extends Fragment {
                 if (selectedItemPosition != RecyclerView.NO_POSITION) {
                     Cliente clienteSelecionado = clienteList.get(selectedItemPosition);
                     int clienteId = clienteSelecionado.getId();
-                    //DialogSelecaoProdutos dialog = new DialogSelecaoProdutos(getContext(), bancoDeDados, clienteId);
+
                     EditDialogFragmentCliente dialog = new EditDialogFragmentCliente(bancoDeDados, adapter, clienteSelecionado);
-                    dialog.show(getParentFragmentManager(), "dialog_selecao_produtos");
+                    dialog.show(getParentFragmentManager(), "EditDialogFragmentCliente");
                 } else {
                     Log.d("HomeActivity", "Nenhum item selecionado para edição");
                     Toast.makeText(context, "Selecione um cliente para editar", Toast.LENGTH_SHORT).show();

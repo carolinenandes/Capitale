@@ -114,7 +114,8 @@ public class EditDialogFragmentCliente extends DialogFragment {
             adicionarPedidosAoCliente(produtosSelecionados);
         });
 
-        DialogSelecaoProdutos dialog = new DialogSelecaoProdutos(context);
+        int clienteId = clienteParaEditar.getId();
+        DialogSelecaoProdutos dialog = new DialogSelecaoProdutos(getContext(), banco, clienteId);
         dialog.show(getParentFragmentManager(), "selecao_produtos_dialog");
     }
 
