@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.text.InputType;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,6 +108,9 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
                         // Obter o ID da meta
                         int metaId = metas.getId();
 
+                        // Obter o valor inicial atual da meta antes de fazer qualquer alteração
+                        float valorInicialAntes = banco.obterValorInicialAtualMeta(metaId);
+
                         // Atualiza o valor na tabela do banco de dados
                         banco.atualizarValorMetaAtual(metaId, valorInicial);
 
@@ -119,6 +123,9 @@ public class adapterMetas extends RecyclerView.Adapter<adapterMetas.MyViewHolder
                         // Calcule a nova porcentagem
                         double valorMeta = Double.parseDouble(metas.getValor_meta());
                         double porcentagem = (valorInicial / valorMeta) * 100;
+
+                        // Atualizar o saldo da empresa usando o valor inicial antes da mudança
+                        banco.atualizarSaldoEmpresa(metaId, valorInicialAntes, valorInicial);
 
                         // Salvar a porcentagem no SharedPreferences
                         SharedPreferences sharedPreferences = context.getSharedPreferences("progress_prefs", Context.MODE_PRIVATE);

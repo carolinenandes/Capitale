@@ -251,6 +251,68 @@ public class BancoDeDados extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void atualizarSaldoEmpresa(int metaId, float novoValorInicial, double valorInicial) {
+        try {
+            openDB();
+
+            // Obter o valor inicial atual da meta antes da mudança
+            float valorInicialAntes = obterValorInicialAtualMeta(metaId);
+
+            Log.d("TAG", "Valor inicial antes: " + valorInicialAntes);
+            Log.d("TAG", "Novo valor inicial: " + novoValorInicial);
+
+            // Calcular a diferença entre o novo valor inicial e o valor inicial antes da mudança
+            float diferenca = valorInicialAntes - novoValorInicial;
+
+            Log.d("TAG", "Diferença: " + diferenca);
+
+            // Atualizar o saldo da empresa subtraindo a diferença calculada
+            String updateQuery = "UPDATE TB_EMPRESA SET SALDO_EMPRESA = SALDO_EMPRESA - ?";
+            db.execSQL(updateQuery, new Object[]{diferenca});
+
+            // Adicionar log para verificar o saldo atual da empresa
+            float saldoAtualizado = obterSaldoAtualEmpresa();
+            Log.d("TAG", "Saldo atualizado: " + saldoAtualizado);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+
+
+    // Método para obter o saldo atual da empresa
+    private float obterSaldoAtualEmpresa() {
+        float saldoAtualizado = 0.0f;
+
+        // Adicionar log para verificar o saldo atual da empresa
+        String query = "SELECT SALDO_EMPRESA FROM TB_EMPRESA";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            saldoAtualizado = cursor.getFloat(cursor.getColumnIndex("SALDO_EMPRESA"));
+            cursor.close();
+        }
+
+        return saldoAtualizado;
+    }
+
+    public float obterValorInicialAtualMeta(int metaId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT VALOR_META_ATUAL FROM TB_METAS_FINANCEIRAS WHERE ID_META = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(metaId)});
+
+        float valorInicialAtual = 0.0f;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            valorInicialAtual = cursor.getFloat(cursor.getColumnIndex("VALOR_META_ATUAL"));
+            cursor.close();
+        }
+
+        return valorInicialAtual;
+    }
+
     public Cursor rawQuery(String sql, String[] selectionArgs) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery(sql, selectionArgs);
