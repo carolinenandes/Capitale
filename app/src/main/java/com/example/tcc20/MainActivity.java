@@ -47,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
         bottomMenuBar = (BottomNavigationView) findViewById(R.id.bottomMenuBar);
 
+        String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
+
+        // Load HomeFragment and pass the nomeUsuario as an argument
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment, HomeFragment.newInstance(nomeUsuario))
+                    .commit();
+        }
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();

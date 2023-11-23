@@ -1,7 +1,5 @@
 package com.example.Entrar;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -30,12 +28,13 @@ import java.io.IOException;
 public class Login extends AppCompatActivity {
 
     public BancoDeDados banco;
+    private String nomeUsuario;
     EditText emailUsuario, senhaUsuario;
     ImageView btnLogin;
     Context context;
-    TextView  btnEsqSenha,btnIrCad;
+    TextView btnEsqSenha, btnIrCad;
 
-
+    // URL do servidor remoto
     public String host = "https://capit4le.000webhostapp.com/projeto/";
 
     @Override
@@ -52,35 +51,36 @@ public class Login extends AppCompatActivity {
 
         banco = new BancoDeDados(this);
 
-
+        // Configura o botão para ir para a tela de cadastro
         btnIrCad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent ti = new Intent(Login.this, CadastroActivity.class);
                 startActivity(ti);
-
             }
         });
 
+        // Configura o botão de login
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Verifica as credenciais do usuário
                 verificarCredenciais();
 
+                // Adiciona um efeito visual ao botão de login
                 btnLogin.setImageResource(R.drawable.logar_btn_press);
 
+                // Restaura a imagem original após um curto período
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       btnLogin.setImageResource(R.drawable.logar_btnn);
+                        btnLogin.setImageResource(R.drawable.logar_btnn);
                     }
                 }, 150);
-
-
             }
         });
 
+        // Configura o botão para ir para a tela de redefinição de senha
         btnEsqSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,9 +88,9 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    // Método para verificar as credenciais do usuário
     private void verificarCredenciais() {
         // Obtém o email e a senha inseridos pelo usuário
         String email = emailUsuario.getText().toString();
@@ -105,7 +105,7 @@ public class Login extends AppCompatActivity {
         // Flag para acompanhar se o login remoto foi bem-sucedido
         final boolean[] loginRemotoSucesso = {false};
 
-        // Enviando os dados para o servidor usando uma requisição HTTP
+        // Envia os dados para o servidor usando uma requisição HTTP
         Ion.with(this)
                 .load(host + "login.php")
                 .setBodyParameter("email_usuario", email)
@@ -136,25 +136,35 @@ public class Login extends AppCompatActivity {
                             loginRemotoSucesso[0] = true;
                             // Verifica se o login remoto foi bem-sucedido
                             if (result.equals("Login bem-sucedido")) {
+                                // Puxa o nome do usuário do banco de dados
+                                puxaNomedb(email, senha, new SimpleCallback() {
+                                    @Override
+                                    public void onSuccess(String result) {
+                                        // Insere valores padrão na tabela TB_EMPRESA se a primeira linha não existe
+                                        if (!primeiraLinhaExiste()) {
+                                            SQLiteDatabase db = banco.getWritableDatabase();
+                                            ContentValues valuesEmpresa = new ContentValues();
+                                            valuesEmpresa.put("NOME_EMPRESA", "Insira o nome da empresa aqui");
+                                            valuesEmpresa.put("EMAIL_EMPRESA", email);
+                                            valuesEmpresa.put("STATUS_USUARIO", "Ativo");
+                                            valuesEmpresa.put("DTA_CADASTRO_USUARIO", (String) null);
+                                            valuesEmpresa.put("SALDO_EMPRESA", 0);
+                                            valuesEmpresa.put("CNPJ_EMPRESA", "0000000");
+                                            valuesEmpresa.put("TELEFONE_EMPRESA", (String) null);
+                                            db.insert("TB_EMPRESA", null, valuesEmpresa);
+                                            db.close();
+                                        }
+                                        // Navega para a MainActivity após o login remoto
+                                        Intent intent = new Intent(Login.this, MainActivity.class);
+                                        intent.putExtra("NOME_USUARIO", nomeUsuario);
+                                        startActivity(intent);
+                                    }
 
-                                // Verifica se a primeira linha já existe na tabela TB_EMPRESA
-                                if (!primeiraLinhaExiste()) {
-                                    // Insere valores padrão na tabela TB_EMPRESA apenas se a primeira linha não existe
-                                    SQLiteDatabase db = banco.getWritableDatabase();
-                                    ContentValues valuesEmpresa = new ContentValues();
-                                    valuesEmpresa.put("NOME_EMPRESA", "Insira o nome da empresa aqui");
-                                    valuesEmpresa.put("EMAIL_EMPRESA", email);
-                                    valuesEmpresa.put("STATUS_USUARIO", "Ativo");
-                                    valuesEmpresa.put("DTA_CADASTRO_USUARIO", (String) null);
-                                    valuesEmpresa.put("SALDO_EMPRESA", 0);
-                                    valuesEmpresa.put("CNPJ_EMPRESA", "0000000");
-                                    valuesEmpresa.put("TELEFONE_EMPRESA", (String) null);
-                                    db.insert("TB_EMPRESA", null, valuesEmpresa);
-                                    db.close();
-                                }
-                                // Navega para a MainActivity após o login remoto
-                                Intent intent = new Intent(Login.this, MainActivity.class);
-                                startActivity(intent);
+                                    @Override
+                                    public void onError(Exception e) {
+                                        // Lidar com erro, se necessário
+                                    }
+                                });
                             }
                         }
 
@@ -165,13 +175,14 @@ public class Login extends AppCompatActivity {
                     }
                 });
     }
-    // Método para logar localmente
+
+    // Método para realizar login localmente
     private void loginLocalmente() {
         // Obtém o email e a senha inseridos pelo usuário
         String email = emailUsuario.getText().toString();
         String senha = senhaUsuario.getText().toString();
 
-        // Inserir no banco de dados local (SQLite)
+        // Insere no banco de dados local (SQLite)
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("EMAIL_USUARIO", email);
@@ -219,5 +230,32 @@ public class Login extends AppCompatActivity {
 
         return false;
     }
-}
 
+    // Método para puxar o nome do usuário do banco de dados usando email e senha
+    private void puxaNomedb(String email, String senha, SimpleCallback callback) {
+        Ion.with(this)
+                .load(host + "puxaNome.php")
+                .setBodyParameter("email_usuario", email)
+                .setBodyParameter("senha_usuario", senha)
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        if (e != null) {
+                            Log.e("Erro", e.toString());
+                            callback.onError(e);
+                        } else {
+                            Log.d("Nome do Usuário", result);
+                            nomeUsuario = result;
+                            callback.onSuccess(result);
+                        }
+                    }
+                });
+    }
+
+    // Interface de retorno de chamada
+    public interface SimpleCallback {
+        void onSuccess(String result);
+        void onError(Exception e);
+    }
+}
