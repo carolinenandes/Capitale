@@ -70,7 +70,7 @@
         android:id="@+id/btnEditCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/btneditar"
         android:text="@string/btnEditCliente"
@@ -82,7 +82,7 @@
         android:id="@+id/btnExcluir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/btnexcluir"
@@ -96,7 +96,7 @@
         android:id="@+id/btnAdicionarPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/btnadicionar_prod"
@@ -104,6 +104,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEditCliente"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

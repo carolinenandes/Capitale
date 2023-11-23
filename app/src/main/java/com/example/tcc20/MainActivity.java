@@ -32,7 +32,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-
+    private NavController navController;
     private BottomNavigationView bottomMenuBar;
     BancoDeDados banco;
     ActivityMainBinding binding;
@@ -42,43 +42,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new HomeFragment());
 
-        String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
+        // Configura o NavController
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.nav_host_fragment, HomeFragment.newInstance(nomeUsuario))
-                    .commit();
-        }
+        // Configura o BottomNavigationView
+        bottomMenuBar = findViewById(R.id.bottomMenuBar);
+        NavigationUI.setupWithNavController(bottomMenuBar, navController);
 
-        binding.bottomMenuBar.setOnItemSelectedListener(item -> {
+        bottomMenuBar.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.btnHomeMenu:
-                    replaceFragment(new HomeFragment());
+                    navController.navigate(R.id.homeFragment);
                     break;
                 case R.id.btnMetasMenu:
-                    replaceFragment(new MetasFragment());
+                    navController.navigate(R.id.metasFragment);
                     break;
                 case R.id.btnFinancasMenu:
-                    replaceFragment(new FinancasFragment());
+                    navController.navigate(R.id.financasFragment);
                     break;
                 case R.id.btnClientesMenu:
-                    replaceFragment(new ClientesFragment());
+                    navController.navigate(R.id.clientesFragment);
                     break;
                 case R.id.btnProdutosMenu:
-                    replaceFragment(new ProdutosFragment());
+                    navController.navigate(R.id.produtosFragment);
                     break;
             }
-
-            return false;
+            return true;
         });
-    }
 
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment, fragment);
-        fragmentTransaction.commit();
-    }
+}
 }

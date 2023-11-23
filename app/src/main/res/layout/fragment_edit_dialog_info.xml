@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     app:cardElevation="10dp"
+    android:background="#E8E6F5"
     app:cardPreventCornerOverlap="true"
     app:cardCornerRadius="60dp"
     >
@@ -11,8 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:layout_margin="0dp"
-        android:background="@android:color/transparent">
+        android:background="#E8E6F5">
 
         <EditText
             android:id="@+id/txtNomeEmpresa"

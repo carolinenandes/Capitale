@@ -24,22 +24,24 @@
 
     <ImageButton
         android:id="@+id/btnConfirmaPgto"
-        android:layout_width="222dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="190dp"
-        android:layout_marginTop="656dp"
+        android:layout_width="175dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="636dp"
         android:background="@drawable/btn_confirmar"
         android:text="@string/btnConfirmaPgto"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btnExcluirPedido"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
         android:id="@+id/btnExcluirPedido"
-        android:layout_width="185dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="656dp"
+        android:layout_width="175dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="636dp"
         android:background="@drawable/btnexcluir"
         android:text="@string/btnExcluirPedido"
         app:layout_constraintStart_toStartOf="parent"
