@@ -144,7 +144,7 @@ public class Login extends AppCompatActivity {
                                         if (!primeiraLinhaExiste()) {
                                             SQLiteDatabase db = banco.getWritableDatabase();
                                             ContentValues valuesEmpresa = new ContentValues();
-                                            valuesEmpresa.put("NOME_EMPRESA", "Insira o nome da empresa aqui");
+                                            valuesEmpresa.put("NOME_EMPRESA", "Nome da empresa aqui");
                                             valuesEmpresa.put("EMAIL_EMPRESA", email);
                                             valuesEmpresa.put("STATUS_USUARIO", "Ativo");
                                             valuesEmpresa.put("DTA_CADASTRO_USUARIO", (String) null);

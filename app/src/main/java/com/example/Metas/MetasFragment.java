@@ -170,7 +170,7 @@ public class MetasFragment extends Fragment {
                 do {
                     int id = cursor.getInt(cursor.getColumnIndex("ID_META"));
                     String nome = cursor.getString(cursor.getColumnIndex("NOME_META"));
-                    int saldoEmpresaUsuario = cursor.getInt(cursor.getColumnIndex("SALDO_EMPRESA_USUARIO"));
+                    int saldoEmpresaUsuario = cursor.getInt(cursor.getColumnIndex("SALDO_EMPRESA"));
                     String valorMeta = cursor.getString(cursor.getColumnIndex("VALOR_META"));
                     String valorAtualMeta = cursor.getString(cursor.getColumnIndex("VALOR_META_ATUAL"));
 

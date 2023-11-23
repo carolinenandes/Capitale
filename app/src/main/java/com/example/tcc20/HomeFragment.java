@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        txtHeaderNome = view.findViewById(R.id.txtHeaderNome);
+        //txtHeaderNome = view.findViewById(R.id.txtHeaderNome);
         txtHeaderEmpresa = view.findViewById(R.id.txtHeaderEmpresa);
         txtHeaderSaldoAtual = view.findViewById(R.id.txtHeaderSaldoAtual);
         btnNoticias = view.findViewById(R.id.btnNoticias);
@@ -57,13 +57,14 @@ public class HomeFragment extends Fragment {
         // Retrieve the string from the arguments
         String nomeUsuario = getArguments() != null ? getArguments().getString(ARG_NOME_USUARIO) : null;
 
-// Check if nomeUsuario is not null before using it
+        // Check if nomeUsuario is not null before using it
         if (nomeUsuario != null) {
             // Initialize and set the text for txtHeaderNome
             txtHeaderNome = (TextView) view.findViewById(R.id.txtHeaderNome);
             txtHeaderNome.setText(nomeUsuario);
         } else {
             // Handle the case where nomeUsuario is null
+            Log.d("HomeFragment", "Nome do usuário: " + nomeUsuario);
             Log.e("HomeFragment", "nomeUsuario is null");
         }
 

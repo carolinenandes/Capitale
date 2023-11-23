@@ -89,7 +89,7 @@ public class EditDialogFragmentMetas extends DialogFragment {
 
         ContentValues values = new ContentValues();
         values.put("NOME_META", produto.getNome_meta());
-        values.put("SALDO_EMPRESA_USUARIO", produto.getSaldo_empresa_usuario());
+        values.put("SALDO_EMPRESA", produto.getSaldo_empresa_usuario());
         values.put("VALOR_META", produto.getValor_meta());
 
         db.update("TB_METAS_FINANCEIRAS", values, "ID_META = ?", new String[]{String.valueOf(produto.getId())});

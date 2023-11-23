@@ -67,7 +67,7 @@ public class InsertDialogFragmentMetas extends DialogFragment {
 
         ContentValues values = new ContentValues();
         values.put("NOME_META", metas.getNome_meta());
-        values.put("SALDO_EMPRESA_USUARIO", metas.getSaldo_empresa_usuario());
+        values.put("SALDO_EMPRESA", metas.getSaldo_empresa_usuario());
         values.put("VALOR_META", metas.getValor_meta());
         values.put("VALOR_META_ATUAL", 0);
 
