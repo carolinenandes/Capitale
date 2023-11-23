@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomMenuBar;
     BancoDeDados banco;
 
-    ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +54,23 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController(bottomMenuBar, navController);
+
+
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                // Mostra ou oculta o BottomNavigationView conforme necessário
+                if (destination.getId() == R.id.homeFragment || destination.getId() == R.id.homeFragment) {
+                    bottomMenuBar.setVisibility(View.VISIBLE);
+                } else {
+                    bottomMenuBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
 
         // Inicializa o banco de dados
         banco = new BancoDeDados(getApplicationContext());
@@ -100,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         // Substitui o fragment atual pelo fragment clicado
         fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
     }
-
 
 
 

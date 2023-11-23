@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
 
     private static final String ARG_NOME_USUARIO = "ARG_NOME_USUARIO";
     private TextView txtHeaderNome, txtHeaderEmpresa, txtHeaderSaldoAtual;
-    private ImageButton btnNoticias;
+    private ImageView btnNoticias;
 
     public static HomeFragment newInstance(String nomeUsuario) {
         HomeFragment fragment = new HomeFragment();
@@ -60,6 +60,8 @@ public class HomeFragment extends Fragment {
 
         carregarDadosDoBanco();
 
+        btnNoticias = (ImageView) view.findViewById(R.id.btnNoticias);
+
         // Adiciona listener ao botão de notícias
         btnNoticias.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +73,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
 
     // Método para carregar os dados do banco de dados
     private void carregarDadosDoBanco() {
