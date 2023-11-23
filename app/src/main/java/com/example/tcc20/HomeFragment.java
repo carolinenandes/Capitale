@@ -35,6 +35,8 @@ public class HomeFragment extends Fragment {
         txtHeaderEmpresa = (TextView)view.findViewById(R.id.txtHeaderEmpresa);
         txtHeaderSaldoAtual = (TextView) view.findViewById(R.id.txtHeaderSaldoAtual);
 
+        carregarDadosDoBanco();
+
         btnNoticias = (ImageButton) view.findViewById(R.id.btnNoticias);
 
         // Adiciona listener ao botão de notícias
@@ -56,19 +58,17 @@ public class HomeFragment extends Fragment {
             BancoDeDados banco = new BancoDeDados(requireContext());
             banco.openDB();
 
-            String sql = "SELECT * FROM TB_EMPRESA";
+            String sql = "SELECT * FROM TB_EMPRESA WHERE ID_EMPRESA = 1";
             Cursor cursor = banco.db.rawQuery(sql, null);
 
             if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id_empresa"));
-                    String nome = cursor.getString(cursor.getColumnIndex("nome_empresa"));
-                    String saldo = cursor.getString(cursor.getColumnIndex("saldo_empresa"));
+                // Obtém os dados
+                String nome = cursor.getString(cursor.getColumnIndex("NOME_EMPRESA"));
+                double saldo = cursor.getDouble(cursor.getColumnIndex("SALDO_EMPRESA"));
 
-                    Empresa empresa = new Empresa(id, nome, saldo);
-                    txtHeaderEmpresa.setText(nome);
-                } while (cursor.moveToNext());
-
+                // Atualiza os TextViews com os dados obtidos
+                txtHeaderEmpresa.setText(nome);
+                txtHeaderSaldoAtual.setText(String.valueOf(saldo));
                 cursor.close();
             }
 
