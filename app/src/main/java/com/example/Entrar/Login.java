@@ -135,6 +135,7 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, result, Toast.LENGTH_SHORT).show();
                                 }
                             });
+
                             loginRemotoSucesso[0] = true;
                             // Verifica se o login remoto foi bem-sucedido
                             if (result.equals("Login bem-sucedido")) {
@@ -142,6 +143,8 @@ public class Login extends AppCompatActivity {
                                 puxaNomedb(email, senha, new SimpleCallback() {
                                     @Override
                                     public void onSuccess(String result) {
+                                        Log.d("Login", "Nome do Usuário: " + result);
+
                                         // Insere valores padrão na tabela TB_EMPRESA se a primeira linha não existe
                                         if (!primeiraLinhaExiste()) {
                                             SQLiteDatabase db = banco.getWritableDatabase();
@@ -155,27 +158,61 @@ public class Login extends AppCompatActivity {
                                             valuesEmpresa.put("TELEFONE_EMPRESA", (String) null);
                                             db.insert("TB_EMPRESA", null, valuesEmpresa);
                                             db.close();
+
                                         }
-                                        // Navega para a MainActivity após o login remoto
+                                        // Insere ou atualiza a linha na tabela TB_USUARIO
+                                        inserirOuAtualizarUsuario(nomeUsuario = result);
+
+                                        // Navega para a MainActivity após o login local
                                         Intent intent = new Intent(Login.this, MainActivity.class);
-                                        intent.putExtra("NOME_USUARIO", nomeUsuario);
                                         startActivity(intent);
+                                        finish();
                                     }
 
                                     @Override
                                     public void onError(Exception e) {
+                                        Log.e("Login", "Erro no puxaNomedb", e);
                                         // Lidar com erro, se necessário
                                     }
                                 });
                             }
                         }
-
                         // Realiza o login localmente apenas se o login remoto não for bem-sucedido
                         if (!loginRemotoSucesso[0]) {
                             loginLocalmente();
                         }
                     }
                 });
+    }
+
+    private void inserirOuAtualizarUsuario(String nomeUsuario) {
+        SQLiteDatabase db = banco.getWritableDatabase();
+
+        Log.d("Login", "Nome do Usuário banco: " + nomeUsuario);
+
+        // Verifica se a primeira linha da tabela TB_USUARIO já existe
+        boolean primeiraLinhaExiste = primeiraLinhaExiste();
+
+        ContentValues values = new ContentValues();
+        values.put("NOME_USUARIO", nomeUsuario);
+
+        // Se a primeira linha existir, atualiza os valores
+        if (primeiraLinhaExiste) {
+            db.update("TB_USUARIO", values, "ID_USUARIO = 1", null);
+        } else {
+            // Se a primeira linha não existir, insere uma nova linha
+            long newRowId = db.insert("TB_USUARIO", null, values);
+
+            if (newRowId != -1) {
+                // Verifica o resultado da operação de inserção local
+                Toast.makeText(this, "Sucesso no login", Toast.LENGTH_SHORT).show();
+            } else {
+                // Verifica o resultado da operação de inserção local
+                Toast.makeText(this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        db.close();
     }
 
     // Método para realizar login localmente

@@ -62,7 +62,18 @@ public class EditDialogInfo extends DialogFragment {
                 } else {
                     // Sempre atualiza as informações
                     String res = atualizarLocalmente(txtNomeEmpresa, txtCnpj, txtFoneEmpresa, txtEmailEmpresa);
+
+                    // Se a atualização for bem-sucedida, atualiza as informações no design
+                    if (res.equals("Informações da empresa atualizadas com sucesso!")) {
+                        // Atualiza as informações no design
+                        txtNomeEmpresa.setText(txtNomeEmpresa.getText().toString());
+                        txtCnpj.setText(txtCnpj.getText().toString());
+                        txtFoneEmpresa.setText(txtFoneEmpresa.getText().toString());
+                        txtEmailEmpresa.setText(txtEmailEmpresa.getText().toString());
+                    }
                 }
+
+
             }
         });
 
@@ -111,6 +122,5 @@ public class EditDialogInfo extends DialogFragment {
         }
         return resultado;
     }
-
 
 }
