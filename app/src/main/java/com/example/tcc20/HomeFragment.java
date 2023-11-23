@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
         txtHeaderEmpresa = view.findViewById(R.id.txtHeaderEmpresa);
         txtHeaderSaldoAtual = view.findViewById(R.id.txtHeaderSaldoAtual);
         btnNoticias = view.findViewById(R.id.btnNoticias);
+
 
         // Pega a string do argumento
         String nomeUsuario = getArguments() != null ? getArguments().getString(ARG_NOME_USUARIO) : null;

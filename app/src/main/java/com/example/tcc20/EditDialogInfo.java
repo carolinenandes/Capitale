@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,10 @@ import com.example.Entrar.Login;
 import com.example.ObjectClasses.BancoDeDados;
 import com.example.ObjectClasses.Empresa;
 import com.example.ObjectClasses.adapterCliente;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class EditDialogInfo extends DialogFragment {
 
@@ -51,30 +56,29 @@ public class EditDialogInfo extends DialogFragment {
         btnaddEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txtNomeEmpresa.getText().equals("") || txtNomeEmpresa.getText().equals("")
-                        || txtNomeEmpresa.getText().equals("") || txtNomeEmpresa.getText().equals(""))
-                {Toast.makeText(context, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();}
-                else{
-                    String res = cadastrarLocalmente(txtNomeEmpresa, txtCnpj, txtFoneEmpresa, txtEmailEmpresa);
-
-                    if(res.equals("Empresa cadastrada com sucesso!")){
-                        Bundle result = new Bundle();
-                        result.putString("nomeEmpresa", txtNomeEmpresa.getText().toString());
-
-                        // The child fragment needs to still set the result on its parent fragment manager
-                        getParentFragmentManager().setFragmentResult("requestKey", result);
-
-                        //getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
-                    }
+                if (txtNomeEmpresa.getText().equals("") || txtCnpj.getText().equals("")
+                        || txtFoneEmpresa.getText().equals("") || txtEmailEmpresa.getText().equals("")) {
+                    Toast.makeText(context, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Sempre atualiza as informações
+                    String res = atualizarLocalmente(txtNomeEmpresa, txtCnpj, txtFoneEmpresa, txtEmailEmpresa);
                 }
             }
         });
+
+
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private String cadastrarLocalmente(TextView nome, TextView cnpj, TextView fone, TextView email) {
+    private String atualizarLocalmente(TextView nome, TextView cnpj, TextView fone, TextView email) {
+        // Obtém a data atual do sistema
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String dataCadastro = dateFormat.format(calendar.getTime());
+
+        // Obtem as informações existentes da empresa
         String nomeEmpresa = nome.getText().toString();
         String cnpjEmpresa = cnpj.getText().toString();
         String foneEmpresa = fone.getText().toString();
@@ -83,29 +87,30 @@ public class EditDialogInfo extends DialogFragment {
         String resultado = "";
 
         try {
-            // Insere no banco de dados local (SQLite)
+            // Atualiza as informações no banco de dados local (SQLite)
             SQLiteDatabase db = banco.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("NOME_EMPRESA", nomeEmpresa);
             values.put("CNPJ_EMPRESA", cnpjEmpresa);
+            values.put("DTA_CADASTRO_USUARIO",dataCadastro);
             values.put("TELEFONE_EMPRESA", foneEmpresa);
             values.put("EMAIL_EMPRESA", emailEmpresa);
 
-            long newRowId = db.insertOrThrow("TB_EMPRESA", null, values);
+            int numRowsAffected = db.update("TB_EMPRESA", values, "ID_EMPRESA = 1", null);
 
-            if (newRowId != -1) {
-                resultado = "Empresa cadastrada com sucesso!";
-                Toast.makeText(context, "Empresa cadastrada com sucesso!", Toast.LENGTH_SHORT).show();
-                dismiss();
+            if (numRowsAffected > 0) {
+                resultado = "Informações da empresa atualizadas com sucesso!";
+                Toast.makeText(context, "Informações da empresa atualizadas com sucesso!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "Erro ao cadastrar localmente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erro ao atualizar as informações localmente", Toast.LENGTH_SHORT).show();
             }
             db.close();
         } catch (Exception e) {
             Log.e("Erro SQLite", e.toString());
-            Toast.makeText(context, "Erro ao cadastrar localmente (e)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Erro ao atualizar as informações localmente (e)", Toast.LENGTH_SHORT).show();
         }
         return resultado;
     }
+
 
 }
