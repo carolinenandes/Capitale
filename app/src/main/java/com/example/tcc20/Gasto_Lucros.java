@@ -136,8 +136,8 @@ public class Gasto_Lucros {
         Log.d("Gasto_Lucros", "Saldo antes do cadastro na meta: " + obterSaldoMeta());
 
         // Atualiza o saldo na tabela TB_METAS_FINANCEIRAS
-        String updateQuery = "UPDATE TB_METAS_FINANCEIRAS SET SALDO_EMPRESA = ? WHERE ROWID = 1";
-        float lucro = 0;
+        String updateQuery = "UPDATE TB_EMPRESA SET SALDO_EMPRESA = ? WHERE ROWID = 1";
+        float lucro = obterLucro();
         float saldoAtualizado = obterSaldoMeta() + lucro;
         database.executarQuery(updateQuery, new String[]{String.valueOf(saldoAtualizado)});
 
@@ -146,7 +146,7 @@ public class Gasto_Lucros {
 
     @SuppressLint("Range")
     private float obterSaldoMeta() {
-        String query = "SELECT SALDO_EMPRESA FROM TB_METAS_FINANCEIRAS WHERE ROWID = 1";
+        String query = "SELECT SALDO_EMPRESA FROM TB_EMPRESA WHERE ROWID = 1";
         Cursor cursor = database.rawQuery(query, null);
 
         float saldo = 0.0f;
