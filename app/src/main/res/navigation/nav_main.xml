@@ -29,4 +29,9 @@
         android:name="com.example.tcc20.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.NoticiasViews.NewsFragment"
+        android:label="NewsFragment" />
 </navigation>

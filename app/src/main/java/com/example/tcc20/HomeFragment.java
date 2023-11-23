@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment {
         btnNoticias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new NewsFragment());
+                Navigation.findNavController(v).navigate(R.id.newsFragment);
             }
         });
 
@@ -173,8 +174,8 @@ public class HomeFragment extends Fragment {
     private void loadFragment(Fragment fragment) {
         // Obtem o fragment manager
         FragmentManager fragmentManager = getChildFragmentManager();
-
         // Substitui o fragment atual pelo fragment clicado
         fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+
     }
 }
