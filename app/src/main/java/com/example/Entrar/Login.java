@@ -1,9 +1,13 @@
 package com.example.Entrar;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,11 +25,14 @@ import com.example.tcc20.esqSenhaActivity;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import java.io.IOException;
+
 public class Login extends AppCompatActivity {
 
     public BancoDeDados banco;
     EditText emailUsuario, senhaUsuario;
     ImageView btnLogin;
+    Context context;
     TextView  btnEsqSenha,btnIrCad;
 
 
@@ -36,6 +43,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        context = getApplicationContext();
         btnIrCad = findViewById(R.id.btnIrCadastro);
         btnLogin = findViewById(R.id.btnLogin);
         btnEsqSenha = findViewById(R.id.btnEsqSenha);
@@ -129,19 +137,21 @@ public class Login extends AppCompatActivity {
                             // Verifica se o login remoto foi bem-sucedido
                             if (result.equals("Login bem-sucedido")) {
 
-                                // Insere valores padrão na tabela TB_EMPRESA apenas se o login remoto foi bem-sucedido
-                                SQLiteDatabase db = banco.getWritableDatabase();
-                                ContentValues valuesEmpresa = new ContentValues();
-                                valuesEmpresa.put("NOME_EMPRESA", "Insira o nome da empresa aqui");
-                                valuesEmpresa.put("EMAIL_EMPRESA", email);
-                                valuesEmpresa.put("STATUS_USUARIO", "Ativo");
-                                valuesEmpresa.put("DTA_CADASTRO_USUARIO", (String) null);
-                                valuesEmpresa.put("SALDO_EMPRESA", 0);
-                                valuesEmpresa.put("CNPJ_EMPRESA", "0000000");
-                                valuesEmpresa.put("TELEFONE_EMPRESA", (String) null);
-                                db.insert("TB_EMPRESA", null, valuesEmpresa);
-                                db.close();
-
+                                // Verifica se a primeira linha já existe na tabela TB_EMPRESA
+                                if (!primeiraLinhaExiste()) {
+                                    // Insere valores padrão na tabela TB_EMPRESA apenas se a primeira linha não existe
+                                    SQLiteDatabase db = banco.getWritableDatabase();
+                                    ContentValues valuesEmpresa = new ContentValues();
+                                    valuesEmpresa.put("NOME_EMPRESA", "Insira o nome da empresa aqui");
+                                    valuesEmpresa.put("EMAIL_EMPRESA", email);
+                                    valuesEmpresa.put("STATUS_USUARIO", "Ativo");
+                                    valuesEmpresa.put("DTA_CADASTRO_USUARIO", (String) null);
+                                    valuesEmpresa.put("SALDO_EMPRESA", 0);
+                                    valuesEmpresa.put("CNPJ_EMPRESA", "0000000");
+                                    valuesEmpresa.put("TELEFONE_EMPRESA", (String) null);
+                                    db.insert("TB_EMPRESA", null, valuesEmpresa);
+                                    db.close();
+                                }
                                 // Navega para a MainActivity após o login remoto
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
@@ -182,6 +192,32 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
         }
         db.close();
+    }
+
+    // Método para verificar se a primeira linha da tabela TB_EMPRESA já existe
+    private boolean primeiraLinhaExiste() {
+        try {
+            BancoDeDados banco = new BancoDeDados(this);
+            banco.openDB();
+
+            String sql = "SELECT * FROM TB_EMPRESA LIMIT 1";
+            Cursor cursor = banco.db.rawQuery(sql, null);
+
+            boolean existe = cursor != null && cursor.moveToFirst();
+
+            if (cursor != null) {
+                cursor.close();
+            }
+
+            banco.close();
+
+            return existe;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
 
