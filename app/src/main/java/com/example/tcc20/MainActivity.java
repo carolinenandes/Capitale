@@ -1,12 +1,11 @@
 package com.example.tcc20;
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -34,95 +33,44 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private BottomNavigationView bottomMenuBar;
     BancoDeDados banco;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFragment());
 
-        bottomMenuBar = (BottomNavigationView) findViewById(R.id.bottomMenuBar);
-
-        String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
-
-        // Load HomeFragment and pass the nomeUsuario as an argument
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment, HomeFragment.newInstance(nomeUsuario))
-                    .commit();
-        }
-
-
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
-
-
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                // Mostra ou oculta o BottomNavigationView conforme necessário
-                if (destination.getId() == R.id.homeFragment || destination.getId() == R.id.homeFragment) {
-                    bottomMenuBar.setVisibility(View.VISIBLE);
-                } else {
-                    bottomMenuBar.setVisibility(View.GONE);
-                }
-            }
-        });
-
-
-        // Inicializa o banco de dados
-        banco = new BancoDeDados(getApplicationContext());
-
-        // Adiciona listener ao BottomNavigationView
-     /*   bottomMenuBar.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-
+        binding.bottomMenuBar.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
+                case R.id.btnHomeMenu:
+                    replaceFragment(new HomeFragment());
+                    break;
                 case R.id.btnMetasMenu:
-                    selectedFragment = new MetasFragment();
+                    replaceFragment(new MetasFragment());
                     break;
                 case R.id.btnFinancasMenu:
-                    selectedFragment = new FinancasFragment();
-                    break;
-                case R.id.btnProdutosMenu:
-                    selectedFragment = new ProdutosFragment();
+                    replaceFragment(new FinancasFragment());
                     break;
                 case R.id.btnClientesMenu:
-                    selectedFragment = new ClientesFragment();
+                    replaceFragment(new ClientesFragment());
                     break;
-                case R.id.btnHomeMenu:
-                    selectedFragment = new HomeFragment();
+                case R.id.btnProdutosMenu:
+                    replaceFragment(new ProdutosFragment());
                     break;
             }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, selectedFragment)
-                    .commit();
 
-            return true;
-        });*/
+            return false;
+        });
     }
 
-    // Método para carregar um fragmento no contêiner
-    private void loadFragment(Fragment fragment) {
-        // Obtem o fragment manager
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-
-        // Substitui o fragment atual pelo fragment clicado
-        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, fragment);
+        fragmentTransaction.commit();
     }
-
-
-
-    public void limparElementos() {
-        FragmentContainerView homeContainerView = findViewById(R.id.nav_host_fragment);
-
-        // Remove todas as visualizações dentro de homeContainer
-        homeContainerView.removeAllViews();
-
-        // Oculta a LinearLayout homeContainer
-        homeContainerView.setVisibility(View.GONE);
-    }
-
 }

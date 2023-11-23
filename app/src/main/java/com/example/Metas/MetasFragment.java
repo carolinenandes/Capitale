@@ -58,10 +58,7 @@ public class MetasFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_metas, container, false);
 
-        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).limparElementos();
-        }
+
 
         AppCompatImageButton btnEditMetas = view.findViewById(R.id.btnEditMetas);
         AppCompatImageButton btnAddMetas = view.findViewById(R.id.btnAddMetas);

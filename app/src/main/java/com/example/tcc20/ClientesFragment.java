@@ -70,10 +70,7 @@ public class ClientesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clientes, container, false);
 
-        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).limparElementos();
-        }
+
 
         AppCompatImageButton btnVerCliente = view.findViewById(R.id.btnVerCliente);
         AppCompatImageButton btnAddCliente = view.findViewById(R.id.btnInsertCliente);

@@ -68,10 +68,7 @@ public class ProdutosFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_produtos, container, false);
 
-        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).limparElementos();
-        }
+
 
         AppCompatImageButton btnEditarProd = view.findViewById(R.id.btnEditarProd);
         AppCompatImageButton btnAddProd = view.findViewById(R.id.btnAddProd);

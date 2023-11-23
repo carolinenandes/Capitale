@@ -67,10 +67,6 @@ public class FinancasFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_financas, container, false);
 
-        // Limpa ou oculta os elementos da HomeActivity, por exemplo:
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).limparElementos();
-        }
 
         go_bar_chart = view.findViewById(R.id.go_bar_chart_button);
         go_pie_chart = view.findViewById(R.id.pie_chart_button);
