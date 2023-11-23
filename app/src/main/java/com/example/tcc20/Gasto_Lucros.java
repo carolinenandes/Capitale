@@ -6,6 +6,9 @@ import android.database.Cursor;
 
 import com.example.ObjectClasses.BancoDeDados;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class Gasto_Lucros {
 
     BancoDeDados database;
@@ -132,13 +135,27 @@ public class Gasto_Lucros {
         Log.d("Gasto_Lucros", "Valores após a atualização - Gasto: " + obterSomaGastos() + ", Ganho: " + obterSomaGanhos() + ", Lucro: " + calcularLucro());
     }
 
-    public void cadastrarLucroNaMeta() {
+    public void cadastrarLucroNaMeta(ArrayList<Integer> idsPedidosSelecionados) {
         Log.d("Gasto_Lucros", "Saldo antes do cadastro na meta: " + obterSaldoMeta());
 
-        // Atualiza o saldo na tabela TB_METAS_FINANCEIRAS
+        float lucroTotal = 0;
+
+        // Itera sobre os IDs dos pedidos selecionados
+        for (int idPedido : idsPedidosSelecionados) {
+            // Obtém o valor de venda e o valor de custo do pedido de compra
+            float valorVenda = obterValorVendaPedidoCompra(idPedido);
+            float valorCusto = obterValorCustoPedidoCompra(idPedido);
+
+            // Calcula o lucro para este pedido
+            float lucroPedido = valorVenda - valorCusto;
+
+            // Adiciona o lucro ao total
+            lucroTotal += lucroPedido;
+        }
+
+        // Atualiza o saldo na tabela TB_EMPRESA
         String updateQuery = "UPDATE TB_EMPRESA SET SALDO_EMPRESA = ? WHERE ROWID = 1";
-        float lucro = obterLucro();
-        float saldoAtualizado = obterSaldoMeta() + lucro;
+        float saldoAtualizado = obterSaldoMeta() + lucroTotal;
         database.executarQuery(updateQuery, new String[]{String.valueOf(saldoAtualizado)});
 
         Log.d("Gasto_Lucros", "Saldo após o cadastro na meta: " + obterSaldoMeta());
@@ -170,5 +187,49 @@ public class Gasto_Lucros {
         ganho = obterSomaGanhos();
 
         atualizarGastoGanhoLucro(gasto, ganho);
+    }
+
+    // Método para obter o valor de venda de um pedido de compra específico
+    private float obterValorVendaPedidoCompra(int idPedido) {
+        float valorVenda = 0;
+
+        try {
+            database.openDB();
+            String sql = "SELECT VALOR_PED_COMPRA FROM TB_PEDIDO_COMPRA WHERE ID_PED_COMPRA = ?";
+            Cursor cursor = database.db.rawQuery(sql, new String[]{String.valueOf(idPedido)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                valorVenda = cursor.getFloat(cursor.getColumnIndex("VALOR_PED_COMPRA"));
+                cursor.close();
+            }
+
+            database.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return valorVenda;
+    }
+
+    // Método para obter o valor de custo de um pedido de compra específico
+    private float obterValorCustoPedidoCompra(int idPedido) {
+        float valorCusto = 0;
+
+        try {
+            database.openDB();
+            String sql = "SELECT VALOR_CUSTO_PED_COMPRA FROM TB_PEDIDO_COMPRA WHERE ID_PED_COMPRA = ?";
+            Cursor cursor = database.db.rawQuery(sql, new String[]{String.valueOf(idPedido)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                valorCusto = cursor.getFloat(cursor.getColumnIndex("VALOR_CUSTO_PED_COMPRA"));
+                cursor.close();
+            }
+
+            database.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return valorCusto;
     }
 }

@@ -81,9 +81,15 @@ public class DialogVerPedidos extends DialogFragment {
 
                 // Verifique se há pedidos selecionados
                 if (!pedidosSelecionados.isEmpty()) {
+                    // Lista para armazenar os IDs dos pedidos selecionados
+                    ArrayList<Integer> idsPedidosSelecionados = new ArrayList<>();
+
                     // Atualize o status dos pedidos para "Pago"
                     for (pedidoSelecao pedido : pedidosSelecionados) {
                         atualizarStatusPedido(pedido.getId(), "Pago");
+
+                        // Adicione o ID do pedido à lista
+                        idsPedidosSelecionados.add(pedido.getId());
                     }
 
                     // Atualize a interface do usuário (se necessário)
@@ -91,8 +97,9 @@ public class DialogVerPedidos extends DialogFragment {
 
                     // Chame o método de confirmação de seleção
                     confirmarSelecao();
-                    gasto_lucros.GanhoGastoLucro();
-                    gasto_lucros.cadastrarLucroNaMeta();
+
+                    // Chame o método para cadastrar lucro na meta, passando os IDs dos pedidos selecionados
+                    gasto_lucros.cadastrarLucroNaMeta(idsPedidosSelecionados);
                 }
             }
         });
