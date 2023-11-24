@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.NoticiasViews.NewsFragment;
 import com.example.ObjectClasses.BancoDeDados;
 import com.example.ObjectClasses.Empresa;
+import com.example.ObjectClasses.adapterProd;
 
 import java.io.IOException;
 
@@ -28,12 +29,14 @@ public class HomeFragment extends Fragment {
 
     private static final String ARG_NOME_USUARIO = "ARG_NOME_USUARIO";
     private static final String STATE_HEADER_NOME = "state_header_nome";
-
+    private adapterProd adapter;
     private HomeViewModel viewModel;
     private TextView txtHeaderNome;
     private TextView txtHeaderEmpresa;
     private TextView txtHeaderSaldoAtual;
     private ImageView btnNoticias;
+    private ImageView btnHomeAddProd;
+    private BancoDeDados banco;
 
     public static HomeFragment newInstance(String nomeUsuario) {
         HomeFragment fragment = new HomeFragment();
@@ -98,6 +101,17 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.newsFragment);
             }
         });
+
+    //btnHomeAddprod
+      btnHomeAddProd = (ImageView) view.findViewById(R.id.btnHomeAddProd);
+        btnHomeAddProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertDialogFragmentProd dialog = new InsertDialogFragmentProd(banco, adapter);
+                dialog.show(getParentFragmentManager(), "insert_dialog");
+            }
+        });
+
 
         // Inflate the layout for this fragment
         return view;
