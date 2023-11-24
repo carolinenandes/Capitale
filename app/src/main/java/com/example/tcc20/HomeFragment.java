@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ import java.io.IOException;
 
 public class HomeFragment extends Fragment {
 
+    private MainActivity context;
+    private com.example.ObjectClasses.adapterCliente clienteadapter;
     private static final String ARG_NOME_USUARIO = "ARG_NOME_USUARIO";
     private static final String STATE_HEADER_NOME = "state_header_nome";
     private adapterProd adapter;
@@ -37,6 +40,10 @@ public class HomeFragment extends Fragment {
     private ImageView btnNoticias;
     private ImageView btnHomeAddProd;
     private BancoDeDados banco;
+    private ImageView btnHomeAddPedido;
+    private ImageView btnHomeAddCliente;
+    BancoDeDados db;
+    public BancoDeDados bancoDeDados;
 
     public static HomeFragment newInstance(String nomeUsuario) {
         HomeFragment fragment = new HomeFragment();
@@ -92,6 +99,7 @@ public class HomeFragment extends Fragment {
 
         carregarDadosDoBanco();
 
+//        OUTRO BOTAO
         btnNoticias = (ImageView) view.findViewById(R.id.btnNoticias);
 
         // Adiciona listener ao botão de notícias
@@ -108,6 +116,25 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 InsertDialogFragmentProd dialog = new InsertDialogFragmentProd(banco, adapter);
+                dialog.show(getParentFragmentManager(), "insert_dialog");
+            }
+        });
+//        BOTAO
+
+        btnHomeAddPedido =  (ImageView) view.findViewById(R.id.btnHomeAddPedido);
+        btnHomeAddPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogSelecaoProdutosFinancas dialog = new DialogSelecaoProdutosFinancas(context, db);
+                dialog.show(getParentFragmentManager(), "select_dialog");
+            }
+        });
+
+        btnHomeAddCliente = (ImageView) view.findViewById(R.id.btnHomeAddCliente);
+        btnHomeAddCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertDialogFragmentCliente dialog = new InsertDialogFragmentCliente(bancoDeDados, clienteadapter);
                 dialog.show(getParentFragmentManager(), "insert_dialog");
             }
         });
